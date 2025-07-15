@@ -939,6 +939,28 @@
     </div>
 
     <script>
+// Global variables
+let userRole = null;
+let eventData = {
+    marketing: [],
+    development: [],
+    benefits: [],
+    team: [],
+    documents: [],
+    photos: [],
+    calendar: []
+};
+let calendarDates = {
+    marketing: new Date(),
+    development: new Date(),
+    benefits: new Date(),
+    team: new Date(),
+    documents: new Date(),
+    photos: new Date(),
+    calendar: new Date()
+};
+let currentEditElement = null;
+
 // Handle login form submission (onclick fallback)
 function handleLoginSubmit(event) {
     console.log('handleLoginSubmit called!');
@@ -1181,6 +1203,37 @@ function handleDelete(table, listId) {
     await apiRequest(table, 'DELETE', null, id);
     await displayList(table, listId);
   };
+}
+
+// Generate calendar function
+function generateCalendar(calendarType, currentDate) {
+  // Simple calendar generation placeholder
+  console.log(`Generating calendar for ${calendarType} with date:`, currentDate);
+  
+  // Find the calendar container for this type
+  const calendarContainer = document.querySelector(`[data-calendar="${calendarType}"] .calendar-container`);
+  if (!calendarContainer) {
+    console.log(`Calendar container not found for ${calendarType}`);
+    return;
+  }
+  
+  // Clear existing calendar
+  calendarContainer.innerHTML = '';
+  
+  // Create a simple calendar grid
+  const calendarGrid = document.createElement('div');
+  calendarGrid.className = 'calendar-grid';
+  calendarGrid.innerHTML = `
+    <div class="calendar-header">
+      <h4>${calendarType.charAt(0).toUpperCase() + calendarType.slice(1)} Calendar</h4>
+      <p>Current Date: ${currentDate.toDateString()}</p>
+    </div>
+    <div class="calendar-body">
+      <p>Calendar functionality coming soon...</p>
+    </div>
+  `;
+  
+  calendarContainer.appendChild(calendarGrid);
 }
 
 // Initialize event listeners
