@@ -1,0 +1,49 @@
+
+.documents-section {
+  padding: 20px;
+}
+
+.document-category {
+  margin-bottom: 30px;
+}
+
+.btn.upload-document {
+  background: #d32f2f;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+.btn:hover {
+  background: #b71c1c;
+}
+
+.document-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.document-item {
+  background: #f9f9f9;
+  padding: 15px;
+  border-radius: 4px;
+}
+
+.document-item a {
+  color: #d32f2f;
+  text-decoration: none;
+}
+
+.document-item a:hover {
+  text-decoration: underline;
+}
+
+.document-actions {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+}

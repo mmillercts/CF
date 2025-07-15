@@ -1,0 +1,47 @@
+
+.development-section {
+  padding: 20px;
+}
+
+.btn.add-content {
+  background: #d32f2f;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+.btn:hover {
+  background: #b71c1c;
+}
+
+.content-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.content-item {
+  background: #f9f9f9;
+  padding: 15px;
+  border-radius: 4px;
+}
+
+.content-item a {
+  display: block;
+  color: #d32f2f;
+  text-decoration: none;
+  margin-top: 5px;
+}
+
+.content-item a:hover {
+  text-decoration: underline;
+}
+
+.content-actions {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+}

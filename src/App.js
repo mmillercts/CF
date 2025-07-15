@@ -3,27 +3,27 @@ import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import axios from 'axios';
 import useStore from './store';
-import '../styles/App.css'; // Confirmed as App.css
-import LoginScreen from '../components/LoginScreen'; // Missing
-import Header from '../components/Header'; // Missing
-import HomeSection from '../components/HomeSection'; // Exists
-import AboutSection from '../components/AboutSection'; // Exists
-import TeamSection from '../components/TeamSection'; // Exists
-import DevelopmentSection from '../components/DevelopmentSection'; // Exists
-import BenefitsSection from '../components/BenefitsSection'; // Exists
-import DocumentsSection from '../components/DocumentsSection'; // Exists
-import PhotosSection from '../components/PhotosSection'; // Exists
-import CalendarSection from '../components/CalendarSection'; // Exists
-import EditModal from '../components/Modals/EditModal'; // Missing
-import DeleteModal from '../components/Modals/DeleteModal'; // Missing
-import TeamModal from '../components/Modals/TeamModal'; // Missing
-import DocumentModal from '../components/Modals/DocumentModal'; // Missing
-import PhotoModal from '../components/Modals/PhotoModal'; // Missing
-import EventModal from '../components/Modals/EventModal'; // Missing
-import QuickModal from '../components/Modals/QuickModal'; // Missing
-import AnnouncementModal from '../components/Modals/AnnouncementModal'; // Missing
-import BenefitsModal from '../components/Modals/BenefitsModal'; // Missing
-import PhotoViewerModal from '../components/Modals/PhotoViewerModal'; // Missing;
+import './styles/App.css'; // Confirmed as App.css
+import LoginScreen from './components/LoginScreen'; // Missing
+import Header from './components/Header'; // Missing
+import HomeSection from './components/HomeSection'; // Exists
+import AboutSection from './components/AboutSection'; // Exists
+import TeamSection from './components/TeamSection'; // Exists
+import DevelopmentSection from './components/DevelopmentSection'; // Exists
+import BenefitsSection from './components/BenefitsSection'; // Exists
+import DocumentsSection from './components/DocumentsSection'; // Exists
+import PhotosSection from './components/PhotosSection'; // Exists
+import CalendarSection from './components/CalendarSection'; // Exists
+import EditModal from './components/Modals/EditModal'; // Missing
+import DeleteModal from './components/Modals/DeleteModal'; // Missing
+import TeamModal from './components/Modals/TeamModal'; // Missing
+import DocumentModal from './components/Modals/DocumentModal'; // Missing
+import PhotoModal from './components/Modals/PhotoModal'; // Missing
+import EventModal from './components/Modals/EventModal'; // Missing
+import QuickModal from './components/Modals/QuickModal'; // Missing
+import AnnouncementModal from './components/Modals/AnnouncementModal'; // Missing
+import BenefitsModal from './components/Modals/BenefitsModal'; // Missing
+import PhotoViewerModal from './components/Modals/PhotoViewerModal'; // Missing;
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
