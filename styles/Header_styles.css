@@ -1,0 +1,40 @@
+
+.header {
+  background: #d32f2f;
+  color: white;
+  padding: 10px 20px;
+}
+
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.header-logo img {
+  width: 50px;
+  vertical-align: middle;
+  margin-right: 10px;
+}
+
+.header-logo span {
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+.header-nav a {
+  color: white;
+  margin: 0 15px;
+  text-decoration: none;
+}
+
+.header-nav a.active {
+  font-weight: bold;
+  border-bottom: 2px solid white;
+}
+
+.header-nav a:hover {
+  text-decoration: underline;
+}
