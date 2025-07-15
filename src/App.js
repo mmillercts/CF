@@ -27,7 +27,7 @@ import PhotoViewerModal from './components/Modals/PhotoViewerModal'; // Missing;
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const { userRole, setUserRole, activeSection, setActiveSection, modals, openModal, closeModal } = useStore();
+  const { userRole, setUserRole, activeSection, setActiveSection, modals, OpenModal, CloseModal } = useStore();
 
   useEffect(() => {
     const checkAuth = async () => {
@@ -81,27 +81,27 @@ function App() {
             <main className="main">
               <div className="container">
                 <Routes>
-                  <Route path="/" element={<HomeSection userRole={userRole} openModal={openModal} />} />
-                  <Route path="/about" element={<AboutSection userRole={userRole} openModal={openModal} />} />
-                  <Route path="/team" element={<TeamSection userRole={userRole} openModal={openModal} />} />
-                  <Route path="/development" element={<DevelopmentSection userRole={userRole} openModal={openModal} />} />
-                  <Route path="/benefits" element={<BenefitsSection userRole={userRole} openModal={openModal} />} />
-                  <Route path="/documents" element={<DocumentsSection userRole={userRole} openModal={openModal} />} />
-                  <Route path="/photos" element={<PhotosSection userRole={userRole} openModal={openModal} />} />
-                  <Route path="/calendar" element={<CalendarSection userRole={userRole} openModal={openModal} />} />
+                  <Route path="/" element={<HomeSection userRole={userRole} OpenModal={OpenModal} />} />
+                  <Route path="/about" element={<AboutSection userRole={userRole} OpenModal={OpenModal} />} />
+                  <Route path="/team" element={<TeamSection userRole={userRole} OpenModal={OpenModal} />} />
+                  <Route path="/development" element={<DevelopmentSection userRole={userRole} OpenModal={OpenModal} />} />
+                  <Route path="/benefits" element={<BenefitsSection userRole={userRole} OpenModal={OpenModal} />} />
+                  <Route path="/documents" element={<DocumentsSection userRole={userRole} OpenModal={openModal} />} />
+                  <Route path="/photos" element={<PhotosSection userRole={userRole} OpenModal={OpenModal} />} />
+                  <Route path="/calendar" element={<CalendarSection userRole={userRole} OpenModal={OpenModal} />} />
                 </Routes>
               </div>
             </main>
-            <EditModal isOpen={modals.editModal} closeModal={() => closeModal('editModal')} />
-            <DeleteModal isOpen={modals.deleteModal} closeModal={() => closeModal('deleteModal')} />
-            <TeamModal isOpen={modals.teamModal} closeModal={() => closeModal('teamModal')} />
-            <DocumentModal isOpen={modals.documentModal} closeModal={() => closeModal('documentModal')} />
-            <PhotoModal isOpen={modals.photoModal} closeModal={() => closeModal('photoModal')} />
-            <EventModal isOpen={modals.eventModal} closeModal={() => closeModal('eventModal')} />
-            <QuickModal isOpen={modals.quickModal} closeModal={() => closeModal('quickModal')} />
-            <AnnouncementModal isOpen={modals.announcementModal} closeModal={() => closeModal('announcementModal')} />
-            <BenefitsModal isOpen={modals.benefitsModal} closeModal={() => closeModal('benefitsModal')} />
-            <PhotoViewerModal isOpen={modals.photoViewerModal} closeModal={() => closeModal('photoViewerModal')} />
+            <EditModal isOpen={modals.EditModal} CloseModal={() => CloseModal('EditModal')} />
+            <DeleteModal isOpen={modals.DeleteModal} CloseModal={() => CloseModal('DeleteModal')} />
+            <TeamModal isOpen={modals.TeamModal} CloseModal={() => CloseModal('TeamModal')} />
+            <DocumentModal isOpen={modals.DocumentModal} CloseModal={() => CloseModal('DocumentModal')} />
+            <PhotoModal isOpen={modals.PhotoModal} CloseModal={() => CloseModal('photoModal')} />
+            <EventModal isOpen={modals.EventModal} CloseModal={() => CloseModal('EventModal')} />
+            <QuickModal isOpen={modals.QuickModal} CloseModal={() => CloseModal('QuickModal')} />
+            <AnnouncementModal isOpen={modals.AnnouncementModal} CloseModal={() => closeModal('AnnouncementModal')} />
+            <BenefitsModal isOpen={modals.BenefitsModal} CloseModal={() => CloseModal('BenefitsModal')} />
+            <PhotoViewerModal isOpen={modals.PhotoViewerModal} CloseModal={() => CloseModal('PhotoViewerModal')} />
           </div>
         )}
       </div>
