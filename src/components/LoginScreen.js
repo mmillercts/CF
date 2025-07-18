@@ -18,7 +18,7 @@ function LoginScreen({ handleLogin }) {
       return;
     }
     try {
-      const response = await api.post('/login', { username, password, role });
+      const response = await api.post('/auth/login', { username, password, role });
       if (response.data && response.data.token) {
         localStorage.setItem('token', response.data.token);
         handleLogin(role, username, password);
