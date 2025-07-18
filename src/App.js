@@ -53,25 +53,26 @@ function App() {
 }
 
 function AppContent() {
+
   const navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const { userRole, setUserRole, modals, modalData, openModal, closeModal } = useStore();
-
-  // useEffect(() => {
-  //   const checkAuth = async () => {
-  //     try {
-  //       await axios.get('http://localhost:3001/api/home', { withCredentials: true });
-  //       setIsLoggedIn(true);
-  //     } catch (err) {
-  //       setIsLoggedIn(false);
-  //       setUserRole(null);
-  //     }
-  //   };
-  //   checkAuth();
-  // }, [setUserRole]);
-
-
   const { setAllData } = useStore.getState();
+
+  // Fetch all backend data on first mount to sync Zustand store
+  useEffect(() => {
+    const fetchAllData = async () => {
+      try {
+        const response = await api.get('/all-data');
+        if (response.data && response.data.success) {
+          setAllData(response.data.data);
+        }
+      } catch (err) {
+        console.error('Failed to load Neon DB data on mount:', err);
+      }
+    };
+    fetchAllData();
+  }, [setAllData]);
 
   const handleLogin = async (role, username, password) => {
     setIsLoggedIn(true);
