@@ -9,7 +9,7 @@ const pool = new Pool({
   },
   max: 20, // maximum number of clients in the pool
   idleTimeoutMillis: 30000, // how long a client is allowed to remain idle
-  connectionTimeoutMillis: 2000, // how long to wait when connecting a new client
+  connectionTimeoutMillis: 10000, // how long to wait when connecting a new client (increased from 2000)
 });
 
 // Test database connection
@@ -22,7 +22,8 @@ const testConnection = async () => {
     client.release();
   } catch (err) {
     console.error('❌ Database connection failed:', err.message);
-    process.exit(1);
+    console.error('⚠️  Server will continue running but database features may not work');
+    // Don't exit process - let server continue running
   }
 };
 

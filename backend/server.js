@@ -79,12 +79,30 @@ app.use('/api/calendar', calendarRoutes);
 app.use('/api/admin', adminRoutes);
 
 // Health check endpoint
-app.get('/api/health', (req, res) => {
+app.get('/api/health', async (req, res) => {
+  let dbStatus = 'disconnected';
+  let dbTime = null;
+  
+  try {
+    const client = await db.pool.connect();
+    const result = await client.query('SELECT NOW()');
+    dbStatus = 'connected';
+    dbTime = result.rows[0].now;
+    client.release();
+  } catch (err) {
+    console.error('Health check database error:', err.message);
+    dbStatus = 'error: ' + err.message;
+  }
+  
   res.json({ 
     status: 'OK', 
     message: 'Chick-fil-A Employee Portal API is running',
     timestamp: new Date().toISOString(),
-    environment: process.env.NODE_ENV
+    environment: process.env.NODE_ENV,
+    database: {
+      status: dbStatus,
+      time: dbTime
+    }
   });
 });
 

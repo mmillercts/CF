@@ -6,7 +6,7 @@
 			"type": "shell",
 			"command": "npm start",
 			"options": {
-				"cwd": "${workspaceFolder}/client"
+				"cwd": "${workspaceFolder}"
 			},
 			"group": "build",
 			"isBackground": true,

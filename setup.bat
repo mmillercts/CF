@@ -28,15 +28,19 @@ echo 📥 Installing backend dependencies...
 call npm install
 
 echo.
-echo 🏠 Setting up frontend...
+echo 🏠 Setting up frontend (main app)...
 cd ..
 
 if not exist .env (
-    echo 📝 Frontend .env already exists
+    echo 📝 Frontend .env file not needed for main app
 )
 
 echo 📥 Installing frontend dependencies...
 call npm install
+
+echo.
+echo 📱 Client test app is available in ./client/ if needed
+echo 📥 To install client dependencies: cd client ^&^& npm install
 
 echo.
 echo 🎉 Setup complete!
@@ -46,7 +50,8 @@ echo 1. Update backend\.env with your Neon database URL
 echo 2. Run database migrations: cd backend ^&^& npm run migrate
 echo 3. Seed the database: cd backend ^&^& npm run seed
 echo 4. Start the backend: cd backend ^&^& npm run dev
-echo 5. Start the frontend: npm start
+echo 5. Start the main frontend: npm start
+echo    (or run the test client: cd client ^&^& npm start)
 echo.
 echo 📚 For detailed instructions, see backend\README.md
 
