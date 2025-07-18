@@ -56,7 +56,18 @@ const TeamModal = ({ isOpen, CloseModal, item }) => {
       if (photo) {
         headshotUrl = await convertFileToBase64(photo);
       }
-      const payload = { name, position, description, level, store, headshot: headshotUrl };
+      // Map level string to integer for backend
+      const levelMap = {
+        owner: 1,
+        executive: 2,
+        global: 3,
+        operations: 4,
+        director: 5,
+        manager: 6,
+        teamLeader: 7
+      };
+      const levelInt = levelMap[level] || null;
+      const payload = { name, position, description, level: levelInt, store, headshot: headshotUrl };
       if (item?.id) {
         // Update existing member (PUT)
         await api.put(`/team/${item.id}`, payload);
