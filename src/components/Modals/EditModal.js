@@ -99,10 +99,10 @@ const EditModal = ({ isOpen, CloseModal, item }) => {
       } else if (section === 'benefits') {
         const payload = { title, description };
         if (item.id) {
-          await api.put(`/benefits/${item.id}`, payload);
+          await api.put(`benefits/${item.id}`, payload);
           updateBenefitsContent(itemCategory, item.id, payload);
         } else {
-          const response = await api.post('/benefits', payload);
+          const response = await api.post('benefits', payload);
           addBenefitsContent(itemCategory, response.data || payload);
         }
       } else if (section === 'team') {
