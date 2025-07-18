@@ -10,7 +10,6 @@ const DeleteModal = ({ isOpen, CloseModal, item }) => {
     deleteAboutContent,
     deleteHomeQuickLink, deleteHomeAnnouncement,
     deleteBenefitsContent,
-    deleteTeamContent,
     deleteDevelopmentContent,
     deleteDocumentsContent,
     deletePhotosContent,
