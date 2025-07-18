@@ -23,13 +23,10 @@ const DeleteModal = ({ isOpen, CloseModal, item }) => {
       const section = item?.section;
       const itemCategory = item?.category || item?.type; // Handle both category and type
 
-      // Only handle API for team section (expand as needed for others)
       if (section === 'team') {
-        // Use axios instance that sends JWT automatically
         await api.delete(`/team/${item.id}`);
         deleteTeamContent(item.id);
       } else {
-        // Fallback: just update local state for other sections (or add API calls as needed)
         if (section === 'about') {
           deleteAboutContent(item.id);
         } else if (section === 'home') {
@@ -61,6 +58,7 @@ const DeleteModal = ({ isOpen, CloseModal, item }) => {
       CloseModal('DeleteModal');
     } catch (err) {
       console.error('Error deleting item:', err);
+      alert('Delete failed: ' + (err?.message || 'Unknown error'));
     }
   };
 
