@@ -70,11 +70,11 @@ const TeamModal = ({ isOpen, CloseModal, item }) => {
       const payload = { name, position, description, level: levelInt, store, headshot: headshotUrl };
       if (item?.id) {
         // Update existing member (PUT)
-        await api.put(`/team/${item.id}`, payload);
+        await api.put(`team/${item.id}`, payload);
         updateTeamContent(item.id, payload);
       } else {
         // Add new member (POST)
-        const response = await api.post('/team', payload);
+        const response = await api.post('team', payload);
         // Use response.data if backend returns the created object
         addTeamContent(response.data || payload);
       }
