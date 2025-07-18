@@ -5,11 +5,26 @@
 			"label": "Start React App",
 			"type": "shell",
 			"command": "npm start",
+			"options": {
+				"cwd": "${workspaceFolder}/client"
+			},
 			"group": "build",
 			"isBackground": true,
 			"problemMatcher": [
 				"$tsc"
 			]
+		},
+		{
+			"label": "Start Backend Server",
+			"type": "shell",
+			"command": "node",
+			"args": ["server.js"],
+			"options": {
+				"cwd": "${workspaceFolder}/backend"
+			},
+			"group": "build",
+			"isBackground": true,
+			"problemMatcher": []
 		}
 	]
 }
