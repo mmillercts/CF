@@ -100,8 +100,9 @@ const EditModal = ({ isOpen, CloseModal, item }) => {
         } else {
           await teamAPI.addMember(name, position, '', level, '', '');
         }
+        // Always fetch the latest team members from backend to sync state
         const teamData = await teamAPI.getMembers();
-        useStore.setState({ teamContent: teamData });
+        useStore.setState({ teamContent: teamData.teamMembers });
       } else if (section === 'development') {
         if (item.id) {
           await developmentAPI.updateContent(item.id, title, description, '', itemCategory);
