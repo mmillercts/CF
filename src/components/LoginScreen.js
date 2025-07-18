@@ -1,7 +1,7 @@
 // src/components/LoginScreen.js
 
 import React, { useState } from 'react';
-import api from '../../utils/api';
+import api from '../utils/api';
 import '../styles/LoginScreen.css';
 
 function LoginScreen({ handleLogin }) {
