@@ -17,7 +17,9 @@ const benefitsRoutes = require('./routes/benefits');
 const documentsRoutes = require('./routes/documents');
 const photosRoutes = require('./routes/photos');
 const calendarRoutes = require('./routes/calendar');
+
 const adminRoutes = require('./routes/admin');
+const allDataRoutes = require('./routes/allData');
 
 const app = express();
 app.set('trust proxy', 1); // trust first proxy for correct client IPs behind Render/Railway/Netlify
@@ -77,7 +79,9 @@ app.use('/api/benefits', benefitsRoutes);
 app.use('/api/documents', documentsRoutes);
 app.use('/api/photos', photosRoutes);
 app.use('/api/calendar', calendarRoutes);
+
 app.use('/api/admin', adminRoutes);
+app.use('/api/all-data', allDataRoutes);
 
 // Health check endpoint
 app.get('/api/health', async (req, res) => {

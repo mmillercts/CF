@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Routes, useNavigate } from 'react-router-dom';
 // import axios from 'axios';
 import useStore from './store';
+import api from './utils/api';
 import './styles/global.css';
 import './styles/base.css';
 import './styles/App.css';
@@ -69,11 +70,21 @@ function AppContent() {
   //   checkAuth();
   // }, [setUserRole]);
 
-  const handleLogin = (role, username, password) => {
-    // In a real application, you would validate credentials here
-    // For now, we'll just set the user as logged in
+
+  const { setAllData } = useStore.getState();
+
+  const handleLogin = async (role, username, password) => {
     setIsLoggedIn(true);
     setUserRole(role);
+    // Fetch all Neon DB data after login
+    try {
+      const response = await api.get('/all-data');
+      if (response.data && response.data.success) {
+        setAllData(response.data.data);
+      }
+    } catch (err) {
+      console.error('Failed to load Neon DB data:', err);
+    }
   };
 
   const handleLogout = async () => {

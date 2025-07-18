@@ -2,6 +2,13 @@
 import { create } from 'zustand';
 
 const useStore = create((set) => ({
+  // Set all data from backend
+  setAllData: (allData) => set((state) => ({
+    // Only update keys that exist in the store
+    ...Object.fromEntries(
+      Object.entries(allData).filter(([key]) => key in state)
+    )
+  })),
   userRole: null,
   setUserRole: (role) => set({ userRole: role }),
   
