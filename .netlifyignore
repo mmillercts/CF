@@ -1,5 +1,14 @@
-# This file tells Netlify to ignore the backend directory during frontend builds
+# Exclude backend files and secrets from Netlify frontend deployment
 backend/
+test-neon-connection.js
 *.env
 .env.*
 !.env.production
+
+# Exclude development files
+node_modules/
+.git/
+.vscode/
+*.log
+*.test.js
+*.spec.js
