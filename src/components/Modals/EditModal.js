@@ -12,8 +12,7 @@ import {
 import '../../styles/Modal.css';
 
 const EditModal = ({ isOpen, CloseModal, item }) => {
-  // Only destructure what is actually used from useStore
-  const {} = useStore();
+  // No destructuring needed from useStore
   
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
