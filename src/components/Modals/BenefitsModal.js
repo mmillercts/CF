@@ -1,6 +1,7 @@
 
+
 import React, { useState, useEffect } from 'react';
-import apiRequest from '../../utils/api_request';
+import api from '../../utils/api';
 import '../../styles/Modal.css';
 
 const BenefitsModal = ({ isOpen, CloseModal, item }) => {
@@ -19,13 +20,19 @@ const BenefitsModal = ({ isOpen, CloseModal, item }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await apiRequest('benefits', item?.id ? 'PUT' : 'POST', { title, description, category }, item?.id);
+      const payload = { title, description, category };
+      if (item?.id) {
+        await api.put(`/benefits/${item.id}`, payload);
+      } else {
+        await api.post('/benefits', payload);
+      }
       CloseModal('BenefitsModal');
       setTitle('');
       setDescription('');
       setCategory('');
     } catch (err) {
       console.error('Error saving benefit:', err);
+      alert('Failed to save benefit.');
     }
   };
 

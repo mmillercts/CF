@@ -1,6 +1,8 @@
 
+
 import React, { useState, useEffect } from 'react';
 import useStore from '../../store';
+import api from '../../utils/api';
 import '../../styles/Modal.css';
 
 const DocumentModal = ({ isOpen, CloseModal, item }) => {
@@ -34,19 +36,22 @@ const DocumentModal = ({ isOpen, CloseModal, item }) => {
 
     try {
       if (item?.id) {
-        // Update existing document
+        // Update existing document (PUT)
+        await api.put(`/documents/${item.id}`, documentData);
         updateDocumentsContent(category, item.id, documentData);
       } else {
-        // Add new document
-        addDocumentsContent(category, documentData);
+        // Add new document (POST)
+        const response = await api.post('/documents', documentData);
+        addDocumentsContent(category, response.data || documentData);
       }
-      
+
       CloseModal('DocumentModal');
       setTitle('');
       setCategory('');
       setFile(null);
     } catch (err) {
       console.error('Error uploading document:', err);
+      alert('Failed to upload document.');
     }
   };
 

@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
 import useStore from '../../store';
-// import apiRequest from '../../utils/api_request';
+import api from '../../utils/api';
 import '../../styles/Modal.css';
 
 const EditModal = ({ isOpen, CloseModal, item }) => {
@@ -62,82 +62,105 @@ const EditModal = ({ isOpen, CloseModal, item }) => {
     try {
       const section = item?.section;
       const itemCategory = item?.category;
-      
-      // Handle different sections
+      // Handle different sections with backend API
       if (section === 'about') {
+        const payload = { title, description };
         if (item.id) {
-          updateAboutContent(item.id, { title, description });
+          await api.put(`/about/${item.id}`, payload);
+          updateAboutContent(item.id, payload);
         } else {
-          addAboutContent({ title, description });
+          const response = await api.post('/about', payload);
+          addAboutContent(response.data || payload);
         }
       } else if (section === 'home') {
         if (item.type === 'welcome') {
-          updateHomeWelcome({ title, message: description });
+          const payload = { title, message: description };
+          await api.put('/home/welcome', payload);
+          updateHomeWelcome(payload);
         } else if (item.type === 'quickLink') {
+          const payload = { label, link, icon };
           if (item.id) {
-            updateHomeQuickLink(item.id, { label, link, icon });
+            await api.put(`/home/quickLink/${item.id}`, payload);
+            updateHomeQuickLink(item.id, payload);
           } else {
-            addHomeQuickLink({ label, link, icon });
+            const response = await api.post('/home/quickLink', payload);
+            addHomeQuickLink(response.data || payload);
           }
         } else if (item.type === 'announcement') {
+          const payload = { title, date, message: description };
           if (item.id) {
-            updateHomeAnnouncement(item.id, { title, date, message: description });
+            await api.put(`/home/announcement/${item.id}`, payload);
+            updateHomeAnnouncement(item.id, payload);
           } else {
-            addHomeAnnouncement({ title, date, message: description });
+            const response = await api.post('/home/announcement', payload);
+            addHomeAnnouncement(response.data || payload);
           }
         }
       } else if (section === 'benefits') {
+        const payload = { title, description };
         if (item.id) {
-          updateBenefitsContent(itemCategory, item.id, { title, description });
+          await api.put(`/benefits/${item.id}`, payload);
+          updateBenefitsContent(itemCategory, item.id, payload);
         } else {
-          addBenefitsContent(itemCategory, { title, description });
+          const response = await api.post('/benefits', payload);
+          addBenefitsContent(itemCategory, response.data || payload);
         }
       } else if (section === 'team') {
+        const payload = { name, position, description, level, store };
         if (item.id) {
-          updateTeamContent(item.id, { name, position, description, level, store });
+          await api.put(`/team/${item.id}`, payload);
+          updateTeamContent(item.id, payload);
         } else {
-          addTeamContent({ name, position, description, level, store });
+          const response = await api.post('/team', payload);
+          addTeamContent(response.data || payload);
         }
       } else if (section === 'development') {
+        const payload = { title, description, type, duration: time };
         if (item.id) {
-          updateDevelopmentContent(item.id, { title, description, type, duration: time });
+          await api.put(`/development/${item.id}`, payload);
+          updateDevelopmentContent(item.id, payload);
         } else {
-          addDevelopmentContent({ title, description, type, duration: time });
+          const response = await api.post('/development', payload);
+          addDevelopmentContent(response.data || payload);
         }
       } else if (section === 'documents') {
+        const payload = { title, type, size, uploadDate };
         if (item.id) {
-          updateDocumentsContent(itemCategory, item.id, { title, type, size, uploadDate });
+          await api.put(`/documents/${item.id}`, payload);
+          updateDocumentsContent(itemCategory, item.id, payload);
         } else {
-          addDocumentsContent(itemCategory, { title, type, size, uploadDate });
+          const response = await api.post('/documents', payload);
+          addDocumentsContent(itemCategory, response.data || payload);
         }
       } else if (section === 'photos') {
+        const payload = { title, description, url, uploadDate };
         if (item.id) {
-          updatePhotosContent(itemCategory, item.id, { title, description, url, uploadDate });
+          await api.put(`/photos/${item.id}`, payload);
+          updatePhotosContent(itemCategory, item.id, payload);
         } else {
-          addPhotosContent(itemCategory, { title, description, url, uploadDate });
+          const response = await api.post('/photos', payload);
+          addPhotosContent(itemCategory, response.data || payload);
         }
       } else if (section === 'videos') {
+        const payload = { title, description, videoUrl: url, uploadDate, date };
         if (item.id) {
-          updateVideosContent(itemCategory, item.id, { title, description, videoUrl: url, uploadDate, date });
+          await api.put(`/videos/${item.id}`, payload);
+          updateVideosContent(itemCategory, item.id, payload);
         } else {
-          addVideosContent(itemCategory, { title, description, videoUrl: url, uploadDate, date });
+          const response = await api.post('/videos', payload);
+          addVideosContent(itemCategory, response.data || payload);
         }
       } else if (section === 'calendar') {
+        const payload = { title, date, time, description };
         if (item.id) {
-          updateCalendarContent(itemCategory, item.id, { title, date, time, description });
+          await api.put(`/calendar/${item.id}`, payload);
+          updateCalendarContent(itemCategory, item.id, payload);
         } else {
-          addCalendarContent(itemCategory, { title, date, time, description });
+          const response = await api.post('/calendar', payload);
+          addCalendarContent(itemCategory, response.data || payload);
         }
       }
-      
-      // Static handling - no API call needed
-      console.log('Saving content:', { 
-        section: section || 'unknown', 
-        title, 
-        description, 
-        type: item?.type || 'content' 
-      });
-      
+
       CloseModal('EditModal');
       // Reset all form fields
       setTitle('');
@@ -159,6 +182,7 @@ const EditModal = ({ isOpen, CloseModal, item }) => {
       setUploadDate('');
     } catch (err) {
       console.error('Error saving content:', err);
+      alert('Failed to save content.');
     }
   };
 

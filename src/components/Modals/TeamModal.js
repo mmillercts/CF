@@ -1,6 +1,8 @@
 
+
 import React, { useState, useEffect } from 'react';
 import useStore from '../../store';
+import api from '../../utils/api';
 import '../../styles/Modal.css';
 
 const TeamModal = ({ isOpen, CloseModal, item }) => {
@@ -55,33 +57,38 @@ const TeamModal = ({ isOpen, CloseModal, item }) => {
       let headshotUrl = existingPhoto;
       
       // Convert photo to base64 or URL for local storage
+    try {
+      let headshotUrl = existingPhoto;
+      // Convert photo to base64 or URL for local storage
       if (photo) {
         headshotUrl = await convertFileToBase64(photo);
       }
 
-      const teamMemberData = {
-        name,
-        position,
-        description,
-        level,
-        store,
-        headshot: headshotUrl
-      };
-
-      console.log('Saving team member:', teamMemberData);
+      const payload = { name, position, description, level, store, headshot: headshotUrl };
 
       if (item?.id) {
-        // Update existing team member
-        console.log('Updating existing member with ID:', item.id);
-        updateTeamContent(item.id, teamMemberData);
+        // Update existing member (PUT)
+        await api.put(`/team/${item.id}`, payload);
+        updateTeamContent(item.id, payload);
       } else {
-        // Add new team member
-        console.log('Adding new team member');
-        addTeamContent(teamMemberData);
+        // Add new member (POST)
+        const response = await api.post('/team', payload);
+        // Use response.data if backend returns the created object
+        addTeamContent(response.data || payload);
       }
 
-      console.log('Team member saved successfully');
-      
+      CloseModal('TeamModal');
+      setName('');
+      setPosition('');
+      setDescription('');
+      setLevel('');
+      setStore('');
+      setPhoto(null);
+      setExistingPhoto('');
+    } catch (err) {
+      console.error('Error saving team member:', err);
+      alert('Failed to save team member.');
+    }
       CloseModal('TeamModal');
       // Reset form
       setName('');
