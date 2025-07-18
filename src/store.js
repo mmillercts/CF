@@ -69,31 +69,8 @@ const useStore = create((set) => ({
     ]
   },
 
-  teamContent: [
-    // Corporate Level
-    { id: 1, name: 'John Smith', position: 'Owner/Operator', description: 'Franchise owner overseeing both locations', level: 'owner', store: 'corporate' },
-    { id: 2, name: 'Sarah Williams', position: 'Executive Director', description: 'Executive leadership for restaurant operations', level: 'executive', store: 'corporate' },
-    
-    // Global Level
-    { id: 3, name: 'Michael Johnson', position: 'Global Manager', description: 'Overseeing operations across both stores', level: 'global', store: 'corporate' },
-    { id: 4, name: 'Jennifer Davis', position: 'Global Manager', description: 'Managing corporate initiatives and standards', level: 'global', store: 'corporate' },
-    
-    // South Main Store
-    { id: 5, name: 'Robert Brown', position: 'Operations Director', description: 'Directing South Main store operations', level: 'operations', store: 'southMain' },
-    { id: 6, name: 'Lisa Chen', position: 'Store Director', description: 'Managing South Main store strategy', level: 'director', store: 'southMain' },
-    { id: 7, name: 'David Wilson', position: 'General Manager', description: 'Leading South Main daily operations', level: 'manager', store: 'southMain' },
-    { id: 8, name: 'Emily Rodriguez', position: 'Assistant Manager', description: 'Supporting South Main management', level: 'manager', store: 'southMain' },
-    { id: 9, name: 'James Taylor', position: 'Team Leader', description: 'Leading South Main team members', level: 'teamLeader', store: 'southMain' },
-    { id: 10, name: 'Maria Garcia', position: 'Team Leader', description: 'Kitchen operations leader at South Main', level: 'teamLeader', store: 'southMain' },
-    
-    // Union Cross Store
-    { id: 11, name: 'Thomas Anderson', position: 'Operations Director', description: 'Directing Union Cross store operations', level: 'operations', store: 'unionCross' },
-    { id: 12, name: 'Amanda White', position: 'Store Director', description: 'Managing Union Cross store strategy', level: 'director', store: 'unionCross' },
-    { id: 13, name: 'Christopher Lee', position: 'General Manager', description: 'Leading Union Cross daily operations', level: 'manager', store: 'unionCross' },
-    { id: 14, name: 'Nicole Thompson', position: 'Assistant Manager', description: 'Supporting Union Cross management', level: 'manager', store: 'unionCross' },
-    { id: 15, name: 'Kevin Martinez', position: 'Team Leader', description: 'Leading Union Cross team members', level: 'teamLeader', store: 'unionCross' },
-    { id: 16, name: 'Rachel Adams', position: 'Team Leader', description: 'Customer service leader at Union Cross', level: 'teamLeader', store: 'unionCross' }
-  ],
+  teamContent: [],
+  setTeamContent: (teamMembers) => set({ teamContent: teamMembers }),
 
   developmentContent: [
     {

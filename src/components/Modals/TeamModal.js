@@ -71,13 +71,13 @@ const TeamModal = ({ isOpen, CloseModal, item }) => {
       if (item?.id) {
         // Update existing member (PUT)
         await api.put(`team/${item.id}`, payload);
-        updateTeamContent(item.id, payload);
       } else {
         // Add new member (POST)
-        const response = await api.post('team', payload);
-        // Use response.data if backend returns the created object
-        addTeamContent(response.data || payload);
+        await api.post('team', payload);
       }
+      // Always fetch the latest team members from backend to sync state
+      const { teamMembers } = await api.get('/team').then(res => res.data);
+      useStore.setState({ teamContent: teamMembers });
       CloseModal('TeamModal');
       setName('');
       setPosition('');
