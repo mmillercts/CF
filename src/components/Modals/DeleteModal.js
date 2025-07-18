@@ -1,5 +1,6 @@
 
 import React from 'react';
+import api from '../../utils/api';
 import useStore from '../../store';
 // import apiRequest from '../../utils/api_request';
 import '../../styles/Modal.css';
@@ -24,20 +25,8 @@ const DeleteModal = ({ isOpen, CloseModal, item }) => {
 
       // Only handle API for team section (expand as needed for others)
       if (section === 'team') {
-        // Send DELETE request to backend
-        const response = await fetch(`${process.env.REACT_APP_API_URL}/team/${item.id}`, {
-          method: 'DELETE',
-          credentials: 'include', // if using cookies for auth
-          headers: {
-            'Content-Type': 'application/json',
-            // Add Authorization header if using JWT
-            // 'Authorization': `Bearer ${localStorage.getItem('token')}`
-          }
-        });
-        if (!response.ok) {
-          throw new Error('Failed to delete item from backend');
-        }
-        // Only update local state if backend succeeded
+        // Use axios instance that sends JWT automatically
+        await api.delete(`/team/${item.id}`);
         deleteTeamContent(item.id);
       } else {
         // Fallback: just update local state for other sections (or add API calls as needed)
