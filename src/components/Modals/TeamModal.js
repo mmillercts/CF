@@ -39,7 +39,6 @@ const TeamModal = ({ isOpen, CloseModal, item }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
     // Validation
     if (!isPhotoUpload) {
       if (!name.trim() || !position.trim() || !level || !store) {
@@ -47,25 +46,17 @@ const TeamModal = ({ isOpen, CloseModal, item }) => {
         return;
       }
     }
-    
     if (isPhotoUpload && !photo) {
       alert('Please select a photo to upload');
       return;
     }
-
-    try {
-      let headshotUrl = existingPhoto;
-      
-      // Convert photo to base64 or URL for local storage
     try {
       let headshotUrl = existingPhoto;
       // Convert photo to base64 or URL for local storage
       if (photo) {
         headshotUrl = await convertFileToBase64(photo);
       }
-
       const payload = { name, position, description, level, store, headshot: headshotUrl };
-
       if (item?.id) {
         // Update existing member (PUT)
         await api.put(`/team/${item.id}`, payload);
@@ -76,21 +67,7 @@ const TeamModal = ({ isOpen, CloseModal, item }) => {
         // Use response.data if backend returns the created object
         addTeamContent(response.data || payload);
       }
-
       CloseModal('TeamModal');
-      setName('');
-      setPosition('');
-      setDescription('');
-      setLevel('');
-      setStore('');
-      setPhoto(null);
-      setExistingPhoto('');
-    } catch (err) {
-      console.error('Error saving team member:', err);
-      alert('Failed to save team member.');
-    }
-      CloseModal('TeamModal');
-      // Reset form
       setName('');
       setPosition('');
       setDescription('');
