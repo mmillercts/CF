@@ -1,7 +1,14 @@
 
 import React, { useState, useEffect } from 'react';
 import useStore from '../../store';
-import api from '../../utils/api';
+import {
+  aboutAPI,
+  homeAPI,
+  benefitsAPI,
+  teamAPI,
+  developmentAPI,
+  documentsAPI
+} from '../../utils/api';
 import '../../styles/Modal.css';
 
 const EditModal = ({ isOpen, CloseModal, item }) => {
@@ -64,60 +71,50 @@ const EditModal = ({ isOpen, CloseModal, item }) => {
       const itemCategory = item?.category;
       // Handle different sections with backend API
       if (section === 'about') {
-        const payload = { title, description };
         if (item.id) {
-          await api.put(`/about/${item.id}`, payload);
-          updateAboutContent(item.id, payload);
+          await aboutAPI.updateContent(item.id, title, description);
         } else {
-          const response = await api.post('/about', payload);
-          addAboutContent(response.data || payload);
+          await aboutAPI.addContent(title, description);
         }
+        const aboutData = await aboutAPI.getContent();
+        useStore.setState({ aboutContent: aboutData.content });
       } else if (section === 'home') {
         if (item.type === 'welcome') {
-          const payload = { title, message: description };
-          await api.put('/home/welcome', payload);
-          updateHomeWelcome(payload);
+          await homeAPI.updateWelcome(title, description);
         } else if (item.type === 'quickLink') {
-          const payload = { label, link, icon };
           if (item.id) {
-            await api.put(`/home/quickLink/${item.id}`, payload);
-            updateHomeQuickLink(item.id, payload);
+            await homeAPI.addQuickLink(label, link, icon); // If you have a separate updateQuickLink, use it
           } else {
-            const response = await api.post('/home/quickLink', payload);
-            addHomeQuickLink(response.data || payload);
+            await homeAPI.addQuickLink(label, link, icon);
           }
         } else if (item.type === 'announcement') {
-          const payload = { title, date, message: description };
           if (item.id) {
-            await api.put(`/home/announcement/${item.id}`, payload);
-            updateHomeAnnouncement(item.id, payload);
+            await homeAPI.addAnnouncement(title, description); // If you have a separate updateAnnouncement, use it
           } else {
-            const response = await api.post('/home/announcement', payload);
-            addHomeAnnouncement(response.data || payload);
+            await homeAPI.addAnnouncement(title, description);
           }
         }
+        const homeData = await homeAPI.getContent();
+        useStore.setState({ homeContent: homeData });
       } else if (section === 'benefits') {
-        const payload = { title, description };
         if (item.id) {
-          await api.put(`benefits/${item.id}`, payload);
-          updateBenefitsContent(itemCategory, item.id, payload);
+          await benefitsAPI.updateBenefit(item.id, title, description, itemCategory);
         } else {
-          const response = await api.post('benefits', payload);
-          addBenefitsContent(itemCategory, response.data || payload);
+          await benefitsAPI.addBenefit(title, description, itemCategory);
         }
+        const benefitsData = await benefitsAPI.getBenefits();
+        useStore.setState({ benefitsContent: benefitsData });
       } else if (section === 'team') {
-        const payload = { name, position, description, level, store };
         if (item.id) {
-          await api.put(`/team/${item.id}`, payload);
-          updateTeamContent(item.id, payload);
+          await teamAPI.updateMember(item.id, name, position, '', level, '', '');
         } else {
-          const response = await api.post('/team', payload);
-          addTeamContent(response.data || payload);
+          await teamAPI.addMember(name, position, '', level, '', '');
         }
+        const teamData = await teamAPI.getMembers();
+        useStore.setState({ teamContent: teamData });
       } else if (section === 'development') {
-        const payload = { title, description, type, duration: time };
         if (item.id) {
-          await api.put(`/development/${item.id}`, payload);
+          await developmentAPI.updateContent(item.id, title, description, '', itemCategory);
           updateDevelopmentContent(item.id, payload);
         } else {
           const response = await api.post('/development', payload);
