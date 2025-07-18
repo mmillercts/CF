@@ -21,40 +21,54 @@ const DeleteModal = ({ isOpen, CloseModal, item }) => {
     try {
       const section = item?.section;
       const itemCategory = item?.category || item?.type; // Handle both category and type
-      
-      // Handle different sections
-      if (section === 'about') {
-        deleteAboutContent(item.id);
-      } else if (section === 'home') {
-        if (item.type === 'quickLink') {
-          deleteHomeQuickLink(item.id);
-        } else if (item.type === 'announcement') {
-          deleteHomeAnnouncement(item.id);
+
+      // Only handle API for team section (expand as needed for others)
+      if (section === 'team') {
+        // Send DELETE request to backend
+        const response = await fetch(`${process.env.REACT_APP_API_URL}/team/${item.id}`, {
+          method: 'DELETE',
+          credentials: 'include', // if using cookies for auth
+          headers: {
+            'Content-Type': 'application/json',
+            // Add Authorization header if using JWT
+            // 'Authorization': `Bearer ${localStorage.getItem('token')}`
+          }
+        });
+        if (!response.ok) {
+          throw new Error('Failed to delete item from backend');
         }
-      } else if (section === 'benefits') {
-        deleteBenefitsContent(itemCategory, item.id);
-      } else if (section === 'team') {
+        // Only update local state if backend succeeded
         deleteTeamContent(item.id);
-      } else if (section === 'development') {
-        deleteDevelopmentContent(item.id);
-      } else if (section === 'documents') {
-        deleteDocumentsContent(itemCategory, item.id);
-      } else if (section === 'photos') {
-        deletePhotosContent(itemCategory, item.id);
-      } else if (section === 'videos') {
-        deleteVideosContent(itemCategory, item.id);
-      } else if (section === 'calendar') {
-        deleteCalendarContent(itemCategory, item.id);
+      } else {
+        // Fallback: just update local state for other sections (or add API calls as needed)
+        if (section === 'about') {
+          deleteAboutContent(item.id);
+        } else if (section === 'home') {
+          if (item.type === 'quickLink') {
+            deleteHomeQuickLink(item.id);
+          } else if (item.type === 'announcement') {
+            deleteHomeAnnouncement(item.id);
+          }
+        } else if (section === 'benefits') {
+          deleteBenefitsContent(itemCategory, item.id);
+        } else if (section === 'development') {
+          deleteDevelopmentContent(item.id);
+        } else if (section === 'documents') {
+          deleteDocumentsContent(itemCategory, item.id);
+        } else if (section === 'photos') {
+          deletePhotosContent(itemCategory, item.id);
+        } else if (section === 'videos') {
+          deleteVideosContent(itemCategory, item.id);
+        } else if (section === 'calendar') {
+          deleteCalendarContent(itemCategory, item.id);
+        }
       }
-      
-      // Static handling - no API call needed
-      console.log('Deleting item:', { 
-        section: item?.section || 'unknown', 
+
+      console.log('Deleting item:', {
+        section: item?.section || 'unknown',
         id: item?.id || 'unknown',
         category: itemCategory || 'unknown'
       });
-      
-      // await apiRequest(item.section, 'DELETE', null, item.id);
       CloseModal('DeleteModal');
     } catch (err) {
       console.error('Error deleting item:', err);
