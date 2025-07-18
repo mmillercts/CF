@@ -113,6 +113,7 @@ router.post('/login', [
 
     res.json({
       message: 'Login successful',
+      token, // <-- Add token to response
       user: {
         id: user.id,
         username: user.username,

@@ -1,5 +1,7 @@
 // src/components/LoginScreen.js
+
 import React, { useState } from 'react';
+import api from '../../utils/api';
 import '../styles/LoginScreen.css';
 
 function LoginScreen({ handleLogin }) {
@@ -8,59 +10,26 @@ function LoginScreen({ handleLogin }) {
   const [role, setRole] = useState('');
   const [error, setError] = useState('');
 
-  // User credentials database - matching the working HTML version
-  const userCredentials = {
-    // Team Members
-    'Kvillecfa': { password: '1248', role: 'team' },
-    'kvillecfa': { password: '1248', role: 'team' },
-    'Kvillecfa_4772': { password: '4772', role: 'team' },
-    'kvillecfa_4772': { password: '4772', role: 'team' },
-    
-    // Managers
-    'Kvillecfamgr': { password: '1248mgr', role: 'manager' },
-    'kvillecfamgr': { password: '1248mgr', role: 'manager' },
-    'Kvillecfamgr_4772': { password: '4772mgr', role: 'manager' },
-    'kvillecfamgr_4772': { password: '4772mgr', role: 'manager' },
-    
-    // Admins
-    'Admin': { password: 'AdminCFA', role: 'admin' },
-    'admin': { password: 'AdminCFA', role: 'admin' }
-  };
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    
-    // Clear previous errors
     setError('');
-    
-    // Validate inputs
     if (!username || !password || !role) {
       setError('Please fill in all fields');
       return;
     }
-    
-    // Check if user exists
-    if (!userCredentials[username]) {
-      setError('Invalid username or password');
-      return;
+    try {
+      const response = await api.post('/login', { username, password, role });
+      if (response.data && response.data.token) {
+        localStorage.setItem('token', response.data.token);
+        handleLogin(role, username, password);
+      } else {
+        setError('Login failed: No token received');
+      }
+    } catch (err) {
+      setError(
+        err.response?.data?.error || 'Login failed. Please check your credentials.'
+      );
     }
-    
-    const user = userCredentials[username];
-    
-    // Validate password
-    if (user.password !== password) {
-      setError('Invalid username or password');
-      return;
-    }
-    
-    // Validate role matches user's assigned role
-    if (user.role !== role) {
-      setError('Selected role does not match your account');
-      return;
-    }
-    
-    // Successful login
-    handleLogin(role, username, password);
   };
 
   return (
