@@ -23,35 +23,45 @@ The health endpoint shows database status. If connected, your tables are automat
 ### 3. CORS Test
 Your frontend should be able to connect to the backend once you update the API URL.
 
-## Next Steps After Backend is Live:
+---
 
-1. **Copy your Railway URL** (e.g., `https://cf-production-abc123.up.railway.app`)
+## Next Steps After Backend is Live
 
-2. **Update Netlify Environment Variables**:
-   - Go to Netlify Dashboard → Site Settings → Environment Variables
-   - Update `REACT_APP_API_URL` to `https://your-railway-url.railway.app/api`
-   - Trigger a new deploy
+1. **Copy your Railway Backend URL**  
+   Example: `https://cf-production-abc123.up.railway.app`
 
-3. **Update Railway FRONTEND_URL**:
-   - Go to Railway Variables
-   - Update `FRONTEND_URL` to your Netlify URL
+2. **Update Netlify Environment Variables**
+   - Go to **Netlify Dashboard → Site Settings → Environment Variables**
+   - Set or update `REACT_APP_API_URL` to:  
+     `https://your-railway-url.railway.app/api`
+   - Save changes and **trigger a new deploy**
 
-4. **Test Full Integration**:
-   - Frontend: Your Netlify site
-   - Backend API: Your Railway API
-   - Database: Neon PostgreSQL
+3. **Update Railway FRONTEND_URL**
+   - Go to **Railway Variables**
+   - Set or update `FRONTEND_URL` to your Netlify site URL (must include `https://`)
 
-## Troubleshooting:
+4. **Test Full Integration**
+   - **Frontend:** Your Netlify site
+   - **Backend API:** Your Railway API
+   - **Database:** Neon PostgreSQL
 
-**Build Fails?**
-- Check Railway logs in Deployments tab
-- Verify Root Directory is set to `/backend`
-- Ensure all environment variables are set
+---
 
-**Database Connection Fails?**
-- Verify DATABASE_URL is exactly from your backend/.env
-- Check Neon database is active
+## Troubleshooting
 
-**CORS Errors?**
-- Verify FRONTEND_URL matches your Netlify domain exactly
-- Include https:// in the URL
+### Build Fails?
+- Check Railway logs in the Deployments tab for errors
+- Verify the Root Directory is set to `/backend` in Railway project settings
+- Ensure all required environment variables are set in both Railway and Netlify
+
+### Database Connection Fails?
+- Verify `DATABASE_URL` in Railway matches the value from your backend/.env
+- Check that your Neon database is active and accessible
+
+### CORS Errors?
+- Ensure `FRONTEND_URL` in Railway matches your Netlify domain **exactly** (including `https://`)
+- Double-check for typos or missing protocol in URLs
+
+---
+
+**Tip:** After any environment variable change, always redeploy your site and/or backend to apply updates.

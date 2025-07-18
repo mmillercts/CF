@@ -115,47 +115,43 @@ const EditModal = ({ isOpen, CloseModal, item }) => {
       } else if (section === 'development') {
         if (item.id) {
           await developmentAPI.updateContent(item.id, title, description, '', itemCategory);
-          updateDevelopmentContent(item.id, payload);
         } else {
-          const response = await api.post('/development', payload);
-          addDevelopmentContent(response.data || payload);
+          await developmentAPI.addContent(title, description, '', itemCategory);
         }
+        const developmentData = await developmentAPI.getContent();
+        useStore.setState({ developmentContent: developmentData });
       } else if (section === 'documents') {
-        const payload = { title, type, size, uploadDate };
         if (item.id) {
-          await api.put(`/documents/${item.id}`, payload);
-          updateDocumentsContent(itemCategory, item.id, payload);
+          await documentsAPI.updateDocument(item.id, title, type, size, uploadDate, itemCategory);
         } else {
-          const response = await api.post('/documents', payload);
-          addDocumentsContent(itemCategory, response.data || payload);
+          await documentsAPI.addDocument(title, type, size, uploadDate, itemCategory);
         }
+        const documentsData = await documentsAPI.getDocuments();
+        useStore.setState({ documentsContent: documentsData });
       } else if (section === 'photos') {
-        const payload = { title, description, url, uploadDate };
         if (item.id) {
-          await api.put(`/photos/${item.id}`, payload);
-          updatePhotosContent(itemCategory, item.id, payload);
+          await documentsAPI.updatePhoto(item.id, title, description, url, uploadDate, itemCategory);
         } else {
-          const response = await api.post('/photos', payload);
-          addPhotosContent(itemCategory, response.data || payload);
+          await documentsAPI.addPhoto(title, description, url, uploadDate, itemCategory);
         }
+        const photosData = await documentsAPI.getPhotos();
+        useStore.setState({ photosContent: photosData });
       } else if (section === 'videos') {
-        const payload = { title, description, videoUrl: url, uploadDate, date };
         if (item.id) {
-          await api.put(`/videos/${item.id}`, payload);
-          updateVideosContent(itemCategory, item.id, payload);
+          await documentsAPI.updateVideo(item.id, title, description, url, uploadDate, date, itemCategory);
         } else {
-          const response = await api.post('/videos', payload);
-          addVideosContent(itemCategory, response.data || payload);
+          await documentsAPI.addVideo(title, description, url, uploadDate, date, itemCategory);
         }
+        const videosData = await documentsAPI.getVideos();
+        useStore.setState({ videosContent: videosData });
       } else if (section === 'calendar') {
-        const payload = { title, date, time, description };
         if (item.id) {
-          await api.put(`/calendar/${item.id}`, payload);
-          updateCalendarContent(itemCategory, item.id, payload);
+          await documentsAPI.updateCalendar(item.id, title, date, time, description, itemCategory);
         } else {
-          const response = await api.post('/calendar', payload);
-          addCalendarContent(itemCategory, response.data || payload);
+          await documentsAPI.addCalendar(title, date, time, description, itemCategory);
         }
+        const calendarData = await documentsAPI.getCalendar();
+        useStore.setState({ calendarContent: calendarData });
       }
 
       CloseModal('EditModal');
