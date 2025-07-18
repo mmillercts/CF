@@ -51,27 +51,33 @@ const BenefitsModal = ({ isOpen, CloseModal, item }) => {
             <input
               type="text"
               id="title"
+              name="title"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               required
+              autoComplete="off"
             />
           </div>
           <div className="form-group">
             <label htmlFor="description">Description</label>
             <textarea
               id="description"
+              name="description"
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               required
+              autoComplete="off"
             />
           </div>
           <div className="form-group">
             <label htmlFor="category">Category</label>
             <select
               id="category"
+              name="category"
               value={category}
               onChange={(e) => setCategory(e.target.value)}
               required
+              autoComplete="off"
             >
               <option value="">Select Category</option>
               {['fullTime', 'partTime', 'manager'].map((cat) => (

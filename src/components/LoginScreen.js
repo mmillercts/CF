@@ -49,12 +49,13 @@ function LoginScreen({ handleLogin }) {
             <input
               type="text"
               id="username"
+              name="username"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
               className="form-input"
               placeholder="Enter username"
               required
-              autoComplete="off"
+              autoComplete="username"
             />
           </div>
           
@@ -63,12 +64,13 @@ function LoginScreen({ handleLogin }) {
             <input
               type="password"
               id="password"
+              name="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               className="form-input"
               placeholder="Enter password"
               required
-              autoComplete="off"
+              autoComplete="current-password"
             />
           </div>
           

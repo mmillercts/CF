@@ -44,9 +44,11 @@ const AnnouncementModal = ({ isOpen, CloseModal, item }) => {
             <input
               type="date"
               id="date"
+              name="date"
               value={date}
               onChange={(e) => setDate(e.target.value)}
               required
+              autoComplete="off"
             />
           </div>
           <div className="form-group">
@@ -54,18 +56,22 @@ const AnnouncementModal = ({ isOpen, CloseModal, item }) => {
             <input
               type="text"
               id="title"
+              name="title"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               required
+              autoComplete="off"
             />
           </div>
           <div className="form-group">
             <label htmlFor="description">Description</label>
             <textarea
               id="description"
+              name="description"
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               required
+              autoComplete="off"
             />
           </div>
           <div className="modal-actions">
