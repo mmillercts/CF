@@ -1,3 +1,4 @@
+require('dotenv').config();
 const bcrypt = require('bcryptjs');
 const db = require('../config/database');
 
@@ -31,11 +32,23 @@ const seedData = async () => {
     await db.query(`
       INSERT INTO home_content (type, title, description, created_at)
       VALUES 
-        ('welcome', 'Welcome to Your Employee Portal', 'Your gateway to company resources, updates, and team connections', NOW()),
-        ('quick_link', 'Team', 'team', '👥'),
-        ('quick_link', 'Calendar', 'calendar', '📅'),
-        ('quick_link', 'Benefits', 'benefits', '🏥'),
-        ('quick_link', 'Documents', 'documents', '📄'),
+        ('welcome', 'Welcome to Your Employee Portal', 'Your gateway to company resources, updates, and team connections', NOW())
+      ON CONFLICT DO NOTHING
+    `);
+    
+    await db.query(`
+      INSERT INTO home_content (type, title, link_url, icon, created_at)
+      VALUES 
+        ('quick_link', 'Team', 'team', '👥', NOW()),
+        ('quick_link', 'Calendar', 'calendar', '📅', NOW()),
+        ('quick_link', 'Benefits', 'benefits', '🏥', NOW()),
+        ('quick_link', 'Documents', 'documents', '📄', NOW())
+      ON CONFLICT DO NOTHING
+    `);
+    
+    await db.query(`
+      INSERT INTO home_content (type, title, description, created_at)
+      VALUES 
         ('announcement', 'Welcome to the Portal', 'Welcome to the new Chick-fil-A Kernersville Employee Portal! Here you can access all your employee resources, benefits information, training materials, and stay updated with the latest company news.', NOW()),
         ('announcement', 'Training Reminder', 'Don''t forget to complete your monthly safety training. Access the training materials in the Development section.', NOW()),
         ('announcement', 'Team Meeting', 'Next team meeting is scheduled for the first Monday of next month. Check the calendar for specific details.', NOW())

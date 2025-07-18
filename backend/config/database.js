@@ -1,9 +1,10 @@
 const { Pool } = require('pg');
+require('dotenv').config();
 
 // Create connection pool to Neon PostgreSQL
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
-  ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false,
+  ssl: { rejectUnauthorized: false }, // Always use SSL for Neon
   max: 20, // maximum number of clients in the pool
   idleTimeoutMillis: 30000, // how long a client is allowed to remain idle
   connectionTimeoutMillis: 2000, // how long to wait when connecting a new client
