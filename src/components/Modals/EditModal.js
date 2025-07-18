@@ -66,6 +66,7 @@ const EditModal = ({ isOpen, CloseModal, item }) => {
         } else {
           await aboutAPI.addContent(title, description);
         }
+        // Always fetch the latest about content from backend to sync state
         const aboutData = await aboutAPI.getContent();
         useStore.setState({ aboutContent: aboutData.content });
       } else if (section === 'home') {

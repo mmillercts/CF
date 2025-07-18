@@ -25,7 +25,9 @@ const DeleteModal = ({ isOpen, CloseModal, item }) => {
 
       if (section === 'team') {
         await api.delete(`/team/${item.id}`);
-        deleteTeamContent(item.id);
+        // Always fetch the latest team members from backend to sync state
+        const { teamMembers } = await api.get('/team').then(res => res.data);
+        useStore.setState({ teamContent: teamMembers });
       } else {
         if (section === 'about') {
           deleteAboutContent(item.id);
