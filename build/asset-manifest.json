@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/static/css/main.f90ae21a.css",
+    "main.js": "/static/js/main.c9462250.js",
+    "static/media/RooneyPro-Medium.otf": "/static/media/RooneyPro-Medium.a012b6630684d7ff543c.otf",
+    "static/media/Apercu-Medium.otf": "/static/media/Apercu-Medium.15fa62fdaa1c6c35e5bf.otf",
+    "index.html": "/index.html",
+    "main.f90ae21a.css.map": "/static/css/main.f90ae21a.css.map",
+    "main.c9462250.js.map": "/static/js/main.c9462250.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.f90ae21a.css",
+    "static/js/main.c9462250.js"
+  ]
+}

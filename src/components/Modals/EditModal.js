@@ -19,7 +19,7 @@ const EditModal = ({ isOpen, CloseModal, item }) => {
   
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
-  const [category, setCategory] = useState('');
+  const [category, setCategory] = useState(''); // eslint-disable-line no-unused-vars
   const [date, setDate] = useState('');
   const [time, setTime] = useState('');
   const [name, setName] = useState('');
@@ -29,7 +29,7 @@ const EditModal = ({ isOpen, CloseModal, item }) => {
   const [icon, setIcon] = useState('');
   const [label, setLabel] = useState('');
   const [link, setLink] = useState('');
-  const [message, setMessage] = useState('');
+  const [message, setMessage] = useState(''); // eslint-disable-line no-unused-vars
   const [url, setUrl] = useState('');
   const [type, setType] = useState('');
   const [size, setSize] = useState('');

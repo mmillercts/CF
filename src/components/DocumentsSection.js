@@ -19,23 +19,6 @@ const DocumentsSection = ({ userRole, openModal }) => {
     return documentsContent[category] || [];
   };
 
-  const getDocumentIcon = (url) => {
-    if (!url) return '';
-    const extension = url.split('.').pop()?.toLowerCase();
-    switch (extension) {
-      case 'pdf': return 'PDF';
-      case 'doc':
-      case 'docx': return 'DOC';
-      case 'xls':
-      case 'xlsx': return 'XLS';
-      case 'ppt':
-      case 'pptx': return 'PPT';
-      case 'zip':
-      case 'rar': return 'ZIP';
-      default: return 'FILE';
-    }
-  };
-
   return (
     <div className="documents-section">
       <div className="section-header">

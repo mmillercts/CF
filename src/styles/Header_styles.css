@@ -39,7 +39,8 @@
   position: relative;
 }
 
-.secondary-nav a {
+.secondary-nav a,
+.secondary-nav button {
   color: #DD0033;
   text-decoration: none;
   font-family: 'Apercu-Medium', sans-serif;
@@ -51,6 +52,9 @@
   white-space: nowrap;
   display: block;
   position: relative;
+  background: none;
+  border: none;
+  cursor: pointer;
 }
 
 /* Dropdown Menu */
@@ -76,24 +80,33 @@
   transform: translateY(0);
 }
 
-.dropdown-menu a {
+.dropdown-menu a,
+.dropdown-menu button {
   color: #004F71;
   padding: 12px 16px;
   font-size: 1.1em;
   border-bottom: 1px solid #f8f9fa;
   border-radius: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
 }
 
-.dropdown-menu a:last-child {
+.dropdown-menu a:last-child,
+.dropdown-menu button:last-child {
   border-bottom: none;
 }
 
-.dropdown-menu a:hover {
+.dropdown-menu a:hover,
+.dropdown-menu button:hover {
   background: #f8f9fa;
   color: #DD0033;
 }
 
-.secondary-nav a:hover {
+.secondary-nav a:hover,
+.secondary-nav button:hover {
   background: rgba(221, 0, 51, 0.1);
   color: #b71c1c;
 }
@@ -149,7 +162,8 @@
   align-items: center;
 }
 
-.desktop-nav a {
+.desktop-nav a,
+.desktop-nav button {
   color: #004F71;
   margin: 0 15px;
   text-decoration: none;
@@ -160,16 +174,20 @@
   font-weight: 600;
   border: 2px solid white;
   border-radius: 6px;
+  background: none;
+  cursor: pointer;
 }
 
-.desktop-nav a.active {
+.desktop-nav a.active,
+.desktop-nav button.active {
   font-weight: bold;
   border: 2px solid #DD0033;
   color: #DD0033;
   background: rgba(221, 0, 51, 0.1);
 }
 
-.desktop-nav a:hover {
+.desktop-nav a:hover,
+.desktop-nav button:hover {
   color: #DD0033;
   text-decoration: none;
   border-color: #DD0033;
@@ -257,16 +275,24 @@
   transform: translateX(5px);
 }
 
-.mobile-nav a.logout-btn {
+.mobile-nav a.logout-btn,
+.mobile-nav button.logout-btn {
   margin-top: 20px;
   background: #DD0033;
   color: white;
   border: none;
   text-align: center;
   font-weight: bold;
+  cursor: pointer;
+  width: 100%;
+  padding: 12px 16px;
+  font-family: 'Apercu-Medium', sans-serif;
+  font-size: 1.1em;
+  border-radius: 4px;
 }
 
-.mobile-nav a.logout-btn:hover {
+.mobile-nav a.logout-btn:hover,
+.mobile-nav button.logout-btn:hover {
   background: #b71c1c;
   color: white;
 }

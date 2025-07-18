@@ -61,7 +61,7 @@ const Header = ({ userRole, handleLogout }) => {
           
           {/* Desktop Navigation */}
           <nav className="header-nav desktop-nav">
-            <a href="#" onClick={handleLogoutClick}>Log Out</a>
+            <button type="button" onClick={handleLogoutClick} className="logout-button">Log Out</button>
           </nav>
 
           {/* Mobile Hamburger Menu Button */}
@@ -82,8 +82,8 @@ const Header = ({ userRole, handleLogout }) => {
         <nav className="secondary-nav">
           {sections.map((section) => (
             <div key={section} className="secondary-nav-item">
-              <a
-                href="#"
+              <button
+                type="button"
                 className={isActiveSection(section.toLowerCase()) ? 'active' : ''}
                 onClick={(e) => {
                   e.preventDefault();
@@ -91,13 +91,13 @@ const Header = ({ userRole, handleLogout }) => {
                 }}
               >
                 {section}
-              </a>
+              </button>
               {sectionsWithSubsections[section].length > 0 && (
                 <div className="dropdown-menu">
                   {sectionsWithSubsections[section].map((subsection, index) => (
-                    <a
+                    <button
                       key={index}
-                      href="#"
+                      type="button"
                       onClick={(e) => {
                         e.preventDefault();
                         // Handle subsection navigation if needed
@@ -105,7 +105,7 @@ const Header = ({ userRole, handleLogout }) => {
                       }}
                     >
                       {subsection}
-                    </a>
+                    </button>
                   ))}
                 </div>
               )}
@@ -118,9 +118,9 @@ const Header = ({ userRole, handleLogout }) => {
       <nav className={`mobile-nav ${isMobileMenuOpen ? 'open' : ''}`}>
         <div className="mobile-nav-content">
           {sections.map((section) => (
-            <a
+            <button
               key={section}
-              href="#"
+              type="button"
               className={isActiveSection(section.toLowerCase()) ? 'active' : ''}
               onClick={(e) => {
                 e.preventDefault();
@@ -128,9 +128,9 @@ const Header = ({ userRole, handleLogout }) => {
               }}
             >
               {section}
-            </a>
+            </button>
           ))}
-          <a href="#" onClick={handleLogoutClick} className="logout-btn">Log Out</a>
+          <button type="button" onClick={handleLogoutClick} className="logout-btn">Log Out</button>
         </div>
       </nav>
 
