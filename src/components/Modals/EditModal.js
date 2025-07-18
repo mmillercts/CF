@@ -12,17 +12,8 @@ import {
 import '../../styles/Modal.css';
 
 const EditModal = ({ isOpen, CloseModal, item }) => {
-  const { 
-    addAboutContent, updateAboutContent,
-    updateHomeWelcome, addHomeQuickLink, updateHomeQuickLink, addHomeAnnouncement, updateHomeAnnouncement,
-    addBenefitsContent, updateBenefitsContent,
-    addTeamContent, updateTeamContent,
-    addDevelopmentContent, updateDevelopmentContent,
-    addDocumentsContent, updateDocumentsContent,
-    addPhotosContent, updatePhotosContent,
-    addVideosContent, updateVideosContent,
-    addCalendarContent, updateCalendarContent
-  } = useStore();
+  // Only destructure what is actually used from useStore
+  const {} = useStore();
   
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
