@@ -6,7 +6,7 @@ import api from '../../utils/api';
 import '../../styles/Modal.css';
 
 const TeamModal = ({ isOpen, CloseModal, item }) => {
-  const { ...rest } = useStore();
+  // ...existing code...
   const [name, setName] = useState('');
   const [position, setPosition] = useState('');
   const [description, setDescription] = useState('');
