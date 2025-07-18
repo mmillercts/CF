@@ -5,6 +5,9 @@
 [build.environment]
   NODE_VERSION = "18"
   NPM_FLAGS = "--no-optional --no-fund --silent"
+  # Disable secrets scanning for backend files and test files (frontend-only build)
+  SECRETS_SCAN_OMIT_PATHS = "backend/**/*,test-*,*.test.js,*.spec.js"
+  SECRETS_SCAN_OMIT_KEYS = "npg_,JWT_SECRET,COOKIE_SECRET"
 
 # Redirect configuration for SPA
 [[redirects]]

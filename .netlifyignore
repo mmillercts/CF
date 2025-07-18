@@ -1,0 +1,5 @@
+# This file tells Netlify to ignore the backend directory during frontend builds
+backend/
+*.env
+.env.*
+!.env.production
