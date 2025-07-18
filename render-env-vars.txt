@@ -1,0 +1,24 @@
+# Environment Variables for Render Deployment
+# Copy these exact values to Render dashboard > Environment > Environment Variables
+
+DATABASE_URL=postgresql://neondb_owner:npg_8xCQo2igDFUu@ep-super-night-aee4d2m0-pooler.c-2.us-east-2.aws.neon.tech/neondb?sslmode=require
+
+JWT_SECRET=0cbff919dcc10dba24356cfdad9c8091872535f36d010e082e1a60fb113688d1044f4d410a2c7254946e41d7390e30d3280350a4000daa076a90324bfc8724fb
+
+COOKIE_SECRET=b0b9bb39c69a7bebcdfa830ff4b433558fe1b87f7870b418753a1dac99dc68aa49a6a8ac22ddee900d0051485818624c621c20d45f60e8274b82c704ebf51bc8
+
+FRONTEND_URL=https://your-netlify-site.netlify.app
+
+NODE_ENV=production
+
+PORT=10000
+
+# Optional rate limiting (Render free tier handles basic rate limiting)
+RATE_LIMIT_WINDOW_MS=900000
+RATE_LIMIT_MAX_REQUESTS=100
+MAX_FILE_SIZE=5242880
+
+# Note: 
+# 1. Replace FRONTEND_URL with your actual Netlify URL after deployment
+# 2. Change JWT_SECRET and COOKIE_SECRET to strong random strings
+# 3. PORT=10000 is required for Render (they assign this port)

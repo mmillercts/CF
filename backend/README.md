@@ -2,6 +2,26 @@
 
 A Node.js/Express backend API for the Chick-fil-A Kernersville Employee Portal, powered by Neon PostgreSQL.
 
+## 🚀 Quick Deploy to Railway
+
+1. **Sign up for Railway**: https://railway.app
+2. **Create new project** and connect this GitHub repo  
+3. **Configure deployment**:
+   - Root Directory: `/backend`
+   - Build Command: `npm install`
+   - Start Command: `npm run deploy`
+
+4. **Set environment variables** in Railway dashboard:
+   ```
+   DATABASE_URL=your-neon-connection-string-here
+   JWT_SECRET=your-strong-jwt-secret
+   COOKIE_SECRET=your-strong-cookie-secret  
+   FRONTEND_URL=https://your-netlify-app.netlify.app
+   NODE_ENV=production
+   ```
+
+5. **Update frontend**: Set `REACT_APP_API_URL` in Netlify to your Railway URL
+
 ## Features
 
 - 🔐 **Authentication & Authorization** - JWT-based auth with role-based access control
