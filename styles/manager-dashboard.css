@@ -1,0 +1,210 @@
+/* Manager Dashboard Specific Styles */
+
+/* Dashboard layout improvements */
+#dashboardSection .cards {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+
+#dashboardSection .card {
+    min-height: 200px;
+    border-left: 4px solid #3498db;
+    transition: all 0.3s ease;
+}
+
+#dashboardSection .card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+    border-left-color: #2980b9;
+}
+
+/* Performance metrics styling */
+.performance-metrics {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    padding: 1rem;
+    border-radius: 8px;
+    margin-top: 1rem;
+}
+
+.metric {
+    background: white;
+    border: none;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    transition: all 0.2s ease;
+}
+
+.metric:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+.metric-value {
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+/* Color coding for different metrics */
+.metric:nth-child(1) { border-left-color: #27ae60; } /* Green for satisfaction */
+.metric:nth-child(2) { border-left-color: #f39c12; } /* Orange for efficiency */
+.metric:nth-child(3) { border-left-color: #e74c3c; } /* Red for sales */
+.metric:nth-child(4) { border-left-color: #9b59b6; } /* Purple for experience */
+
+/* Schedule actions styling */
+.schedule-actions {
+    margin-top: 1rem;
+}
+
+.schedule-actions .btn {
+    background: #3498db;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.schedule-actions .btn:hover {
+    background: #2980b9;
+}
+
+/* Alert styling improvements */
+.alert-list {
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.alert-item {
+    animation: slideIn 0.3s ease;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.alert-item:hover {
+    background: #fff3cd;
+    transform: translateX(4px);
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Reports section styling */
+#reportsSection .cards {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+#reportsSection .card {
+    border-left: 4px solid #27ae60;
+}
+
+.report-options .btn {
+    background: #27ae60;
+    color: white;
+    font-size: 0.9em;
+    padding: 0.4rem 0.8rem;
+}
+
+.report-options .btn:hover {
+    background: #219a52;
+}
+
+/* Staff management styling */
+#staffmanagementSection .card {
+    border-left: 4px solid #f39c12;
+}
+
+.staff-actions .btn,
+.schedule-tools .btn,
+.performance-tools .btn {
+    background: #f39c12;
+    color: white;
+    font-size: 0.9em;
+    padding: 0.4rem 0.8rem;
+}
+
+.staff-actions .btn:hover,
+.schedule-tools .btn:hover,
+.performance-tools .btn:hover {
+    background: #e67e22;
+}
+
+/* Manager navigation highlighting */
+.nav-link.manager-only {
+    position: relative;
+}
+
+.nav-link.manager-only::before {
+    content: '★';
+    position: absolute;
+    left: -15px;
+    color: #f39c12;
+    font-size: 0.8em;
+}
+
+/* Admin controls for manager content */
+body.admin-view .manager-only .admin-controls {
+    background: rgba(231, 76, 60, 0.1);
+    border: 1px solid rgba(231, 76, 60, 0.2);
+    padding: 0.5rem;
+    border-radius: 4px;
+    margin-bottom: 0.5rem;
+}
+
+/* Loading states for dynamic content */
+.loading {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 3px solid #f3f3f3;
+    border-top: 3px solid #3498db;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Mobile responsiveness for manager content */
+@media (max-width: 768px) {
+    #dashboardSection .cards,
+    #reportsSection .cards,
+    #staffmanagementSection .cards {
+        grid-template-columns: 1fr;
+    }
+    
+    .performance-metrics {
+        grid-template-columns: 1fr;
+    }
+    
+    .nav-link.manager-only::before {
+        display: none;
+    }
+    
+    .schedule-actions,
+    .report-options,
+    .staff-actions,
+    .schedule-tools,
+    .performance-tools {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .schedule-actions .btn,
+    .report-options .btn,
+    .staff-actions .btn,
+    .schedule-tools .btn,
+    .performance-tools .btn {
+        width: 100%;
+        text-align: center;
+    }
+}

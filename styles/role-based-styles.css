@@ -1,0 +1,173 @@
+/* Role-based visibility controls */
+.manager-only,
+.admin-only {
+    display: none !important;
+}
+
+/* Team Member View */
+body.team-view .team-only {
+    display: block !important;
+}
+
+body.team-view .manager-only,
+body.team-view .admin-only {
+    display: none !important;
+}
+
+/* Manager View */
+body.manager-view .team-only,
+body.manager-view .manager-only {
+    display: block !important;
+}
+
+body.manager-view .admin-only {
+    display: none !important;
+}
+
+/* Admin View */
+body.admin-view .team-only,
+body.admin-view .manager-only,
+body.admin-view .admin-only {
+    display: block !important;
+}
+
+/* Manager-specific styling */
+.performance-metrics {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.metric {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background: #f8f9fa;
+    border-radius: 8px;
+    border-left: 4px solid #e74c3c;
+}
+
+.metric-label {
+    font-weight: 500;
+    color: #555;
+}
+
+.metric-value {
+    font-weight: bold;
+    font-size: 1.2em;
+    color: #e74c3c;
+}
+
+.schedule-actions,
+.report-options,
+.staff-actions,
+.schedule-tools,
+.performance-tools {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+
+.alert-list {
+    margin-top: 1rem;
+}
+
+.alert-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem;
+    margin-bottom: 0.5rem;
+    background: #fff3cd;
+    border: 1px solid #ffeaa7;
+    border-radius: 4px;
+    font-size: 0.9em;
+}
+
+.alert-icon {
+    font-size: 1.1em;
+}
+
+/* Role indicator in header */
+.user-info {
+    font-size: 0.9em;
+    color: #666;
+    font-weight: 500;
+}
+
+.user-info .role {
+    background: #e74c3c;
+    color: white;
+    padding: 0.2rem 0.5rem;
+    border-radius: 12px;
+    font-size: 0.8em;
+    margin-left: 0.5rem;
+}
+
+/* Login role dropdown styling */
+#loginRole {
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    background-size: 1em;
+    padding-right: 3rem;
+}
+
+/* Manager dashboard specific cards */
+.manager-only .card {
+    border-left: 4px solid #3498db;
+}
+
+.manager-only .card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+/* Admin controls visibility */
+.admin-controls {
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+body.admin-view .admin-controls {
+    opacity: 1;
+}
+
+.card:hover .admin-controls {
+    opacity: 1;
+}
+
+/* Role-specific navigation styling */
+.nav-link.manager-only {
+    border-left: 3px solid #3498db;
+    padding-left: 1rem;
+}
+
+.nav-link.manager-only:hover {
+    background-color: rgba(52, 152, 219, 0.1);
+}
+
+/* Responsive adjustments for manager content */
+@media (max-width: 768px) {
+    .performance-metrics {
+        grid-template-columns: 1fr;
+    }
+    
+    .schedule-actions,
+    .report-options,
+    .staff-actions,
+    .schedule-tools,
+    .performance-tools {
+        flex-direction: column;
+    }
+    
+    .metric {
+        flex-direction: column;
+        text-align: center;
+        gap: 0.5rem;
+    }
+}

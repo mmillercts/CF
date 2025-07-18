@@ -33,9 +33,9 @@
   --cfa-text-light: #757575;
   
   /* Background Colors */
-  --cfa-background-primary: #fff;
-  --cfa-background-secondary: #fafafa;
-  --cfa-background-dark: #a8a8a8;
+  --cfa-background-primary: #ffffff;
+  --cfa-background-secondary: #ffffff;
+  --cfa-background-dark: #ffffff;
   
   /* Typography */
   --cfa-font-family: apercu, sans-serif;
@@ -105,7 +105,7 @@ body {
   font-variant-ligatures: none;
   -webkit-font-variant-ligatures: none;
   -webkit-font-smoothing: antialiased;
-  background-color: var(--cfa-background-secondary);
+  background-color: #ffffff;
   line-height: var(--cfa-line-height-lg);
 }
 

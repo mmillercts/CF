@@ -4,30 +4,355 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chick-fil-A Kernersville Employee Portal</title>
+    <style>
+        /* Reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        
+        /* Login Screen Styling */
+        #loginScreen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+        }
+
+        .login-container {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            max-width: 400px;
+            width: 90%;
+            text-align: center;
+        }
+
+        .logo-section {
+            margin-bottom: 2rem;
+        }
+
+        .logo-section img {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 50%;
+            margin-bottom: 1rem;
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            color: #2c3e50;
+            font-weight: bold;
+            line-height: 1.3;
+        }
+
+        #loginForm {
+            text-align: left;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #34495e;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #bdc3c7;
+            border-radius: 6px;
+            font-size: 16px;
+            background: white;
+            color: #2c3e50;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: #e74c3c;
+            box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.1);
+        }
+
+        select.form-input {
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23333' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 1rem center;
+            background-size: 1em;
+            padding-right: 3rem;
+            cursor: pointer;
+        }
+
+        #loginError {
+            color: #e74c3c;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+            padding: 0.5rem;
+            border-radius: 4px;
+            background: rgba(231, 76, 60, 0.1);
+            border: 1px solid rgba(231, 76, 60, 0.3);
+            display: none;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 12px;
+            background: #e74c3c;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 1rem;
+        }
+
+        .btn:hover {
+            background: #c0392b;
+        }
+
+        /* Hide main portal initially */
+        #mainPortal {
+            display: none;
+        }
+
+        /* Role-based visibility controls */
+        .manager-only,
+        .admin-only {
+            display: none !important;
+        }
+
+        body.team-view .team-only {
+            display: block !important;
+        }
+
+        body.manager-view .team-only,
+        body.manager-view .manager-only {
+            display: block !important;
+        }
+
+        body.admin-view .team-only,
+        body.admin-view .manager-only,
+        body.admin-view .admin-only {
+            display: block !important;
+        }
+    </style>
+    <script>
+        // User credentials database
+        const userCredentials = {
+            // Team Members - can use either password
+            'Kvillecfa': { passwords: ['1248', '4772'], role: 'team' },
+            'kvillecfa': { passwords: ['1248', '4772'], role: 'team' }, // lowercase version
+            
+            // Managers - can use either password
+            'Kvillecfamgr': { passwords: ['1248mgr', '4772mgr'], role: 'manager' },
+            'kvillecfamgr': { passwords: ['1248mgr', '4772mgr'], role: 'manager' }, // lowercase version
+            
+            // Admins
+            'Admin': { passwords: ['AdminCFA'], role: 'admin' },
+            'admin': { passwords: ['AdminCFA'], role: 'admin' } // lowercase version
+        };
+
+        let currentUserRole = null;
+        let currentUsername = null;
+
+        // Initialize when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Page loaded, setting up login form');
+            setupLoginForm();
+        });
+
+        function setupLoginForm() {
+            const loginForm = document.getElementById('loginForm');
+            if (loginForm) {
+                console.log('Login form found, attaching event listener');
+                loginForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    console.log('Login form submitted');
+                    handleLogin();
+                });
+                
+                // Test input functionality
+                const usernameInput = document.getElementById('loginUsername');
+                const passwordInput = document.getElementById('loginPassword');
+                const roleSelect = document.getElementById('loginRole');
+                
+                usernameInput.addEventListener('input', function(e) {
+                    console.log('Username typed:', e.target.value);
+                });
+                
+                passwordInput.addEventListener('input', function(e) {
+                    console.log('Password typed, length:', e.target.value.length);
+                });
+                
+                roleSelect.addEventListener('change', function(e) {
+                    console.log('Role selected:', e.target.value);
+                });
+                
+            } else {
+                console.error('Login form not found!');
+            }
+        }
+
+        function handleLogin() {
+            console.log('handleLogin called');
+            const username = document.getElementById('loginUsername').value.trim();
+            const password = document.getElementById('loginPassword').value;
+            const selectedRole = document.getElementById('loginRole').value;
+            const errorDiv = document.getElementById('loginError');
+            
+            console.log('Login attempt:', { username, password: password ? `provided (${password.length} chars)` : 'empty', selectedRole });
+            
+            // Clear previous errors
+            errorDiv.style.display = 'none';
+            errorDiv.textContent = '';
+            
+            // Validate inputs
+            if (!username || !password || !selectedRole) {
+                console.log('Validation failed: missing fields');
+                showLoginError('Please fill in all fields');
+                return;
+            }
+            
+            // Check if user exists (case insensitive)
+            const userKey = Object.keys(userCredentials).find(key => 
+                key.toLowerCase() === username.toLowerCase()
+            );
+            
+            if (!userKey) {
+                console.log('User not found:', username);
+                showLoginError('Invalid username or password');
+                return;
+            }
+            
+            const user = userCredentials[userKey];
+            console.log('User found:', { username: userKey, expectedRole: user.role, selectedRole });
+            
+            // Validate password (handle both old single password and new multiple passwords format)
+            const validPasswords = user.passwords || [user.password];
+            if (!validPasswords.includes(password)) {
+                console.log('Password mismatch - tried:', password, 'valid options:', validPasswords);
+                showLoginError('Invalid username or password');
+                return;
+            }
+            
+            // Validate role matches user's assigned role
+            if (user.role !== selectedRole) {
+                console.log('Role mismatch:', { expected: user.role, selected: selectedRole });
+                showLoginError('Selected role does not match your account');
+                return;
+            }
+            
+            console.log('Login successful');
+            
+            // Successful login
+            currentUsername = userKey;
+            currentUserRole = selectedRole;
+            
+            // Apply role-based styling
+            document.body.className = `${selectedRole}-view`;
+            
+            // Hide login screen and show main portal
+            document.getElementById('loginScreen').style.display = 'none';
+            document.getElementById('mainPortal').style.display = 'block';
+            
+            // Update user info display
+            const userInfo = document.querySelector('.user-info');
+            if (userInfo) {
+                userInfo.textContent = `${userKey} (${selectedRole})`;
+            }
+        }
+
+        function showLoginError(message) {
+            console.log('Showing error:', message);
+            const errorDiv = document.getElementById('loginError');
+            if (errorDiv) {
+                errorDiv.textContent = message;
+                errorDiv.style.display = 'block';
+            } else {
+                console.error('Error div not found');
+                alert(message);
+            }
+        }
+
+        function handleLogout() {
+            currentUserRole = null;
+            currentUsername = null;
+            
+            // Remove role classes
+            document.body.className = '';
+            
+            // Clear form
+            document.getElementById('loginUsername').value = '';
+            document.getElementById('loginPassword').value = '';
+            document.getElementById('loginRole').value = '';
+            document.getElementById('loginError').textContent = '';
+            document.getElementById('loginError').style.display = 'none';
+            
+            // Show login screen and hide main portal
+            document.getElementById('loginScreen').style.display = 'flex';
+            document.getElementById('mainPortal').style.display = 'none';
+        }
+    </script>
 </head>
 <body>
-  <div id="root"></div>
-</body>
     <div id="loginScreen">
-        <div>
-            <div>
-                <div>
-                    <img src="./IMG_3606.JPG" alt="Chick-fil-A Logo">
-                </div>
-                <div>Chick-fil-A Kernersville<br>Employee Portal</div>
+        <div class="login-container">
+            <div class="logo-section">
+                <img src="./IMG_3606.JPG" alt="Chick-fil-A Logo">
+                <div class="logo-text">Chick-fil-A Kernersville<br>Employee Portal</div>
             </div>
             <form id="loginForm" autocomplete="off">
-                <div>
+                <div class="form-group">
                     <label for="loginUsername">Username</label>
-                    <input type="text" id="loginUsername" class="form-input" required autocomplete="off">
+                    <input type="text" id="loginUsername" class="form-input" required autocomplete="off" placeholder="Enter username">
                 </div>
-                <div>
+                <div class="form-group">
                     <label for="loginPassword">Password</label>
-                    <input type="password" id="loginPassword" class="form-input" required autocomplete="off">
+                    <input type="password" id="loginPassword" class="form-input" required autocomplete="off" placeholder="Enter password">
+                </div>
+                <div class="form-group">
+                    <label for="loginRole">Login As</label>
+                    <select id="loginRole" class="form-input" required>
+                        <option value="">Select Role</option>
+                        <option value="team">Team Member</option>
+                        <option value="manager">Manager</option>
+                        <option value="admin">Admin</option>
+                    </select>
                 </div>
                 <div id="loginError"></div>
                 <button type="submit" class="btn">Login</button>
             </form>
+            
+            <!-- Help Section -->
+            <div style="margin-top: 1.5rem; padding: 1rem; background: #f8f9fa; border-radius: 6px; font-size: 0.9rem; text-align: left;">
+                <strong>Login Credentials:</strong><br>
+                <strong>Team:</strong> Kvillecfa / 1248 or 4772<br>
+                <strong>Manager:</strong> Kvillecfamgr / 1248mgr or 4772mgr<br>
+                <strong>Admin:</strong> Admin / AdminCFA<br>
+                <small style="color: #666; margin-top: 0.5rem; display: block;">Usernames are case-insensitive</small>
+            </div>
         </div>
     </div>
     <!-- Main Portal -->
@@ -42,14 +367,18 @@
                         <div class="logo-text">Chick-fil-A Kernersville</div>
                     </div>
                     <nav class="nav" id="nav">
-                        <a class="nav-link active">Home</a>
-                        <a class="nav-link">About</a>
-                        <a class="nav-link">Team</a>
-                        <a class="nav-link">Development</a>
-                        <a class="nav-link">Benefits</a>
-                        <a class="nav-link">Documents</a>
-                        <a class="nav-link">Photos</a>
-                        <a class="nav-link">Calendar</a>
+                        <a class="nav-link active" data-section="home">Home</a>
+                        <a class="nav-link" data-section="about">About</a>
+                        <a class="nav-link" data-section="team">Team</a>
+                        <a class="nav-link" data-section="development">Development</a>
+                        <a class="nav-link" data-section="benefits">Benefits</a>
+                        <a class="nav-link" data-section="documents">Documents</a>
+                        <a class="nav-link" data-section="photos">Photos</a>
+                        <a class="nav-link" data-section="calendar">Calendar</a>
+                        <!-- Manager-only navigation -->
+                        <a class="nav-link manager-only" data-section="dashboard">Dashboard</a>
+                        <a class="nav-link manager-only" data-section="reports">Reports</a>
+                        <a class="nav-link manager-only" data-section="staffmanagement">Staff</a>
                         <a class="nav-link logout-link">Log Out</a>
                     </nav>
                     <div class="user-info"></div>
@@ -526,6 +855,189 @@
                             <div class="events-sidebar">
                                 <h3>Union Cross Events</h3>
                                 <div id="unionCrossEventsList"></div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Manager Dashboard Section (Manager/Admin Only) -->
+                <section id="dashboardSection" class="section manager-only">
+                    <div class="page-title">
+                        Manager Dashboard
+                        <button class="admin-btn admin-only">Add Widget</button>
+                    </div>
+                    <div class="cards">
+                        <div class="card" data-id="performance">
+                            <div class="admin-controls admin-only">
+                                <button class="edit-btn">Edit</button>
+                                <button class="delete-btn">Delete</button>
+                            </div>
+                            <div class="card-body">
+                                <h3>Team Performance</h3>
+                                <p>View team metrics and performance data.</p>
+                                <div class="performance-metrics">
+                                    <div class="metric">
+                                        <span class="metric-label">Customer Satisfaction</span>
+                                        <span class="metric-value">98%</span>
+                                    </div>
+                                    <div class="metric">
+                                        <span class="metric-label">Team Efficiency</span>
+                                        <span class="metric-value">95%</span>
+                                    </div>
+                                    <div class="metric">
+                                        <span class="metric-label">Sales Target</span>
+                                        <span class="metric-value">103%</span>
+                                    </div>
+                                    <div class="metric">
+                                        <span class="metric-label">Guest Experience</span>
+                                        <span class="metric-value">4.8/5</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card" data-id="schedule">
+                            <div class="admin-controls admin-only">
+                                <button class="edit-btn">Edit</button>
+                                <button class="delete-btn">Delete</button>
+                            </div>
+                            <div class="card-body">
+                                <h3>Schedule Management</h3>
+                                <p>Manage team schedules and coverage.</p>
+                                <div class="schedule-actions">
+                                    <button class="btn btn-small">View Schedules</button>
+                                    <button class="btn btn-small">Edit Shifts</button>
+                                    <button class="btn btn-small">Coverage Report</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card" data-id="alerts">
+                            <div class="admin-controls admin-only">
+                                <button class="edit-btn">Edit</button>
+                                <button class="delete-btn">Delete</button>
+                            </div>
+                            <div class="card-body">
+                                <h3>Manager Alerts</h3>
+                                <p>Important notifications and action items.</p>
+                                <div class="alert-list" id="managerAlerts">
+                                    <div class="alert-item">
+                                        <span class="alert-icon">⚠️</span>
+                                        <span>Staff meeting scheduled for tomorrow 2PM</span>
+                                    </div>
+                                    <div class="alert-item">
+                                        <span class="alert-icon">📊</span>
+                                        <span>Weekly performance review due</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Reports Section (Manager/Admin Only) -->
+                <section id="reportsSection" class="section manager-only">
+                    <div class="page-title">
+                        Reports & Analytics
+                        <button class="admin-btn admin-only">Generate Report</button>
+                    </div>
+                    <div class="cards">
+                        <div class="card" data-id="sales-report">
+                            <div class="admin-controls admin-only">
+                                <button class="edit-btn">Edit</button>
+                                <button class="delete-btn">Delete</button>
+                            </div>
+                            <div class="card-body">
+                                <h3>Sales Reports</h3>
+                                <p>Daily, weekly, and monthly sales analytics.</p>
+                                <div class="report-options">
+                                    <button class="btn btn-small">Daily Report</button>
+                                    <button class="btn btn-small">Weekly Summary</button>
+                                    <button class="btn btn-small">Monthly Analysis</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card" data-id="staff-report">
+                            <div class="admin-controls admin-only">
+                                <button class="edit-btn">Edit</button>
+                                <button class="delete-btn">Delete</button>
+                            </div>
+                            <div class="card-body">
+                                <h3>Staff Reports</h3>
+                                <p>Team member performance and attendance.</p>
+                                <div class="report-options">
+                                    <button class="btn btn-small">Attendance Report</button>
+                                    <button class="btn btn-small">Performance Review</button>
+                                    <button class="btn btn-small">Training Progress</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card" data-id="operational-report">
+                            <div class="admin-controls admin-only">
+                                <button class="edit-btn">Edit</button>
+                                <button class="delete-btn">Delete</button>
+                            </div>
+                            <div class="card-body">
+                                <h3>Operational Reports</h3>
+                                <p>Kitchen efficiency and service metrics.</p>
+                                <div class="report-options">
+                                    <button class="btn btn-small">Kitchen Times</button>
+                                    <button class="btn btn-small">Service Speed</button>
+                                    <button class="btn btn-small">Quality Metrics</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Staff Management Section (Manager/Admin Only) -->
+                <section id="staffmanagementSection" class="section manager-only">
+                    <div class="page-title">
+                        Staff Management
+                        <button class="admin-btn admin-only">Add Staff Member</button>
+                    </div>
+                    <div class="cards">
+                        <div class="card" data-id="staff-directory">
+                            <div class="admin-controls admin-only">
+                                <button class="edit-btn">Edit</button>
+                                <button class="delete-btn">Delete</button>
+                            </div>
+                            <div class="card-body">
+                                <h3>Staff Directory</h3>
+                                <p>Manage team member information and roles.</p>
+                                <div class="staff-actions">
+                                    <button class="btn btn-small">View All Staff</button>
+                                    <button class="btn btn-small">Add New Member</button>
+                                    <button class="btn btn-small">Update Roles</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card" data-id="schedule-management">
+                            <div class="admin-controls admin-only">
+                                <button class="edit-btn">Edit</button>
+                                <button class="delete-btn">Delete</button>
+                            </div>
+                            <div class="card-body">
+                                <h3>Schedule Management</h3>
+                                <p>Create and manage work schedules.</p>
+                                <div class="schedule-tools">
+                                    <button class="btn btn-small">Weekly Schedule</button>
+                                    <button class="btn btn-small">Time Off Requests</button>
+                                    <button class="btn btn-small">Coverage Planning</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card" data-id="performance-tracking">
+                            <div class="admin-controls admin-only">
+                                <button class="edit-btn">Edit</button>
+                                <button class="delete-btn">Delete</button>
+                            </div>
+                            <div class="card-body">
+                                <h3>Performance Tracking</h3>
+                                <p>Monitor and evaluate team performance.</p>
+                                <div class="performance-tools">
+                                    <button class="btn btn-small">Individual Reviews</button>
+                                    <button class="btn btn-small">Goal Setting</button>
+                                    <button class="btn btn-small">Recognition Program</button>
+                                </div>
                             </div>
                         </div>
                     </div>

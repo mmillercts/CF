@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Form Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        
+        .test-container {
+            max-width: 400px;
+            margin: 0 auto;
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .form-group {
+            margin-bottom: 1rem;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #bdc3c7;
+            border-radius: 6px;
+            font-size: 16px;
+            background: white !important;
+            color: #2c3e50 !important;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+        }
+        
+        .form-input:focus {
+            outline: none;
+            border-color: #e74c3c;
+            box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.1);
+            background: white !important;
+            color: #2c3e50 !important;
+        }
+        
+        .form-input::placeholder {
+            color: #7f8c8d !important;
+            opacity: 0.7;
+        }
+        
+        input:not([type="submit"]):not([type="button"]) {
+            color: #2c3e50 !important;
+            background-color: white !important;
+            -webkit-text-fill-color: #2c3e50 !important;
+        }
+        
+        input:not([type="submit"]):not([type="button"]):focus {
+            color: #2c3e50 !important;
+            background-color: white !important;
+            -webkit-text-fill-color: #2c3e50 !important;
+        }
+        
+        input:-webkit-autofill,
+        input:-webkit-autofill:hover,
+        input:-webkit-autofill:focus {
+            -webkit-text-fill-color: #2c3e50 !important;
+            -webkit-box-shadow: 0 0 0px 1000px white inset !important;
+            background-color: white !important;
+            color: #2c3e50 !important;
+        }
+        
+        .btn {
+            width: 100%;
+            padding: 12px;
+            background: #e74c3c;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 1rem;
+        }
+        
+        .btn:hover {
+            background: #c0392b;
+        }
+        
+        .test-result {
+            margin-top: 1rem;
+            padding: 1rem;
+            border-radius: 6px;
+            display: none;
+        }
+        
+        .test-result.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .test-result.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h2>Login Form Text Visibility Test</h2>
+        <p>Type in the fields below to test if text is visible:</p>
+        
+        <form id="testForm">
+            <div class="form-group">
+                <label for="testUsername">Username</label>
+                <input type="text" id="testUsername" class="form-input" placeholder="Type here to test visibility" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="testPassword">Password</label>
+                <input type="password" id="testPassword" class="form-input" placeholder="Type password here" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="testSelect">Select Test</label>
+                <select id="testSelect" class="form-input" required>
+                    <option value="">Select an option</option>
+                    <option value="option1">Option 1</option>
+                    <option value="option2">Option 2</option>
+                </select>
+            </div>
+            
+            <button type="submit" class="btn">Test Submit</button>
+        </form>
+        
+        <div id="testResult" class="test-result"></div>
+        
+        <div style="margin-top: 2rem; padding: 1rem; background: #f8f9fa; border-radius: 6px; font-size: 0.9rem;">
+            <strong>Test Instructions:</strong><br>
+            1. Type text in the username field - you should see dark text<br>
+            2. Type text in the password field - you should see dots/asterisks<br>
+            3. Select an option from the dropdown<br>
+            4. If any text is invisible or hard to read, there's a styling issue
+        </div>
+    </div>
+    
+    <script>
+        document.getElementById('testForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const username = document.getElementById('testUsername').value;
+            const password = document.getElementById('testPassword').value;
+            const select = document.getElementById('testSelect').value;
+            const resultDiv = document.getElementById('testResult');
+            
+            if (username && password && select) {
+                resultDiv.className = 'test-result success';
+                resultDiv.textContent = 'Success! All fields are working and text is visible.';
+                resultDiv.style.display = 'block';
+            } else {
+                resultDiv.className = 'test-result error';
+                resultDiv.textContent = 'Error: Please fill in all fields to complete the test.';
+                resultDiv.style.display = 'block';
+            }
+        });
+        
+        // Test input visibility
+        document.getElementById('testUsername').addEventListener('input', function(e) {
+            console.log('Username input detected:', e.target.value);
+        });
+        
+        document.getElementById('testPassword').addEventListener('input', function(e) {
+            console.log('Password input detected, length:', e.target.value.length);
+        });
+    </script>
+</body>
+</html>

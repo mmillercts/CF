@@ -2,7 +2,7 @@
 .app {
   text-align: center;
   min-height: 100vh;
-  background-color: var(--cfa-background-secondary);
+  background-color: #ffffff;
   padding: var(--cfa-spacing-lg);
   font-family: var(--cfa-font-family);
   font-size: var(--cfa-font-size-base);
@@ -13,10 +13,11 @@
   max-width: 1200px;
   margin: var(--cfa-spacing-lg) auto;
   padding: var(--cfa-spacing-lg);
+  background-color: #ffffff;
 }
 
 .container {
-  background: var(--cfa-white);
+  background: #ffffff;
   border-radius: var(--cfa-border-radius);
   box-shadow: var(--cfa-box-shadow-md);
   padding: var(--cfa-spacing-lg);

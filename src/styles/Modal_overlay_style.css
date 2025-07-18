@@ -56,6 +56,35 @@
   font-family: 'Apercu-Medium', sans-serif;
   min-height: 44px; /* Touch target size */
   box-sizing: border-box;
+  background: #ffffff !important;
+  color: #2c3e50 !important;
+  -webkit-text-fill-color: #2c3e50 !important;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: #d32f2f;
+  box-shadow: 0 0 0 3px rgba(211, 47, 47, 0.1);
+  background: #ffffff !important;
+  color: #2c3e50 !important;
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  color: #7f8c8d !important;
+  opacity: 0.7;
+}
+
+/* Fix for autofill styles */
+.form-group input:-webkit-autofill,
+.form-group input:-webkit-autofill:hover,
+.form-group input:-webkit-autofill:focus {
+  -webkit-text-fill-color: #2c3e50 !important;
+  -webkit-box-shadow: 0 0 0px 1000px #ffffff inset !important;
+  background-color: #ffffff !important;
+  color: #2c3e50 !important;
 }
 
 /* Mobile Responsive Modal */
@@ -105,6 +134,9 @@
   .form-group select {
     padding: 12px;
     font-size: 16px; /* Prevents zoom on iOS */
+    background: #ffffff !important;
+    color: #2c3e50 !important;
+    -webkit-text-fill-color: #2c3e50 !important;
   }
   
   .form-group textarea {
@@ -181,6 +213,9 @@
     font-size: 1.1em;
     padding: 12px;
     min-height: 44px;
+    background: #ffffff !important;
+    color: #2c3e50 !important;
+    -webkit-text-fill-color: #2c3e50 !important;
   }
   
   .btn {
@@ -224,6 +259,9 @@
     font-size: 1.2em;
     padding: 14px;
     min-height: 48px;
+    background: #ffffff !important;
+    color: #2c3e50 !important;
+    -webkit-text-fill-color: #2c3e50 !important;
   }
   
   .btn {

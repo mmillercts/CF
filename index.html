@@ -4,867 +4,417 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chick-fil-A Kernersville Employee Portal</title>
+    <style>
+        /* Reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        
+        /* Login Screen Styling */
+        #loginScreen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+        }
+
+        .login-container {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            max-width: 400px;
+            width: 90%;
+            text-align: center;
+        }
+
+        .logo-section {
+            margin-bottom: 2rem;
+        }
+
+        .logo-section img {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 50%;
+            margin-bottom: 1rem;
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            color: #2c3e50;
+            font-weight: bold;
+            line-height: 1.3;
+        }
+
+        #loginForm {
+            text-align: left;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #34495e;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #bdc3c7;
+            border-radius: 6px;
+            font-size: 16px;
+            background: white !important;
+            color: #2c3e50 !important;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: #e74c3c;
+            box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.1);
+            background: white !important;
+            color: #2c3e50 !important;
+        }
+
+        .form-input::placeholder {
+            color: #7f8c8d !important;
+            opacity: 0.7;
+        }
+
+        /* Ensure input text is always visible */
+        input[type="text"],
+        input[type="password"],
+        select {
+            color: #2c3e50 !important;
+            background-color: white !important;
+        }
+
+        select.form-input {
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            background: white !important;
+            color: #2c3e50 !important;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23333' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 1rem center;
+            background-size: 1em;
+            padding-right: 3rem;
+            cursor: pointer;
+        }
+
+        select.form-input option {
+            color: #2c3e50 !important;
+            background: white !important;
+        }
+
+        #loginError {
+            color: #e74c3c;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+            padding: 0.5rem;
+            border-radius: 4px;
+            background: rgba(231, 76, 60, 0.1);
+            border: 1px solid rgba(231, 76, 60, 0.3);
+            display: none;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 12px;
+            background: #e74c3c;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 1rem;
+        }
+
+        .btn:hover {
+            background: #c0392b;
+        }
+
+        /* Hide main portal initially */
+        #mainPortal {
+            display: none;
+        }
+
+        /* Role-based visibility controls */
+        .manager-only,
+        .admin-only {
+            display: none !important;
+        }
+
+        body.team-view .team-only {
+            display: block !important;
+        }
+
+        body.manager-view .team-only,
+        body.manager-view .manager-only {
+            display: block !important;
+        }
+
+        body.admin-view .team-only,
+        body.admin-view .manager-only,
+        body.admin-view .admin-only {
+            display: block !important;
+        }
+
+        /* Additional text visibility fixes */
+        input:not([type="submit"]):not([type="button"]) {
+            color: #2c3e50 !important;
+            background-color: white !important;
+            -webkit-text-fill-color: #2c3e50 !important;
+        }
+
+        input:not([type="submit"]):not([type="button"]):focus {
+            color: #2c3e50 !important;
+            background-color: white !important;
+            -webkit-text-fill-color: #2c3e50 !important;
+        }
+
+        /* Fix for autofill styles */
+        input:-webkit-autofill,
+        input:-webkit-autofill:hover,
+        input:-webkit-autofill:focus {
+            -webkit-text-fill-color: #2c3e50 !important;
+            -webkit-box-shadow: 0 0 0px 1000px white inset !important;
+            background-color: white !important;
+            color: #2c3e50 !important;
+        }
+    </style>
 </head>
 <body>
     <div id="loginScreen">
-        <div>
-            <div>
-                <div>
-                    <img src="./IMG_3606.JPG" alt="Chick-fil-A Logo">
-                </div>
-                <div>Chick-fil-A Kernersville<br>Employee Portal</div>
+        <div class="login-container">
+            <div class="logo-section">
+                <img src="./IMG_3606.JPG" alt="Chick-fil-A Logo">
+                <div class="logo-text">Chick-fil-A Kernersville<br>Employee Portal</div>
             </div>
             <form id="loginForm" autocomplete="off">
-                <div>
+                <div class="form-group">
                     <label for="loginUsername">Username</label>
-                    <input type="text" id="loginUsername" class="form-input" required autocomplete="off">
+                    <input type="text" id="loginUsername" class="form-input" required autocomplete="off" placeholder="Enter username">
                 </div>
-                <div>
+                <div class="form-group">
                     <label for="loginPassword">Password</label>
-                    <input type="password" id="loginPassword" class="form-input" required autocomplete="off">
+                    <input type="password" id="loginPassword" class="form-input" required autocomplete="off" placeholder="Enter password">
+                </div>
+                <div class="form-group">
+                    <label for="loginRole">Login As</label>
+                    <select id="loginRole" class="form-input" required>
+                        <option value="">Select Role</option>
+                        <option value="team">Team Member</option>
+                        <option value="manager">Manager</option>
+                        <option value="admin">Admin</option>
+                    </select>
                 </div>
                 <div id="loginError"></div>
                 <button type="submit" class="btn">Login</button>
             </form>
+            
+            <!-- Help Section -->
+            <div style="margin-top: 1.5rem; padding: 1rem; background: #f8f9fa; border-radius: 6px; font-size: 0.9rem; text-align: left;">
+                <strong>Login Credentials:</strong><br>
+                <strong>Team:</strong> Kvillecfa / 1248 or 4772<br>
+                <strong>Manager:</strong> Kvillecfamgr / 1248mgr or 4772mgr<br>
+                <strong>Admin:</strong> Admin / AdminCFA<br>
+                <small style="color: #666; margin-top: 0.5rem; display: block;">Both passwords work with the same username</small>
+            </div>
         </div>
     </div>
+
     <!-- Main Portal -->
     <div id="mainPortal">
-        <header class="header">
-            <div class="container">
-                <div class="header-content">
-                    <div class="logo">
-                        <div class="logo-icon">
-                            <img src="./IMG_3606.JPG" alt="Chick-fil-A Logo">
-                        </div>
-                        <div class="logo-text">Chick-fil-A Kernersville</div>
-                    </div>
-                    <nav class="nav" id="nav">
-                        <a class="nav-link active">Home</a>
-                        <a class="nav-link">About</a>
-                        <a class="nav-link">Team</a>
-                        <a class="nav-link">Development</a>
-                        <a class="nav-link">Benefits</a>
-                        <a class="nav-link">Documents</a>
-                        <a class="nav-link">Photos</a>
-                        <a class="nav-link">Calendar</a>
-                        <a class="nav-link logout-link">Log Out</a>
-                    </nav>
-                    <div class="user-info"></div>
-                    <button class="mobile-menu" id="mobileMenu">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </button>
-                </div>
-            </div>
-        </header>
-        <main class="main">
-            <div class="container">
-                <!-- Home Section -->
-                <section id="homeSection" class="section active">
-                    <div class="page-title">
-                        Welcome to Your Employee Portal
-                        <button class="admin-btn">Add Content</button>
-                    </div>
-                    <div class="cards" id="homeCards">
-                        <div class="card" data-id="welcome">
-                            <div class="admin-controls">
-                                <button class="edit-btn">Edit</button>
-                                <button class="delete-btn">Delete</button>
-                            </div>
-                            <div class="card-header">
-                                <h3>Welcome Team Members!</h3>
-                                <p>Your one-stop destination for all employee resources, benefits, and company information.</p>
-                            </div>
-                        </div>
-                        <div class="card" data-id="quick">
-                            <div class="admin-controls">
-                                <button class="edit-btn">Edit</button>
-                                <button class="delete-btn">Delete</button>
-                            </div>
-                            <div class="card-body">
-                                <h3>Quick Access</h3>
-                                <p>Navigate to important sections quickly and easily.</p>
-                                <div class="quick-grid" id="quickGrid">
-                                    <div class="quick-item" data-id="benefits">
-                                        <div class="admin-controls">
-                                            <button>Edit</button>
-                                            <button>Delete</button>
-                                        </div>
-                                        <div class="icon">💼</div>
-                                        <div>Benefits</div>
-                                    </div>
-                                    <div class="quick-item" data-id="calendar">
-                                        <div class="admin-controls">
-                                            <button>Edit</button>
-                                            <button>Delete</button>
-                                        </div>
-                                        <div class="icon">📅</div>
-                                        <div>Calendar</div>
-                                    </div>
-                                    <div class="quick-item" data-id="documents">
-                                        <div class="admin-controls">
-                                            <button>Edit</button>
-                                            <button>Delete</button>
-                                        </div>
-                                        <div class="icon">📄</div>
-                                        <div>Documents</div>
-                                    </div>
-                                    <div class="quick-item" data-id="development">
-                                        <div class="admin-controls">
-                                            <button>Edit</button>
-                                            <button>Delete</button>
-                                        </div>
-                                        <div class="icon">🎓</div>
-                                        <div>Training</div>
-                                    </div>
-                                </div>
-                                <button class="btn btn-small admin-only">Add Quick Link</button>
-                            </div>
-                        </div>
-                        <div class="card" data-id="announcements">
-                            <div class="admin-controls">
-                                <button class="edit-btn">Edit</button>
-                                <button class="delete-btn">Delete</button>
-                            </div>
-                            <div class="card-body">
-                                <h3>Announcements</h3>
-                                <p>Stay updated with the latest news and announcements.</p>
-                                <div id="announcementsList"></div>
-                                <button class="btn btn-small admin-only">Add Announcement</button>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-                <!-- About Section -->
-                <section id="aboutSection" class="section">
-                    <div class="page-title">
-                        About Chick-fil-A
-                        <button class="admin-btn">Add Content</button>
-                    </div>
-                    <div class="cards" id="aboutCards">
-                        <div class="card" data-id="mission">
-                            <div class="admin-controls">
-                                <button class="edit-btn">Edit</button>
-                                <button class="delete-btn">Delete</button>
-                            </div>
-                            <div class="card-body">
-                                <h3>Our Mission</h3>
-                                <p>To glorify God by being a faithful steward of all that is entrusted to us and to have a positive influence on all who come into contact with Chick-fil-A.</p>
-                            </div>
-                        </div>
-                        <div class="card" data-id="vision">
-                            <div class="admin-controls">
-                                <button class="edit-btn">Edit</button>
-                                <button class="delete-btn">Delete</button>
-                            </div>
-                            <div class="card-body">
-                                <h3>Our Vision</h3>
-                                <p>To be America's best quick-service restaurant at getting better.</p>
-                            </div>
-                        </div>
-                        <div class="card" data-id="values">
-                            <div class="admin-controls">
-                                <button class="edit-btn">Edit</button>
-                                <button class="delete-btn">Delete</button>
-                            </div>
-                            <div class="card-body">
-                                <h3>Our Values</h3>
-                                <p><strong>Service:</strong> We exist to serve others with excellence. <strong>Teamwork:</strong> We collaborate to achieve our goals. <strong>Growth:</strong> We continuously improve ourselves.</p>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-                <!-- Team Section -->
-                <section id="teamSection" class="section">
-                    <div class="page-title">
-                        Our Team
-                        <button class="admin-btn">Add Team Member</button>
-                    </div>
-                    <div id="orgChart">
-                        <div class="org-level" data-level="1">
-                            <h4>Owner/Operator</h4>
-                            <div class="team-grid">
-                                <div class="card team-member" draggable="true" data-id="owner">
-                                    <div class="admin-controls">
-                                        <button class="edit-btn">Edit</button>
-                                        <button class="delete-btn">Delete</button>
-                                    </div>
-                                    <div class="card-body">
-                                        <div class="team-avatar">OW</div>
-                                        <h3>Operator/Owner</h3>
-                                        <p>Restaurant Owner</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="org-level" data-level="2">
-                            <h4>Executive Director</h4>
-                            <div class="team-grid">
-                                <div class="card team-member" draggable="true" data-id="exec-director">
-                                    <div class="admin-controls">
-                                        <button class="edit-btn">Edit</button>
-                                        <button class="delete-btn">Delete</button>
-                                    </div>
-                                    <div class="card-body">
-                                        <div class="team-avatar">ED</div>
-                                        <h3>Executive Director</h3>
-                                        <p>Executive Leadership</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="org-level" data-level="3">
-                            <h4>Globals</h4>
-                            <div class="team-grid"></div>
-                        </div>
-                        <div class="org-level" data-level="4">
-                            <h4>Operations Directors</h4>
-                            <div class="team-grid"></div>
-                        </div>
-                        <div class="org-level" data-level="5">
-                            <h4>Directors</h4>
-                            <div class="team-grid"></div>
-                        </div>
-                        <div class="org-level" data-level="6">
-                            <h4>Managers</h4>
-                            <div class="team-grid">
-                                <div class="card team-member" draggable="true" data-id="gm">
-                                    <div class="admin-controls">
-                                        <button class="edit-btn">Edit</button>
-                                        <button class="delete-btn">Delete</button>
-                                    </div>
-                                    <div class="card-body">
-                                        <div class="team-avatar">GM</div>
-                                        <h3>General Manager</h3>
-                                        <p>Operations Leader</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="org-level" data-level="7">
-                            <h4>Team Leaders</h4>
-                            <div class="team-grid">
-                                <div class="card team-member" draggable="true" data-id="team">
-                                    <div class="admin-controls">
-                                        <button class="edit-btn">Edit</button>
-                                        <button class="delete-btn">Delete</button>
-                                    </div>
-                                    <div class="card-body">
-                                        <div class="team-avatar">TL</div>
-                                        <h3>Team Leaders</h3>
-                                        <p>Front & Back of House</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-                <!-- Development Section -->
-                <section id="developmentSection" class="section">
-                    <div class="page-title">
-                        My Development
-                        <button class="admin-btn">Add Content</button>
-                    </div>
-                    <div class="cards" id="developmentCards">
-                        <div class="card" data-id="orientation">
-                            <div class="admin-controls">
-                                <button class="edit-btn">Edit</button>
-                                <button class="delete-btn">Delete</button>
-                            </div>
-                            <div class="card-body">
-                                <h3>New Team Member Orientation</h3>
-                                <p>Complete introduction to Chick-fil-A values and procedures.</p>
-                                <div class="development-links"></div>
-                            </div>
-                        </div>
-                        <div class="card" data-id="safety">
-                            <div class="admin-controls">
-                                <button class="edit-btn">Edit</button>
-                                <button class="delete-btn">Delete</button>
-                            </div>
-                            <div class="card-body">
-                                <h3>Food Safety Certification</h3>
-                                <p>Essential food safety and handling procedures.</p>
-                                <div class="development-links"></div>
-                            </div>
-                        </div>
-                        <div class="card" data-id="leadership">
-                            <div class="admin-controls">
-                                <button class="edit-btn">Edit</button>
-                                <button class="delete-btn">Delete</button>
-                            </div>
-                            <div class="card-body">
-                                <h3>Leadership Development</h3>
-                                <p>Leadership skills and management training.</p>
-                                <div class="development-links"></div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-                <!-- Benefits Section -->
-                <section id="benefitsSection" class="section">
-                    <div class="page-title">
-                        My Benefits
-                        <button class="admin-btn admin-only">Add Content</button>
-                    </div>
-                    <div class="cards">
-                        <div class="card benefits-category" data-category="fulltime">
-                            <div class="card-header">
-                                <h3>Full-Time Benefits</h3>
-                            </div>
-                            <div class="card-body" id="fulltimeBenefits">
-                                <div class="benefits-item" data-id="health-ft">
-                                    <div class="admin-controls">
-                                        <button>Edit</button>
-                                        <button>Delete</button>
-                                    </div>
-                                    <h4>Health Insurance</h4>
-                                    <p>Comprehensive medical, dental, and vision coverage.</p>
-                                </div>
-                                <div class="benefits-item" data-id="retirement-ft">
-                                    <div class="admin-controls">
-                                        <button>Edit</button>
-                                        <button>Delete</button>
-                                    </div>
-                                    <h4>401(k) Plan</h4>
-                                    <p>Retirement savings with company matching.</p>
-                                </div>
-                                <button class="btn btn-small admin-only">Add Benefit</button>
-                            </div>
-                        </div>
-                        <div class="card benefits-category" data-category="parttime">
-                            <div class="card-header">
-                                <h3>Part-Time Benefits</h3>
-                            </div>
-                            <div class="card-body" id="parttimeBenefits">
-                                <div class="benefits-item" data-id="discounts-pt">
-                                    <div class="admin-controls">
-                                        <button>Edit</button>
-                                        <button>Delete</button>
-                                    </div>
-                                    <h4>Employee Discounts</h4>
-                                    <p>Generous meal discounts and special offers.</p>
-                                </div>
-                                <div class="benefits-item" data-id="flexible-pt">
-                                    <div class="admin-controls">
-                                        <button>Edit</button>
-                                        <button>Delete</button>
-                                    </div>
-                                    <h4>Flexible Scheduling</h4>
-                                    <p>Work schedules that fit your lifestyle.</p>
-                                </div>
-                                <button class="btn btn-small admin-only">Add Benefit</button>
-                            </div>
-                        </div>
-                        <div class="card benefits-category" data-category="manager">
-                            <div class="card-header">
-                                <h3>Manager Benefits</h3>
-                            </div>
-                            <div class="card-body" id="managerBenefits">
-                                <div class="benefits-item" data-id="bonus-mgr">
-                                    <div class="admin-controls">
-                                        <button>Edit</button>
-                                        <button>Delete</button>
-                                    </div>
-                                    <h4>Performance Bonuses</h4>
-                                    <p>Quarterly and annual performance incentives.</p>
-                                </div>
-                                <div class="benefits-item" data-id="development-mgr">
-                                    <div class="admin-controls">
-                                        <button>Edit</button>
-                                        <button>Delete</button>
-                                    </div>
-                                    <h4>Leadership Development</h4>
-                                    <p>Advanced training and career advancement opportunities.</p>
-                                </div>
-                                <button class="btn btn-small admin-only">Add Benefit</button>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-                <!-- Documents Section -->
-                <section id="documentsSection" class="section">
-                    <div class="page-title">
-                        My Documents
-                        <button class="admin-btn">Upload Document</button>
-                    </div>
-                    <div class="document-categories">
-                        <div class="document-category" data-category="forms">
-                            <div class="document-category-header">
-                                <h3>Forms</h3>
-                                <button class="admin-btn admin-only">Upload Document</button>
-                            </div>
-                            <div class="document-category-body">
-                                <ul class="doc-list" id="formsList"></ul>
-                            </div>
-                        </div>
-                        <div class="document-category" data-category="policy">
-                            <div class="document-category-header">
-                                <h3>Policy</h3>
-                                <button class="admin-btn admin-only">Upload Document</button>
-                            </div>
-                            <div class="document-category-body">
-                                <ul class="doc-list" id="policyList"></ul>
-                            </div>
-                        </div>
-                        <div class="document-category" data-category="tools">
-                            <div class="document-category-header">
-                                <h3>Tools</h3>
-                                <button class="admin-btn admin-only">Upload Document</button>
-                            </div>
-                            <div class="document-category-body">
-                                <ul class="doc-list" id="toolsList"></ul>
-                            </div>
-                        </div>
-                        <div class="document-category" data-category="handbook">
-                            <div class="document-category-header">
-                                <h3>Handbook</h3>
-                                <button class="admin-btn admin-only">Upload Document</button>
-                            </div>
-                            <div class="document-category-body">
-                                <ul class="doc-list" id="handbookList"></ul>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-                <!-- Photos Section -->
-                <section id="photosSection" class="section">
-                    <div class="page-title">
-                        Photos
-                        <button class="admin-btn">Upload Photos</button>
-                    </div>
-                    <div class="photo-categories">
-                        <div class="photo-category" data-category="team-events">
-                            <div class="photo-category-header">
-                                <h3>Team Events</h3>
-                                <button class="btn btn-small admin-only">Add</button>
-                            </div>
-                            <div class="photo-category-body">
-                                <div class="photos" id="teamEventsList"></div>
-                            </div>
-                        </div>
-                        <div class="photo-category" data-category="south-main">
-                            <div class="photo-category-header">
-                                <h3>South Main</h3>
-                                <button class="btn btn-small admin-only">Add</button>
-                            </div>
-                            <div class="photo-category-body">
-                                <div class="photos" id="southMainList"></div>
-                            </div>
-                        </div>
-                        <div class="photo-category" data-category="union-cross">
-                            <div class="photo-category-header">
-                                <h3>Union Cross</h3>
-                                <button class="btn btn-small admin-only">Add</button>
-                            </div>
-                            <div class="photo-category-body">
-                                <div class="photos" id="unionCrossList"></div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-                <!-- Calendar Section -->
-                <section id="calendarSection" class="section">
-                    <div class="page-title">
-                        Calendar
-                        <button class="admin-btn">Add Event</button>
-                    </div>
-                    <div class="calendar-tabs">
-                        <div class="calendar-tab active">Marketing Calendar</div>
-                        <div class="calendar-tab">South Main</div>
-                        <div class="calendar-tab">Union Cross</div>
-                    </div>
-                    <!-- Marketing Calendar -->
-                    <div id="marketing-calendar" class="calendar-content active">
-                        <div class="calendar-container">
-                            <div class="calendar">
-                                <div class="calendar-header">
-                                    <button class="calendar-nav">◀</button>
-                                    <h3 id="marketingCalendarTitle">July 2025</h3>
-                                    <button class="calendar-nav">▶</button>
-                                </div>
-                                <div class="calendar-grid" id="marketingCalendarGrid"></div>
-                            </div>
-                            <div class="events-sidebar">
-                                <h3>Marketing Events</h3>
-                                <div id="marketingEventsList"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- South Main Calendar -->
-                    <div id="south-main-calendar" class="calendar-content">
-                        <div class="calendar-container">
-                            <div class="calendar">
-                                <div class="calendar-header">
-                                    <button class="calendar-nav">◀</button>
-                                    <h3 id="southMainCalendarTitle">July 2025</h3>
-                                    <button class="calendar-nav">▶</button>
-                                </div>
-                                <div class="calendar-grid" id="southMainCalendarGrid"></div>
-                            </div>
-                            <div class="events-sidebar">
-                                <h3>South Main Events</h3>
-                                <div id="southMainEventsList"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Union Cross Calendar -->
-                    <div id="union-cross-calendar" class="calendar-content">
-                        <div class="calendar-container">
-                            <div class="calendar">
-                                <div class="calendar-header">
-                                    <button class="calendar-nav">◀</button>
-                                    <h3 id="unionCrossCalendarTitle">July 2025</h3>
-                                    <button class="calendar-nav">▶</button>
-                                </div>
-                                <div class="calendar-grid" id="unionCrossCalendarGrid"></div>
-                            </div>
-                            <div class="events-sidebar">
-                                <h3>Union Cross Events</h3>
-                                <div id="unionCrossEventsList"></div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-            </div>
-        </main>
-    </div>
-    <!-- Modal Overlays -->
-    <!-- Edit Content Modal -->
-    <div id="editModal" class="modal-overlay">
-        <div class="modal">
-            <div class="modal-header">
-                <h3>Edit Content</h3>
-                <button class="modal-close">×</button>
-            </div>
-            <form id="editForm">
-                <div class="form-group">
-                    <label class="form-label" for="editTitle">Title</label>
-                    <input type="text" id="editTitle" class="form-input" required>
-                </div>
-                <div class="form-group">
-                    <label class="form-label" for="editDescription">Description</label>
-                    <textarea id="editDescription" class="form-textarea" required></textarea>
-                </div>
-                <div class="modal-buttons">
-                    <button type="button" class="btn btn-cancel">Cancel</button>
-                    <button type="submit" class="btn">Save Changes</button>
-                </div>
-            </form>
+        <div style="padding: 2rem; text-align: center;">
+            <h1>Welcome to the Employee Portal</h1>
+            <div id="userInfo" style="margin: 1rem 0; font-size: 1.1rem;"></div>
+            <nav style="margin: 2rem 0;">
+                <button class="nav-btn" data-section="home">Home</button>
+                <button class="nav-btn manager-only" data-section="dashboard">Manager Dashboard</button>
+                <button class="nav-btn admin-only" data-section="admin">Admin Panel</button>
+            </nav>
+            <button onclick="handleLogout()" style="background: #dc3545; color: white; padding: 0.5rem 1rem; border: none; border-radius: 4px; cursor: pointer;">Logout</button>
         </div>
     </div>
-    <!-- Development Content Modal -->
-    <div id="developmentModal" class="modal-overlay">
-        <div class="modal">
-            <div class="modal-header">
-                <h3>Development Content</h3>
-                <button class="modal-close">×</button>
-            </div>
-            <form id="developmentForm">
-                <div class="form-group">
-                    <label class="form-label" for="devTitle">Title</label>
-                    <input type="text" id="devTitle" class="form-input" required>
-                </div>
-                <div class="form-group">
-                    <label class="form-label" for="devDescription">Description</label>
-                    <textarea id="devDescription" class="form-textarea" required></textarea>
-                </div>
-                <div class="form-group">
-                    <label class="form-label" for="devLinks">Web Links (one per line)</label>
-                    <textarea id="devLinks" class="form-textarea" placeholder="Enter web links, one per line:
-https://example.com - Link Title
-https://training.site.com - Training Portal"></textarea>
-                </div>
-                <div class="modal-buttons">
-                    <button type="button" class="btn btn-cancel">Cancel</button>
-                    <button type="submit" class="btn">Save Changes</button>
-                </div>
-            </form>
-        </div>
-    </div>
-    <!-- Benefits Item Modal -->
-    <div id="benefitsModal" class="modal-overlay">
-        <div class="modal">
-            <div class="modal-header">
-                <h3>Benefits Item</h3>
-                <button class="modal-close">×</button>
-            </div>
-            <form id="benefitsForm">
-                <div class="form-group">
-                    <label class="form-label" for="benefitsTitle">Title</label>
-                    <input type="text" id="benefitsTitle" class="form-input" required>
-                </div>
-                <div class="form-group">
-                    <label class="form-label" for="benefitsDescription">Description</label>
-                    <textarea id="benefitsDescription" class="form-textarea" required></textarea>
-                </div>
-                <div class="form-group">
-                    <label class="form-label" for="benefitsCategory">Category</label>
-                    <select id="benefitsCategory" class="form-select" required>
-                        <option value="fulltime">Full-Time</option>
-                        <option value="parttime">Part-Time</option>
-                        <option value="manager">Manager</option>
-                    </select>
-                </div>
-                <div class="modal-buttons">
-                    <button type="button" class="btn btn-cancel">Cancel</button>
-                    <button type="submit" class="btn">Save Benefits Item</button>
-                </div>
-            </form>
-        </div>
-    </div>
-    <!-- Delete Confirmation Modal -->
-    <div id="deleteModal" class="modal-overlay">
-        <div class="modal">
-            <div class="modal-header">
-                <h3>Confirm Delete</h3>
-                <button class="modal-close">×</button>
-            </div>
-            <p>Are you sure you want to delete this item? This action cannot be undone.</p>
-            <div class="modal-buttons">
-                <button type="button" class="btn btn-cancel">Cancel</button>
-                <button type="button" class="btn" id="confirmDelete">Delete</button>
-            </div>
-        </div>
-    </div>
-    <!-- Add Team Member Modal -->
-    <div id="teamModal" class="modal-overlay">
-        <div class="modal">
-            <div class="modal-header">
-                <h3>Add Team Member</h3>
-                <button class="modal-close">×</button>
-            </div>
-            <form id="teamForm">
-                <div class="form-group">
-                    <label class="form-label" for="teamName">Name</label>
-                    <input type="text" id="teamName" class="form-input" required>
-                </div>
-                <div class="form-group">
-                    <label class="form-label" for="teamPosition">Position</label>
-                    <input type="text" id="teamPosition" class="form-input" required>
-                </div>
-                <div class="form-group">
-                    <label class="form-label" for="teamDescription">Description</label>
-                    <textarea id="teamDescription" class="form-textarea"></textarea>
-                </div>
-                <div class="form-group">
-                    <label class="form-label" for="teamLevel">Organization Level</label>
-                    <select id="teamLevel" class="form-select" required>
-                        <option value="1">Owner/Operator</option>
-                        <option value="2">Executive Director</option>
-                        <option value="3">Globals</option>
-                        <option value="4">Operations Directors</option>
-                        <option value="5">Directors</option>
-                        <option value="6">Managers</option>
-                        <option value="7">Team Leaders</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label class="form-label" for="teamPhoto">Headshot Photo</label>
-                    <div class="form-file">
-                        <input type="file" id="teamPhoto" accept="image/*">
-                        <p id="teamPhotoText">Click to select a photo or drag and drop</p>
-                        <div id="teamPhotoPreview" class="file-preview"></div>
-                    </div>
-                </div>
-                <div class="modal-buttons">
-                    <button type="button" class="btn btn-cancel">Cancel</button>
-                    <button type="submit" class="btn">Add Team Member</button>
-                </div>
-            </form>
-        </div>
-    </div>
-    <!-- Upload Document Modal -->
-    <div id="documentModal" class="modal-overlay">
-        <div class="modal">
-            <div class="modal-header">
-                <h3>Upload Document</h3>
-                <button class="modal-close">×</button>
-            </div>
-            <form id="documentForm">
-                <div class="form-group">
-                    <label class="form-label" for="docTitle">Document Title</label>
-                    <input type="text" id="docTitle" class="form-input" required>
-                </div>
-                <div class="form-group">
-                    <label class="form-label" for="docCategory">Category</label>
-                    <select id="docCategory" class="form-select" required>
-                        <option value="forms">Forms</option>
-                        <option value="policy">Policy</option>
-                        <option value="tools">Tools</option>
-                        <option value="handbook">Handbook</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label class="form-label" for="docFile">Select File</label>
-                    <div class="form-file">
-                        <input type="file" id="docFile" accept=".pdf,.doc,.docx,.txt">
-                        <p id="docFileText">Click to select a file or drag and drop</p>
-                        <div id="docFilePreview" class="file-preview"></div>
-                    </div>
-                </div>
-                <div class="modal-buttons">
-                    <button type="button" class="btn btn-cancel">Cancel</button>
-                    <button type="submit" class="btn">Upload Document</button>
-                </div>
-            </form>
-        </div>
-    </div>
-    <!-- Upload Photos Modal -->
-    <div id="photoModal" class="modal-overlay">
-        <div class="modal">
-            <div class="modal-header">
-                <h3>Upload Photos</h3>
-                <button class="modal-close">×</button>
-            </div>
-            <form id="photoForm">
-                <div class="form-group">
-                    <label class="form-label" for="photoTitle">Photo Title</label>
-                    <input type="text" id="photoTitle" class="form-input" required>
-                </div>
-                <div class="form-group">
-                    <label class="form-label" for="photoDescription">Description</label>
-                    <input type="text" id="photoDescription" class="form-input">
-                </div>
-                <div class="form-group">
-                    <label class="form-label" for="photoCategory">Category</label>
-                    <select id="photoCategory" class="form-select" required>
-                        <option value="team-events">Team Events</option>
-                        <option value="south-main">South Main</option>
-                        <option value="union-cross">Union Cross</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label class="form-label" for="photoFiles">Select Photos</label>
-                    <div class="form-file">
-                        <input type="file" id="photoFiles" accept="image/*" multiple>
-                        <p id="photoFilesText">Click to select photos or drag and drop</p>
-                        <div id="photoFilesPreview" class="file-preview"></div>
-                    </div>
-                </div>
-                <div class="modal-buttons">
-                    <button type="button" class="btn btn-cancel">Cancel</button>
-                    <button type="submit" class="btn">Upload Photos</button>
-                </div>
-            </form>
-        </div>
-    </div>
-    <!-- Add Event Modal -->
-    <div id="eventModal" class="modal-overlay">
-        <div class="modal">
-            <div class="modal-header">
-                <h3>Add Event</h3>
-                <button class="modal-close">×</button>
-            </div>
-            <form id="eventForm">
-                <div class="form-group">
-                    <label class="form-label" for="eventTitle">Event Title</label>
-                    <input type="text" id="eventTitle" class="form-input" required>
-                </div>
-                <div class="form-group">
-                    <label class="form-label" for="eventCalendar">Calendar</label>
-                    <select id="eventCalendar" class="form-select" required>
-                        <option value="marketing">Marketing Calendar</option>
-                        <option value="south-main">South Main</option>
-                        <option value="union-cross">Union Cross</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label class="form-label" for="eventDate">Date</label>
-                    <input type="date" id="eventDate" class="form-input" required>
-                </div>
-                <div class="time-inputs">
-                    <div class="form-group">
-                        <label class="form-label" for="eventStartTime">Start Time</label>
-                        <input type="time" id="eventStartTime" class="form-input">
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label" for="eventEndTime">End Time</label>
-                        <input type="time" id="eventEndTime" class="form-input">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="form-label" for="eventDescription">Description</label>
-                    <textarea id="eventDescription" class="form-textarea" required></textarea>
-                </div>
-                <div class="modal-buttons">
-                    <button type="button" class="btn btn-cancel">Cancel</button>
-                    <button type="submit" class="btn">Add Event</button>
-                </div>
-            </form>
-        </div>
-    </div>
-    <!-- Quick Access Item Modal -->
-    <div id="quickModal" class="modal-overlay">
-        <div class="modal">
-            <div class="modal-header">
-                <h3>Quick Access Link</h3>
-                <button class="modal-close">×</button>
-            </div>
-            <form id="quickForm">
-                <div class="form-group">
-                    <label class="form-label" for="quickIcon">Icon (Emoji)</label>
-                    <input type="text" id="quickIcon" class="form-input" placeholder="🏠" required>
-                </div>
-                <div class="form-group">
-                    <label class="form-label" for="quickLabel">Label</label>
-                    <input type="text" id="quickLabel" class="form-input" required>
-                </div>
-                <div class="form-group">
-                    <label class="form-label" for="quickSection">Link To Section</label>
-                    <select id="quickSection" class="form-select" required>
-                        <option value="">Select Section</option>
-                        <option value="home">Home</option>
-                        <option value="about">About</option>
-                        <option value="team">Team</option>
-                        <option value="development">Development</option>
-                        <option value="benefits">Benefits</option>
-                        <option value="documents">Documents</option>
-                        <option value="photos">Photos</option>
-                        <option value="calendar">Calendar</option>
-                    </select>
-                </div>
-                <div class="modal-buttons">
-                    <button type="button" class="btn btn-cancel">Cancel</button>
-                    <button type="submit" class="btn">Save Link</button>
-                </div>
-            </form>
-        </div>
-    </div>
-    <!-- Announcement Modal -->
-    <div id="announcementModal" class="modal-overlay">
-        <div class="modal">
-            <div class="modal-header">
-                <h3>Announcement</h3>
-                <button class="modal-close">×</button>
-            </div>
-            <form id="announcementForm">
-                <div class="form-group">
-                    <label class="form-label" for="announcementDate">Date</label>
-                    <input type="date" id="announcementDate" class="form-input" required>
-                </div>
-                <div class="form-group">
-                    <label class="form-label" for="announcementTitle">Title</label>
-                    <input type="text" id="announcementTitle" class="form-input" required>
-                </div>
-                <div class="form-group">
-                    <label class="form-label" for="announcementDescription">Description</label>
-                    <textarea id="announcementDescription" class="form-textarea" required></textarea>
-                </div>
-                <div class="modal-buttons">
-                    <button type="button" class="btn btn-cancel">Cancel</button>
-                    <button type="submit" class="btn">Save Announcement</button>
-                </div>
-            </form>
-        </div>
-    </div>
-    <div id="photoViewerModal" class="modal-overlay">
-        <div class="modal">
-            <img id="photoViewerImg" src="" alt="Full Size Photo">
-            <button class="modal-close">×</button>
-        </div>
-    </div>
+
+    <script>
+        // User credentials database - EXACT format from working clean-login
+        const userCredentials = {
+            // Team Members
+            'Kvillecfa': { password: '1248', role: 'team' },
+            'kvillecfa': { password: '1248', role: 'team' }, // lowercase version
+            'Kvillecfa_4772': { password: '4772', role: 'team' },
+            'kvillecfa_4772': { password: '4772', role: 'team' }, // lowercase version
+            
+            // Managers
+            'Kvillecfamgr': { password: '1248mgr', role: 'manager' },
+            'kvillecfamgr': { password: '1248mgr', role: 'manager' }, // lowercase version
+            'Kvillecfamgr_4772': { password: '4772mgr', role: 'manager' },
+            'kvillecfamgr_4772': { password: '4772mgr', role: 'manager' }, // lowercase version
+            
+            // Admins
+            'Admin': { password: 'AdminCFA', role: 'admin' },
+            'admin': { password: 'AdminCFA', role: 'admin' } // lowercase version
+        };
+
+        let currentUserRole = null;
+        let currentUsername = null;
+
+        // Initialize when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Page loaded, setting up login form');
+            setupLoginForm();
+        });
+
+        function setupLoginForm() {
+            const loginForm = document.getElementById('loginForm');
+            if (loginForm) {
+                console.log('Login form found, attaching event listener');
+                loginForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    console.log('Login form submitted');
+                    handleLogin();
+                });
+                
+                // Test input functionality
+                const usernameInput = document.getElementById('loginUsername');
+                const passwordInput = document.getElementById('loginPassword');
+                const roleSelect = document.getElementById('loginRole');
+                
+                usernameInput.addEventListener('input', function(e) {
+                    console.log('Username typed:', e.target.value);
+                });
+                
+                passwordInput.addEventListener('input', function(e) {
+                    console.log('Password typed, length:', e.target.value.length);
+                });
+                
+                roleSelect.addEventListener('change', function(e) {
+                    console.log('Role selected:', e.target.value);
+                });
+                
+            } else {
+                console.error('Login form not found!');
+            }
+        }
+
+        function handleLogin() {
+            console.log('handleLogin called');
+            const username = document.getElementById('loginUsername').value.trim();
+            const password = document.getElementById('loginPassword').value;
+            const selectedRole = document.getElementById('loginRole').value;
+            const errorDiv = document.getElementById('loginError');
+            
+            console.log('Login attempt:', { username, password: password ? 'provided' : 'empty', selectedRole });
+            
+            // Clear previous errors
+            errorDiv.style.display = 'none';
+            errorDiv.textContent = '';
+            
+            // Validate inputs
+            if (!username || !password || !selectedRole) {
+                console.log('Validation failed: missing fields');
+                showLoginError('Please fill in all fields');
+                return;
+            }
+            
+            // Check if user exists
+            if (!userCredentials[username]) {
+                console.log('User not found:', username);
+                showLoginError('Invalid username or password');
+                return;
+            }
+            
+            const user = userCredentials[username];
+            console.log('User found:', { username, expectedRole: user.role, selectedRole });
+            
+            // Validate password
+            if (user.password !== password) {
+                console.log('Password mismatch');
+                showLoginError('Invalid username or password');
+                return;
+            }
+            
+            // Validate role matches user's assigned role
+            if (user.role !== selectedRole) {
+                console.log('Role mismatch:', { expected: user.role, selected: selectedRole });
+                showLoginError('Selected role does not match your account');
+                return;
+            }
+            
+            console.log('Login successful');
+            
+            // Successful login
+            currentUsername = username;
+            currentUserRole = selectedRole;
+            
+            // Apply role-based styling
+            document.body.className = `${selectedRole}-view`;
+            
+            // Hide login screen and show main portal
+            document.getElementById('loginScreen').style.display = 'none';
+            document.getElementById('mainPortal').style.display = 'block';
+            
+            // Update user info display
+            document.getElementById('userInfo').textContent = `Logged in as: ${username} (${selectedRole})`;
+        }
+
+        function showLoginError(message) {
+            console.log('Showing error:', message);
+            const errorDiv = document.getElementById('loginError');
+            if (errorDiv) {
+                errorDiv.textContent = message;
+                errorDiv.style.display = 'block';
+            } else {
+                console.error('Error div not found');
+                alert(message);
+            }
+        }
+
+        function handleLogout() {
+            currentUserRole = null;
+            currentUsername = null;
+            
+            // Remove role classes
+            document.body.className = '';
+            
+            // Clear form
+            document.getElementById('loginUsername').value = '';
+            document.getElementById('loginPassword').value = '';
+            document.getElementById('loginRole').value = '';
+            document.getElementById('loginError').textContent = '';
+            document.getElementById('loginError').style.display = 'none';
+            
+            // Show login screen and hide main portal
+            document.getElementById('loginScreen').style.display = 'flex';
+            document.getElementById('mainPortal').style.display = 'none';
+        }
+    </script>
 </body>
 </html>

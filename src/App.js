@@ -1,7 +1,7 @@
 // src/App.js
 import React, { useState } from 'react';
 // import { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, useNavigate } from 'react-router-dom';
 // import axios from 'axios';
 import useStore from './store';
 import './styles/global.css';
@@ -44,6 +44,15 @@ import BenefitsModal from './components/Modals/BenefitsModal'; // Missing
 import PhotoViewerModal from './components/Modals/PhotoViewerModal'; // Missing;
 
 function App() {
+  return (
+    <Router>
+      <AppContent />
+    </Router>
+  );
+}
+
+function AppContent() {
+  const navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const { userRole, setUserRole, modals, modalData, openModal, closeModal } = useStore();
 
@@ -77,12 +86,15 @@ function App() {
     // }
     
     // Static logout - no API call needed
+    console.log('Logout clicked - setting logged in to false');
     setIsLoggedIn(false);
     setUserRole(null);
+    
+    // Navigate to home route to ensure login screen shows
+    navigate('/');
   };
 
   return (
-    <Router>
       <div className="App">
         {!isLoggedIn ? (
           <Routes>
@@ -124,7 +136,6 @@ function App() {
           </div>
         )}
       </div>
-    </Router>
   );
 }
 

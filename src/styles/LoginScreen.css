@@ -64,6 +64,12 @@
   border-radius: 8px;
   font-size: 16px;
   transition: border-color 0.3s ease;
+  background: white !important;
+  color: #2c3e50 !important;
+  box-sizing: border-box;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
 }
 
 .login-form .form-input:focus,
@@ -71,6 +77,54 @@
   outline: none;
   border-color: #d32f2f;
   box-shadow: 0 0 0 3px rgba(211, 47, 47, 0.1);
+  background: white !important;
+  color: #2c3e50 !important;
+}
+
+.login-form .form-input::placeholder {
+  color: #7f8c8d !important;
+  opacity: 0.7;
+}
+
+/* Ensure input text is always visible */
+input[type="text"],
+input[type="password"],
+select {
+  color: #2c3e50 !important;
+  background-color: white !important;
+  -webkit-text-fill-color: #2c3e50 !important;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus,
+select:focus {
+  color: #2c3e50 !important;
+  background-color: white !important;
+  -webkit-text-fill-color: #2c3e50 !important;
+}
+
+/* Fix for autofill styles */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus {
+  -webkit-text-fill-color: #2c3e50 !important;
+  -webkit-box-shadow: 0 0 0px 1000px white inset !important;
+  background-color: white !important;
+  color: #2c3e50 !important;
+}
+
+.login-form .form-select {
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23333' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  background-size: 1em;
+  padding-right: 3rem;
+  cursor: pointer;
+}
+
+.login-form .form-select option {
+  color: #2c3e50 !important;
+  background: white !important;
 }
 
 .login-form label {

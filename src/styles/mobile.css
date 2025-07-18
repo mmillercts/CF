@@ -199,9 +199,9 @@
 /* Dark mode support */
 @media (prefers-color-scheme: dark) {
   :root {
-    --mobile-bg: #1a1a1a;
-    --mobile-text: #ffffff;
-    --mobile-border: #333333;
+    --mobile-bg: #ffffff;
+    --mobile-text: #2c3e50;
+    --mobile-border: #e9ecef;
   }
   
   body {
@@ -212,8 +212,9 @@
   input,
   textarea,
   select {
-    background-color: #2a2a2a;
-    color: var(--mobile-text);
-    border-color: var(--mobile-border);
+    background-color: #ffffff !important;
+    color: #2c3e50 !important;
+    border-color: #e9ecef;
+    -webkit-text-fill-color: #2c3e50 !important;
   }
 }

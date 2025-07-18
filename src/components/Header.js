@@ -30,8 +30,12 @@ const Header = ({ userRole, handleLogout }) => {
 
   const handleLogoutClick = (e) => {
     e.preventDefault();
+    console.log('Logout button clicked in Header');
     if (handleLogout) {
+      console.log('Calling handleLogout function');
       handleLogout();
+    } else {
+      console.error('handleLogout function not provided to Header');
     }
     setIsMobileMenuOpen(false);
   };
