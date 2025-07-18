@@ -1,0 +1,368 @@
+/* Videos Section - Chick-fil-A Theme */
+.videos-section {
+  min-height: 100vh;
+  background: #f8f9fa;
+  padding: 2rem;
+  font-family: 'Apercu-Medium', sans-serif;
+  position: relative;
+}
+
+/* Section Header */
+.videos-section .section-header {
+  text-align: center;
+  margin-bottom: 3rem;
+  padding: 2rem;
+  background: white;
+  border-radius: 8px;
+  color: #004F71;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+}
+
+.videos-section .section-header h2 {
+  font-family: 'RooneyPro-Medium', serif;
+  font-size: 3rem;
+  font-weight: bold;
+  margin: 0 0 0.5rem 0;
+  color: #004F71;
+}
+
+.videos-section .section-subtitle {
+  font-size: 1.7em;
+  margin: 0;
+  opacity: 0.9;
+  color: #666;
+}
+
+/* Tabs Container */
+.videos-section .tabs-container {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  overflow: hidden;
+  border: none;
+}
+
+/* Dropdown Container */
+.videos-dropdown-container {
+  background: #f8f9fa;
+  padding: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.dropdown-label {
+  color: #004F71;
+  font-weight: bold;
+  font-size: 1.7em;
+  margin: 0;
+}
+
+.videos-dropdown {
+  background: white;
+  border: 2px solid #004F71;
+  border-radius: 6px;
+  padding: 0.75rem 1rem;
+  font-size: 1.7em;
+  font-weight: 600;
+  color: #004F71;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  min-width: 200px;
+}
+
+.videos-dropdown:hover {
+  border-color: #DD0033;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.videos-dropdown:focus {
+  outline: none;
+  border-color: #DD0033;
+  box-shadow: 0 0 0 3px rgba(221, 0, 51, 0.2);
+}
+
+/* Tab Content */
+.tab-content {
+  padding: 2rem;
+}
+
+.tab-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 3px solid #004F71;
+}
+
+.tab-header h3 {
+  font-family: 'RooneyPro-Medium', serif;
+  font-size: 2.5rem;
+  color: #004F71;
+  margin: 0;
+  font-weight: bold;
+}
+
+/* Button Styles */
+.add-content-btn {
+  background: #DD0033;
+  color: white;
+  border: none;
+  padding: 1rem 1.5rem;
+  border-radius: 6px;
+  font-size: 1.7em;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.add-content-btn:hover {
+  background: #b71c1c;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(221, 0, 51, 0.2);
+}
+
+.btn-secondary {
+  background: #004F71;
+  color: white;
+  border: none;
+  padding: 1rem 1.5rem;
+  border-radius: 6px;
+  font-size: 1.7em;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.btn-secondary:hover {
+  background: #DD0033;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 79, 113, 0.2);
+}
+
+/* Videos Grid */
+.videos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 2rem;
+  margin-top: 1.5rem;
+}
+
+/* Video Item */
+.video-item {
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  transition: all 0.3s ease;
+  position: relative;
+  border: none;
+}
+
+.video-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+}
+
+/* Video Actions */
+.video-actions {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  display: flex;
+  gap: 0.5rem;
+  z-index: 10;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.video-item:hover .video-actions {
+  opacity: 1;
+}
+
+.video-actions .action-btn {
+  background: rgba(255, 255, 255, 0.9);
+  border: none;
+  padding: 0.5rem;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 1.7em;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+.video-actions .action-btn.edit:hover {
+  background: #004F71;
+  color: white;
+}
+
+.video-actions .action-btn.delete:hover {
+  background: #DD0033;
+  color: white;
+}
+
+/* Video Container */
+.video-container {
+  width: 100%;
+  height: 250px;
+  position: relative;
+  background: #000;
+}
+
+.video-player {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.video-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+  color: #004F71;
+}
+
+.video-icon {
+  font-size: 4em;
+  margin-bottom: 0.75rem;
+}
+
+.video-placeholder p {
+  font-size: 1.7em;
+  margin: 0;
+  color: #004F71;
+}
+
+/* Video Info */
+.video-info {
+  padding: 1.5rem;
+}
+
+.video-info h4 {
+  font-family: 'RooneyPro-Medium', serif;
+  font-size: 1.8em;
+  color: #004F71;
+  margin: 0 0 0.75rem 0;
+  font-weight: bold;
+}
+
+.video-info p {
+  font-size: 1.7em;
+  color: #333;
+  margin: 0 0 0.75rem 0;
+  line-height: 1.5;
+}
+
+.video-date {
+  display: inline-block;
+  background: #DD0033;
+  color: white;
+  padding: 0.5rem 0.75rem;
+  border-radius: 6px;
+  font-size: 1.7em;
+  font-weight: bold;
+}
+
+/* No Content State */
+.no-content {
+  text-align: center;
+  padding: 3rem;
+  background: white;
+  border-radius: 8px;
+  border: 2px dashed #e9ecef;
+}
+
+.no-content p {
+  font-size: 1.8em;
+  color: #004F71;
+  margin: 0 0 1.5rem 0;
+  font-weight: 600;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .videos-section {
+    padding: 1.5rem;
+  }
+
+  .videos-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .video-container {
+    height: 200px;
+  }
+
+  .tab-header {
+    flex-direction: column;
+    gap: 1rem;
+    text-align: center;
+  }
+
+  .videos-dropdown-container {
+    flex-direction: column;
+    gap: 0.75rem;
+    text-align: center;
+  }
+
+  .videos-dropdown {
+    min-width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .videos-section {
+    padding: 1rem;
+  }
+
+  .videos-section .section-header {
+    padding: 1rem;
+  }
+
+  .videos-section .section-header h2 {
+    font-size: 2.5rem;
+  }
+
+  .videos-section .section-subtitle {
+    font-size: 1.7em;
+  }
+
+  .tab-content {
+    padding: 1.5rem;
+  }
+
+  .video-container {
+    height: 180px;
+  }
+
+  .videos-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .video-info {
+    padding: 1rem;
+  }
+
+  .video-info h4 {
+    font-size: 1.7em;
+  }
+
+  .dropdown-label,
+  .videos-dropdown,
+  .add-content-btn,
+  .btn-secondary,
+  .video-info p,
+  .video-date,
+  .no-content p {
+    font-size: 1.7em;
+  }
+}

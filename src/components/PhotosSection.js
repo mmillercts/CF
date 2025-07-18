@@ -1,56 +1,105 @@
 
-import React, { useState, useEffect } from 'react';
-import apiRequest from '../utils/api_request';
+import React, { useState } from 'react';
+import useStore from '../store';
 import '../styles/Photos_section_styles.css';
 
 const PhotosSection = ({ userRole, openModal }) => {
-  const [photos, setPhotos] = useState({ teamEvents: [], southMain: [], unionCross: [] });
+  const { photosContent } = useStore();
+  const [activeTab, setActiveTab] = useState('teamEvents');
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const data = await apiRequest('photos', 'GET');
-        setPhotos(data || { teamEvents: [], southMain: [], unionCross: [] });
-      } catch (err) {
-        console.error('Error fetching photos data:', err);
-      }
-    };
-    fetchData();
-  }, []);
+  const tabs = [
+    { id: 'teamEvents', label: 'Team Events' },
+    { id: 'southMain', label: 'South Main' },
+    { id: 'unionCross', label: 'Union Cross' }
+  ];
+
+  const getPhotosByCategory = (category) => {
+    return photosContent[category] || [];
+  };
 
   return (
     <div className="photos-section">
-      <h2>Photos</h2>
-      {userRole === 'admin' && (
-        <button className="btn upload-photos" onClick={() => openModal('photoModal')}>
-          Upload Photos
-        </button>
-      )}
-      {['teamEvents', 'southMain', 'unionCross'].map((category) => (
-        <div key={category} className="photo-category">
-          <h3>{category === 'teamEvents' ? 'Team Events' : category === 'southMain' ? 'South Main' : 'Union Cross'}</h3>
-          {userRole === 'admin' && (
-            <button className="btn add-photo" onClick={() => openModal('photoModal', { section: 'photos', type: category })}>
-              Add
-            </button>
-          )}
+      <div className="section-header">
+        <h2>Photos</h2>
+        <p className="section-subtitle">Browse photos by location and events</p>
+      </div>
+
+      <div className="tabs-container">
+        <div className="photos-dropdown-container">
+          <label htmlFor="photos-select" className="dropdown-label">Select Category:</label>
+          <select 
+            id="photos-select"
+            className="photos-dropdown"
+            value={activeTab}
+            onChange={(e) => setActiveTab(e.target.value)}
+          >
+            {tabs.map(tab => (
+              <option key={tab.id} value={tab.id}>
+                {tab.label}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        <div className="tab-content">
+          <div className="tab-header">
+            <h3>{tabs.find(tab => tab.id === activeTab)?.label}</h3>
+            {userRole === 'admin' && (
+              <button 
+                className="btn-primary add-content-btn" 
+                onClick={() => openModal('PhotoModal', { section: 'photos', type: activeTab })}
+              >
+                <span>+</span> Add Photo
+              </button>
+            )}
+          </div>
+
           <div className="photo-grid">
-            {photos[category].map((photo) => (
+            {getPhotosByCategory(activeTab).map((photo) => (
               <div key={photo.id} className="photo-item">
                 {userRole === 'admin' && (
                   <div className="photo-actions">
-                    <button onClick={() => openModal('photoModal', { ...photo, section: 'photos', type: category })}>Edit</button>
-                    <button onClick={() => openModal('deleteModal', { id: photo.id, section: 'photos', type: category })}>Delete</button>
+                    <button 
+                      className="action-btn edit-btn"
+                      onClick={() => openModal('PhotoModal', { ...photo, section: 'photos', type: activeTab })}
+                      title="Edit"
+                    >
+                      ✏️
+                    </button>
+                    <button 
+                      className="action-btn delete-btn"
+                      onClick={() => openModal('DeleteModal', { id: photo.id, section: 'photos', type: activeTab })}
+                      title="Delete"
+                    >
+                      🗑️
+                    </button>
                   </div>
                 )}
-                <img src={photo.url} alt={photo.title} onClick={() => openModal('photoViewerModal', photo)} />
-                <p>{photo.title}</p>
-                <p>{photo.description}</p>
+                <img src={photo.url} alt={photo.title} onClick={() => openModal('PhotoViewerModal', photo)} />
+                <div className="photo-info">
+                  <p className="photo-title">{photo.title}</p>
+                  <p className="photo-description">{photo.description}</p>
+                </div>
               </div>
             ))}
+            
+            {getPhotosByCategory(activeTab).length === 0 && (
+              <div className="empty-state">
+                <h4>No photos uploaded</h4>
+                <p>Be the first to add photos to this category</p>
+                {userRole === 'admin' && (
+                  <button 
+                    className="btn-secondary"
+                    onClick={() => openModal('PhotoModal', { section: 'photos', type: activeTab })}
+                  >
+                    Add Photo
+                  </button>
+                )}
+              </div>
+            )}
           </div>
         </div>
-      ))}
+      </div>
     </div>
   );
 };

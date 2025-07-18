@@ -1,9 +1,10 @@
 
 import React, { useState, useEffect } from 'react';
-import apiRequest from '../../utils/apiRequest';
+import useStore from '../../store';
 import '../../styles/Modal.css';
 
 const PhotoModal = ({ isOpen, CloseModal, item }) => {
+  const { addPhotosContent, updatePhotosContent } = useStore();
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [category, setCategory] = useState('');
@@ -19,22 +20,39 @@ const PhotoModal = ({ isOpen, CloseModal, item }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const formData = new FormData();
-    formData.append('title', title);
-    formData.append('description', description);
-    formData.append('category', category);
-    photos.forEach((photo) => formData.append('photos', photo));
+    
+    if (photos.length > 0) {
+      // Handle multiple photos
+      photos.forEach(photo => {
+        const photoData = {
+          title,
+          description,
+          url: URL.createObjectURL(photo), // Temporary URL for demo
+          uploadDate: new Date().toISOString().split('T')[0]
+        };
 
-    try {
-      await apiRequest('photos', item?.id ? 'PUT' : 'POST', formData, item?.id);
-      CloseModal('PhotoModal');
-      setTitle('');
-      setDescription('');
-      setCategory('');
-      setPhotos([]);
-    } catch (err) {
-      console.error('Error uploading photos:', err);
+        if (item?.id) {
+          // Update existing photo
+          updatePhotosContent(category, item.id, photoData);
+        } else {
+          // Add new photo
+          addPhotosContent(category, photoData);
+        }
+      });
+    } else if (item?.id) {
+      // Update existing photo metadata only
+      const photoData = {
+        title,
+        description
+      };
+      updatePhotosContent(category, item.id, photoData);
     }
+
+    CloseModal('PhotoModal');
+    setTitle('');
+    setDescription('');
+    setCategory('');
+    setPhotos([]);
   };
 
   if (!isOpen) return null;
@@ -43,7 +61,7 @@ const PhotoModal = ({ isOpen, CloseModal, item }) => {
     <div className="modal-overlay">
       <div className="modal">
         <h2>Upload Photos</h2>
-        <button className="modal-close" onClick={() => closeModal('PhotoModal')}>
+        <button className="modal-close" onClick={() => CloseModal('PhotoModal')}>
           ×
         </button>
         <form onSubmit={handleSubmit}>

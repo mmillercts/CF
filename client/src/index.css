@@ -1,10 +1,33 @@
+/* Font Face Declarations */
+@font-face {
+  font-family: 'Apercu-Medium';
+  src: url('/Apercu-Medium.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'RooneyPro-Medium';
+  src: url('/RooneyPro-Medium.otf') format('opentype');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  font-family: 'Apercu-Medium', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+/* Heading styles with Rooney Medium Bold */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'RooneyPro-Medium', 'Apercu-Medium', serif;
+  font-weight: bold;
 }
 
 code {

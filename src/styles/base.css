@@ -1,0 +1,259 @@
+/* Base styles for the entire application */
+
+/* Font Face Declarations */
+@font-face {
+  font-family: 'Apercu-Medium';
+  src: url('/Apercu-Medium.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'RooneyPro-Medium';
+  src: url('/RooneyPro-Medium.otf') format('opentype');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Apercu-Medium', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #f5f5f5;
+}
+
+/* Heading styles with Rooney Medium Bold */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'RooneyPro-Medium', 'Apercu-Medium', serif;
+  font-weight: bold;
+}
+
+/* Container styles */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Button styles */
+.btn {
+  background: #d32f2f;
+  color: white;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: background-color 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
+  text-align: center;
+  font-family: 'Apercu-Medium', sans-serif;
+  min-height: 44px; /* Minimum touch target size */
+  box-sizing: border-box;
+}
+
+.btn:hover {
+  background: #b71c1c;
+}
+
+.btn:active {
+  background: #8d1717;
+}
+
+.btn.btn-small {
+  padding: 8px 16px;
+  font-size: 1rem;
+}
+
+.btn.btn-cancel {
+  background: #666;
+  color: white;
+}
+
+.btn.btn-cancel:hover {
+  background: #555;
+}
+
+/* Form styles */
+.form-input,
+.form-textarea,
+.form-select {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+  background: white;
+  transition: border-color 0.3s ease;
+  font-family: 'Apercu-Medium', sans-serif;
+  min-height: 44px; /* Minimum touch target size */
+  box-sizing: border-box;
+}
+
+.form-input:focus,
+.form-textarea:focus,
+.form-select:focus {
+  outline: none;
+  border-color: #d32f2f;
+  box-shadow: 0 0 0 2px rgba(211, 47, 47, 0.2);
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 500;
+  color: #333;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+/* Card styles */
+.card {
+  background: white;
+  border: 1mm solid #004F71;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin-bottom: 20px;
+  transition: box-shadow 0.3s ease;
+}
+
+.card:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.card-header {  
+  margin-bottom: 16px;
+  background: #DD0033;
+  color: white;
+  padding: 15px;
+  border-radius: 6px 6px 0 0;
+  margin: -20px -20px 16px -20px;
+}
+
+.card-body {
+  line-height: 1.6;
+}
+
+/* Section styles */
+.section {
+  padding: 20px;
+  background: #DD0033;
+  border: 5mm solid white;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  color: white;
+}
+
+.page-title {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Admin controls */
+.admin-controls {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.admin-only {
+  display: none;
+}
+
+.admin .admin-only {
+  display: block;
+}
+
+.admin .admin-controls {
+  display: flex;
+}
+
+.edit-btn,
+.delete-btn {
+  background: #666;
+  color: white;
+  padding: 4px 8px;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.edit-btn:hover {
+  background: #555;
+}
+
+.delete-btn:hover {
+  background: #c62828;
+}
+
+/* Grid layouts */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+/* Utility classes */
+.text-center {
+  text-align: center;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.mb-20 {
+  margin-bottom: 20px;
+}
+
+.mt-20 {
+  margin-top: 20px;
+}
+
+.hidden {
+  display: none;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .container {
+    padding: 0 10px;
+  }
+  
+  .cards {
+    grid-template-columns: 1fr;
+  }
+  
+  .page-title {
+    font-size: 20px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+}

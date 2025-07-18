@@ -4,62 +4,53 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chick-fil-A Kernersville Employee Portal</title>
-    
-    
 </head>
 <body>
-        <!-- Place this just inside <body>, before <div id="mainPortal"> -->
-    <div id="loginScreen" style="position:fixed;top:0;left:0;width:100vw;height:100vh;background:linear-gradient(135deg,#fff 0%,#DD0033 100%);z-index:3000;display:flex;align-items:center;justify-content:center;flex-direction:column;">
-        <div style="background:white;padding:40px 30px 30px 30px;border-radius:18px;box-shadow:0 8px 40px rgba(0,0,0,0.13);min-width:320px;max-width:95vw;">
-            <div style="display:flex;flex-direction:column;align-items:center;margin-bottom:25px;">
-                <div style="width:80px;height:80px;background:#DD0033;border-radius:50%;display:flex;align-items:center;justify-content:center;overflow:hidden;margin-bottom:10px;">
-                    <img src="./IMG_3606.JPG" alt="Chick-fil-A Logo" style="width:100%;height:100%;object-fit:cover;">
+    <div id="loginScreen">
+        <div>
+            <div>
+                <div>
+                    <img src="./IMG_3606.JPG" alt="Chick-fil-A Logo">
                 </div>
-                <div style="font-size:1.5rem;font-weight:bold;color:#DD0033;text-align:center;">Chick-fil-A Kernersville<br>Employee Portal</div>
+                <div>Chick-fil-A Kernersville<br>Employee Portal</div>
             </div>
             <form id="loginForm" autocomplete="off">
-                <div style="margin-bottom:18px;">
-                    <label for="loginUsername" style="font-weight:600;color:#333;">Username</label>
-                    <input type="text" id="loginUsername" class="form-input" style="width:100%;margin-top:6px;" required autocomplete="off">
+                <div>
+                    <label for="loginUsername">Username</label>
+                    <input type="text" id="loginUsername" class="form-input" required autocomplete="off">
                 </div>
-                <div style="margin-bottom:18px;">
-                    <label for="loginPassword" style="font-weight:600;color:#333;">Password</label>
-                    <input type="password" id="loginPassword" class="form-input" style="width:100%;margin-top:6px;" required autocomplete="off">
+                <div>
+                    <label for="loginPassword">Password</label>
+                    <input type="password" id="loginPassword" class="form-input" required autocomplete="off">
                 </div>
-                <div id="loginError" style="color:#DD0033;font-size:14px;min-height:18px;margin-bottom:10px;display:none;"></div>
-                <button type="submit" class="btn" style="width:100%;font-size:1.1rem;" onclick="handleLoginSubmit(event)">Login</button>
+                <div id="loginError"></div>
+                <button type="submit" class="btn">Login</button>
             </form>
         </div>
     </div>
-    <!-- filepath: c:\Users\mmill\OneDrive\CFA Website\New7.7.2025\7.7.25.html -->
     <!-- Main Portal -->
-    <div id="mainPortal" style="display: none;">
+    <div id="mainPortal">
         <header class="header">
             <div class="container">
                 <div class="header-content">
-                    <div class="logo" style="cursor:pointer;" onclick="goHome()">
+                    <div class="logo">
                         <div class="logo-icon">
                             <img src="./IMG_3606.JPG" alt="Chick-fil-A Logo">
                         </div>
                         <div class="logo-text">Chick-fil-A Kernersville</div>
                     </div>
-                    
                     <nav class="nav" id="nav">
-                        <a class="nav-link active" onclick="showSection('home')">Home</a>
-                        <a class="nav-link" onclick="showSection('about')">About</a>
-                        <a class="nav-link" onclick="showSection('team')">Team</a>
-                        <a class="nav-link" onclick="showSection('development')">Development</a>
-                        <a class="nav-link" onclick="showSection('benefits')">Benefits</a>
-                        <a class="nav-link" onclick="showSection('documents')">Documents</a>
-                        <a class="nav-link" onclick="showSection('photos')">Photos</a>
-                        <a class="nav-link" onclick="showSection('calendar')">Calendar</a>
-                        <a class="nav-link logout-link" onclick="logout()">Log Out</a>
+                        <a class="nav-link active">Home</a>
+                        <a class="nav-link">About</a>
+                        <a class="nav-link">Team</a>
+                        <a class="nav-link">Development</a>
+                        <a class="nav-link">Benefits</a>
+                        <a class="nav-link">Documents</a>
+                        <a class="nav-link">Photos</a>
+                        <a class="nav-link">Calendar</a>
+                        <a class="nav-link logout-link">Log Out</a>
                     </nav>
-                    
-    <div class="user-info">
-        <!-- This will be populated by the login process -->
-    </div>
-                    
+                    <div class="user-info"></div>
                     <button class="mobile-menu" id="mobileMenu">
                         <span></span>
                         <span></span>
@@ -68,124 +59,115 @@
                 </div>
             </div>
         </header>
-
         <main class="main">
             <div class="container">
                 <!-- Home Section -->
                 <section id="homeSection" class="section active">
                     <div class="page-title">
                         Welcome to Your Employee Portal
-                        <button class="admin-btn" onclick="addContent('home')">Add Content</button>
+                        <button class="admin-btn">Add Content</button>
                     </div>
-                    
                     <div class="cards" id="homeCards">
                         <div class="card" data-id="welcome">
                             <div class="admin-controls">
-                                <button class="edit-btn" onclick="editContent(this, 'welcome')">Edit</button>
-                                <button class="delete-btn" onclick="deleteContent(this, 'welcome')">Delete</button>
+                                <button class="edit-btn">Edit</button>
+                                <button class="delete-btn">Delete</button>
                             </div>
                             <div class="card-header">
                                 <h3>Welcome Team Members!</h3>
                                 <p>Your one-stop destination for all employee resources, benefits, and company information.</p>
                             </div>
                         </div>
-
                         <div class="card" data-id="quick">
                             <div class="admin-controls">
-                                <button class="edit-btn" onclick="editQuickAccess(this)">Edit</button>
-                                <button class="delete-btn" onclick="deleteContent(this, 'quick')">Delete</button>
+                                <button class="edit-btn">Edit</button>
+                                <button class="delete-btn">Delete</button>
                             </div>
                             <div class="card-body">
                                 <h3>Quick Access</h3>
                                 <p>Navigate to important sections quickly and easily.</p>
                                 <div class="quick-grid" id="quickGrid">
-                                    <div class="quick-item" onclick="showSection('benefits')" data-id="benefits">
+                                    <div class="quick-item" data-id="benefits">
                                         <div class="admin-controls">
-                                            <button onclick="event.stopPropagation(); editQuickItem(this, 'benefits')">Edit</button>
-                                            <button onclick="event.stopPropagation(); deleteQuickItem(this)">Delete</button>
+                                            <button>Edit</button>
+                                            <button>Delete</button>
                                         </div>
                                         <div class="icon">💼</div>
                                         <div>Benefits</div>
                                     </div>
-                                    <div class="quick-item" onclick="showSection('calendar')" data-id="calendar">
+                                    <div class="quick-item" data-id="calendar">
                                         <div class="admin-controls">
-                                            <button onclick="event.stopPropagation(); editQuickItem(this, 'calendar')">Edit</button>
-                                            <button onclick="event.stopPropagation(); deleteQuickItem(this)">Delete</button>
+                                            <button>Edit</button>
+                                            <button>Delete</button>
                                         </div>
                                         <div class="icon">📅</div>
                                         <div>Calendar</div>
                                     </div>
-                                    <div class="quick-item" onclick="showSection('documents')" data-id="documents">
+                                    <div class="quick-item" data-id="documents">
                                         <div class="admin-controls">
-                                            <button onclick="event.stopPropagation(); editQuickItem(this, 'documents')">Edit</button>
-                                            <button onclick="event.stopPropagation(); deleteQuickItem(this)">Delete</button>
+                                            <button>Edit</button>
+                                            <button>Delete</button>
                                         </div>
                                         <div class="icon">📄</div>
                                         <div>Documents</div>
                                     </div>
-                                    <div class="quick-item" onclick="showSection('development')" data-id="development">
+                                    <div class="quick-item" data-id="development">
                                         <div class="admin-controls">
-                                            <button onclick="event.stopPropagation(); editQuickItem(this, 'development')">Edit</button>
-                                            <button onclick="event.stopPropagation(); deleteQuickItem(this)">Delete</button>
+                                            <button>Edit</button>
+                                            <button>Delete</button>
                                         </div>
                                         <div class="icon">🎓</div>
                                         <div>Training</div>
                                     </div>
                                 </div>
-                                 <button class="btn btn-small admin-only" onclick="addQuickItem()">Add Quick Link</button>
+                                <button class="btn btn-small admin-only">Add Quick Link</button>
                             </div>
                         </div>
-
                         <div class="card" data-id="announcements">
                             <div class="admin-controls">
-                                <button class="edit-btn" onclick="editContent(this, 'announcements')">Edit</button>
-                                <button class="delete-btn" onclick="deleteContent(this, 'announcements')">Delete</button>
+                                <button class="edit-btn">Edit</button>
+                                <button class="delete-btn">Delete</button>
                             </div>
                             <div class="card-body">
                                 <h3>Announcements</h3>
                                 <p>Stay updated with the latest news and announcements.</p>
-                                <div id="announcementsList">                                   
-                                </div>
-                                <button class="btn btn-small admin-only" onclick="addAnnouncement()">Add Announcement</button>
+                                <div id="announcementsList"></div>
+                                <button class="btn btn-small admin-only">Add Announcement</button>
                             </div>
                         </div>
                     </div>
                 </section>
-
                 <!-- About Section -->
                 <section id="aboutSection" class="section">
                     <div class="page-title">
                         About Chick-fil-A
-                        <button class="admin-btn" onclick="addContent('about')">Add Content</button>
+                        <button class="admin-btn">Add Content</button>
                     </div>
-                    
                     <div class="cards" id="aboutCards">
                         <div class="card" data-id="mission">
                             <div class="admin-controls">
-                                <button class="edit-btn" onclick="editContent(this, 'mission')">Edit</button>
-                                <button class="delete-btn" onclick="deleteContent(this, 'mission')">Delete</button>
+                                <button class="edit-btn">Edit</button>
+                                <button class="delete-btn">Delete</button>
                             </div>
                             <div class="card-body">
                                 <h3>Our Mission</h3>
                                 <p>To glorify God by being a faithful steward of all that is entrusted to us and to have a positive influence on all who come into contact with Chick-fil-A.</p>
                             </div>
                         </div>
-
                         <div class="card" data-id="vision">
                             <div class="admin-controls">
-                                <button class="edit-btn" onclick="editContent(this, 'vision')">Edit</button>
-                                <button class="delete-btn" onclick="deleteContent(this, 'vision')">Delete</button>
+                                <button class="edit-btn">Edit</button>
+                                <button class="delete-btn">Delete</button>
                             </div>
                             <div class="card-body">
                                 <h3>Our Vision</h3>
                                 <p>To be America's best quick-service restaurant at getting better.</p>
                             </div>
                         </div>
-
                         <div class="card" data-id="values">
                             <div class="admin-controls">
-                                <button class="edit-btn" onclick="editContent(this, 'values')">Edit</button>
-                                <button class="delete-btn" onclick="deleteContent(this, 'values')">Delete</button>
+                                <button class="edit-btn">Edit</button>
+                                <button class="delete-btn">Delete</button>
                             </div>
                             <div class="card-body">
                                 <h3>Our Values</h3>
@@ -194,24 +176,22 @@
                         </div>
                     </div>
                 </section>
-
                 <!-- Team Section -->
                 <section id="teamSection" class="section">
                     <div class="page-title">
                         Our Team
-                        <button class="admin-btn" onclick="addTeamMember()">Add Team Member</button>
+                        <button class="admin-btn">Add Team Member</button>
                     </div>
-                    
                     <div id="orgChart">
                         <div class="org-level" data-level="1">
                             <h4>Owner/Operator</h4>
-                            <div class="team-grid" ondrop="drop(event)" ondragover="allowDrop(event)">
-                                <div class="card team-member" draggable="true" data-id="owner" ondragstart="drag(event)">
+                            <div class="team-grid">
+                                <div class="card team-member" draggable="true" data-id="owner">
                                     <div class="admin-controls">
-                                        <button class="edit-btn" onclick="editTeamMember(this, 'owner')">Edit</button>
-                                        <button class="delete-btn" onclick="deleteTeamMember(this, 'owner')">Delete</button>
+                                        <button class="edit-btn">Edit</button>
+                                        <button class="delete-btn">Delete</button>
                                     </div>
-                                    <div class="card-body" style="text-align: center;">
+                                    <div class="card-body">
                                         <div class="team-avatar">OW</div>
                                         <h3>Operator/Owner</h3>
                                         <p>Restaurant Owner</p>
@@ -219,16 +199,15 @@
                                 </div>
                             </div>
                         </div>
-
                         <div class="org-level" data-level="2">
                             <h4>Executive Director</h4>
-                            <div class="team-grid" ondrop="drop(event)" ondragover="allowDrop(event)">
-                                <div class="card team-member" draggable="true" data-id="exec-director" ondragstart="drag(event)">
+                            <div class="team-grid">
+                                <div class="card team-member" draggable="true" data-id="exec-director">
                                     <div class="admin-controls">
-                                        <button class="edit-btn" onclick="editTeamMember(this, 'exec-director')">Edit</button>
-                                        <button class="delete-btn" onclick="deleteTeamMember(this, 'exec-director')">Delete</button>
+                                        <button class="edit-btn">Edit</button>
+                                        <button class="delete-btn">Delete</button>
                                     </div>
-                                    <div class="card-body" style="text-align: center;">
+                                    <div class="card-body">
                                         <div class="team-avatar">ED</div>
                                         <h3>Executive Director</h3>
                                         <p>Executive Leadership</p>
@@ -236,31 +215,27 @@
                                 </div>
                             </div>
                         </div>
-
                         <div class="org-level" data-level="3">
                             <h4>Globals</h4>
-                            <div class="team-grid" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+                            <div class="team-grid"></div>
                         </div>
-
                         <div class="org-level" data-level="4">
                             <h4>Operations Directors</h4>
-                            <div class="team-grid" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+                            <div class="team-grid"></div>
                         </div>
-
                         <div class="org-level" data-level="5">
                             <h4>Directors</h4>
-                            <div class="team-grid" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+                            <div class="team-grid"></div>
                         </div>
-
                         <div class="org-level" data-level="6">
                             <h4>Managers</h4>
-                            <div class="team-grid" ondrop="drop(event)" ondragover="allowDrop(event)">
-                                <div class="card team-member" draggable="true" data-id="gm" ondragstart="drag(event)">
+                            <div class="team-grid">
+                                <div class="card team-member" draggable="true" data-id="gm">
                                     <div class="admin-controls">
-                                        <button class="edit-btn" onclick="editTeamMember(this, 'gm')">Edit</button>
-                                        <button class="delete-btn" onclick="deleteTeamMember(this, 'gm')">Delete</button>
+                                        <button class="edit-btn">Edit</button>
+                                        <button class="delete-btn">Delete</button>
                                     </div>
-                                    <div class="card-body" style="text-align: center;">
+                                    <div class="card-body">
                                         <div class="team-avatar">GM</div>
                                         <h3>General Manager</h3>
                                         <p>Operations Leader</p>
@@ -268,16 +243,15 @@
                                 </div>
                             </div>
                         </div>
-
                         <div class="org-level" data-level="7">
                             <h4>Team Leaders</h4>
-                            <div class="team-grid" ondrop="drop(event)" ondragover="allowDrop(event)">
-                                <div class="card team-member" draggable="true" data-id="team" ondragstart="drag(event)">
+                            <div class="team-grid">
+                                <div class="card team-member" draggable="true" data-id="team">
                                     <div class="admin-controls">
-                                        <button class="edit-btn" onclick="editTeamMember(this, 'team')">Edit</button>
-                                        <button class="delete-btn" onclick="deleteTeamMember(this, 'team')">Delete</button>
+                                        <button class="edit-btn">Edit</button>
+                                        <button class="delete-btn">Delete</button>
                                     </div>
-                                    <div class="card-body" style="text-align: center;">
+                                    <div class="card-body">
                                         <div class="team-avatar">TL</div>
                                         <h3>Team Leaders</h3>
                                         <p>Front & Back of House</p>
@@ -287,19 +261,17 @@
                         </div>
                     </div>
                 </section>
-
                 <!-- Development Section -->
                 <section id="developmentSection" class="section">
                     <div class="page-title">
                         My Development
-                        <button class="admin-btn" onclick="addContent('development')">Add Content</button>
+                        <button class="admin-btn">Add Content</button>
                     </div>
-                    
                     <div class="cards" id="developmentCards">
                         <div class="card" data-id="orientation">
                             <div class="admin-controls">
-                                <button class="edit-btn" onclick="editDevelopmentContent(this, 'orientation')">Edit</button>
-                                <button class="delete-btn" onclick="deleteContent(this, 'orientation')">Delete</button>
+                                <button class="edit-btn">Edit</button>
+                                <button class="delete-btn">Delete</button>
                             </div>
                             <div class="card-body">
                                 <h3>New Team Member Orientation</h3>
@@ -307,11 +279,10 @@
                                 <div class="development-links"></div>
                             </div>
                         </div>
-
                         <div class="card" data-id="safety">
                             <div class="admin-controls">
-                                <button class="edit-btn" onclick="editDevelopmentContent(this, 'safety')">Edit</button>
-                                <button class="delete-btn" onclick="deleteContent(this, 'safety')">Delete</button>
+                                <button class="edit-btn">Edit</button>
+                                <button class="delete-btn">Delete</button>
                             </div>
                             <div class="card-body">
                                 <h3>Food Safety Certification</h3>
@@ -319,11 +290,10 @@
                                 <div class="development-links"></div>
                             </div>
                         </div>
-
                         <div class="card" data-id="leadership">
                             <div class="admin-controls">
-                                <button class="edit-btn" onclick="editDevelopmentContent(this, 'leadership')">Edit</button>
-                                <button class="delete-btn" onclick="deleteContent(this, 'leadership')">Delete</button>
+                                <button class="edit-btn">Edit</button>
+                                <button class="delete-btn">Delete</button>
                             </div>
                             <div class="card-body">
                                 <h3>Leadership Development</h3>
@@ -333,224 +303,193 @@
                         </div>
                     </div>
                 </section>
-
                 <!-- Benefits Section -->
-<section id="benefitsSection" class="section">
-    <div class="page-title">
-        My Benefits
-        <button class="admin-btn admin-only" onclick="addBenefitsContent()">Add Content</button>
-    </div>
-    
-    <div class="cards">
-        <!-- Full-Time Benefits -->
-        <div class="card benefits-category" data-category="fulltime">
-            <div class="card-header">
-                <h3>Full-Time Benefits</h3>
-            </div>
-            <div class="card-body" id="fulltimeBenefits">
-                <div class="benefits-item" data-id="health-ft">
-                    <div class="admin-controls">
-                        <button onclick="editBenefitsItem(this, 'health-ft')">Edit</button>
-                        <button onclick="deleteBenefitsItem(this)">Delete</button>
+                <section id="benefitsSection" class="section">
+                    <div class="page-title">
+                        My Benefits
+                        <button class="admin-btn admin-only">Add Content</button>
                     </div>
-                    <h4>Health Insurance</h4>
-                    <p>Comprehensive medical, dental, and vision coverage.</p>
-                </div>
-                <div class="benefits-item" data-id="retirement-ft">
-                    <div class="admin-controls">
-                        <button onclick="editBenefitsItem(this, 'retirement-ft')">Edit</button>
-                        <button onclick="deleteBenefitsItem(this)">Delete</button>
+                    <div class="cards">
+                        <div class="card benefits-category" data-category="fulltime">
+                            <div class="card-header">
+                                <h3>Full-Time Benefits</h3>
+                            </div>
+                            <div class="card-body" id="fulltimeBenefits">
+                                <div class="benefits-item" data-id="health-ft">
+                                    <div class="admin-controls">
+                                        <button>Edit</button>
+                                        <button>Delete</button>
+                                    </div>
+                                    <h4>Health Insurance</h4>
+                                    <p>Comprehensive medical, dental, and vision coverage.</p>
+                                </div>
+                                <div class="benefits-item" data-id="retirement-ft">
+                                    <div class="admin-controls">
+                                        <button>Edit</button>
+                                        <button>Delete</button>
+                                    </div>
+                                    <h4>401(k) Plan</h4>
+                                    <p>Retirement savings with company matching.</p>
+                                </div>
+                                <button class="btn btn-small admin-only">Add Benefit</button>
+                            </div>
+                        </div>
+                        <div class="card benefits-category" data-category="parttime">
+                            <div class="card-header">
+                                <h3>Part-Time Benefits</h3>
+                            </div>
+                            <div class="card-body" id="parttimeBenefits">
+                                <div class="benefits-item" data-id="discounts-pt">
+                                    <div class="admin-controls">
+                                        <button>Edit</button>
+                                        <button>Delete</button>
+                                    </div>
+                                    <h4>Employee Discounts</h4>
+                                    <p>Generous meal discounts and special offers.</p>
+                                </div>
+                                <div class="benefits-item" data-id="flexible-pt">
+                                    <div class="admin-controls">
+                                        <button>Edit</button>
+                                        <button>Delete</button>
+                                    </div>
+                                    <h4>Flexible Scheduling</h4>
+                                    <p>Work schedules that fit your lifestyle.</p>
+                                </div>
+                                <button class="btn btn-small admin-only">Add Benefit</button>
+                            </div>
+                        </div>
+                        <div class="card benefits-category" data-category="manager">
+                            <div class="card-header">
+                                <h3>Manager Benefits</h3>
+                            </div>
+                            <div class="card-body" id="managerBenefits">
+                                <div class="benefits-item" data-id="bonus-mgr">
+                                    <div class="admin-controls">
+                                        <button>Edit</button>
+                                        <button>Delete</button>
+                                    </div>
+                                    <h4>Performance Bonuses</h4>
+                                    <p>Quarterly and annual performance incentives.</p>
+                                </div>
+                                <div class="benefits-item" data-id="development-mgr">
+                                    <div class="admin-controls">
+                                        <button>Edit</button>
+                                        <button>Delete</button>
+                                    </div>
+                                    <h4>Leadership Development</h4>
+                                    <p>Advanced training and career advancement opportunities.</p>
+                                </div>
+                                <button class="btn btn-small admin-only">Add Benefit</button>
+                            </div>
+                        </div>
                     </div>
-                    <h4>401(k) Plan</h4>
-                    <p>Retirement savings with company matching.</p>
-                </div>
-                <button class="btn btn-small admin-only" onclick="addBenefitsItem('fulltime')">Add Benefit</button>
-            </div>
-        </div>
-
-        <!-- Part-Time Benefits -->
-        <div class="card benefits-category" data-category="parttime">
-            <div class="card-header">
-                <h3>Part-Time Benefits</h3>
-            </div>
-            <div class="card-body" id="parttimeBenefits">
-                <div class="benefits-item" data-id="discounts-pt">
-                    <div class="admin-controls">
-                        <button onclick="editBenefitsItem(this, 'discounts-pt')">Edit</button>
-                        <button onclick="deleteBenefitsItem(this)">Delete</button>
-                    </div>
-                    <h4>Employee Discounts</h4>
-                    <p>Generous meal discounts and special offers.</p>
-                </div>
-                <div class="benefits-item" data-id="flexible-pt">
-                    <div class="admin-controls">
-                        <button onclick="editBenefitsItem(this, 'flexible-pt')">Edit</button>
-                        <button onclick="deleteBenefitsItem(this)">Delete</button>
-                    </div>
-                    <h4>Flexible Scheduling</h4>
-                    <p>Work schedules that fit your lifestyle.</p>
-                </div>
-                <button class="btn btn-small admin-only" onclick="addBenefitsItem('parttime')">Add Benefit</button>
-            </div>
-        </div>
-
-        <!-- Manager Benefits -->
-        <div class="card benefits-category" data-category="manager">
-            <div class="card-header">
-                <h3>Manager Benefits</h3>
-            </div>
-            <div class="card-body" id="managerBenefits">
-                <div class="benefits-item" data-id="bonus-mgr">
-                    <div class="admin-controls">
-                        <button onclick="editBenefitsItem(this, 'bonus-mgr')">Edit</button>
-                        <button onclick="deleteBenefitsItem(this)">Delete</button>
-                    </div>
-                    <h4>Performance Bonuses</h4>
-                    <p>Quarterly and annual performance incentives.</p>
-                </div>
-                <div class="benefits-item" data-id="development-mgr">
-                    <div class="admin-controls">
-                        <button onclick="editBenefitsItem(this, 'development-mgr')">Edit</button>
-                        <button onclick="deleteBenefitsItem(this)">Delete</button>
-                    </div>
-                    <h4>Leadership Development</h4>
-                    <p>Advanced training and career advancement opportunities.</p>
-                </div>
-                <button class="btn btn-small admin-only" onclick="addBenefitsItem('manager')">Add Benefit</button>
-            </div>
-        </div>
-    </div>
-</section>
-
+                </section>
                 <!-- Documents Section -->
                 <section id="documentsSection" class="section">
                     <div class="page-title">
                         My Documents
-                        <button class="admin-btn" onclick="uploadDocument()">Upload Document</button>
+                        <button class="admin-btn">Upload Document</button>
                     </div>
-                    
                     <div class="document-categories">
                         <div class="document-category" data-category="forms">
                             <div class="document-category-header">
                                 <h3>Forms</h3>
-                                <button class="admin-btn admin-only" onclick="uploadDocument()">Upload Document</button>
+                                <button class="admin-btn admin-only">Upload Document</button>
                             </div>
                             <div class="document-category-body">
-                                <ul class="doc-list" id="formsList">
-                                    
-                                </ul>
+                                <ul class="doc-list" id="formsList"></ul>
                             </div>
                         </div>
-
                         <div class="document-category" data-category="policy">
                             <div class="document-category-header">
                                 <h3>Policy</h3>
-                                <button class="admin-btn admin-only" onclick="uploadDocument()">Upload Document</button>
+                                <button class="admin-btn admin-only">Upload Document</button>
                             </div>
                             <div class="document-category-body">
-                                <ul class="doc-list" id="policyList">
-
-                                </ul>
+                                <ul class="doc-list" id="policyList"></ul>
                             </div>
                         </div>
-
                         <div class="document-category" data-category="tools">
                             <div class="document-category-header">
                                 <h3>Tools</h3>
-                                <button class="admin-btn admin-only" onclick="uploadDocument()">Upload Document</button>
+                                <button class="admin-btn admin-only">Upload Document</button>
                             </div>
                             <div class="document-category-body">
-                                <ul class="doc-list" id="toolsList">
-                                    
-                                </ul>
+                                <ul class="doc-list" id="toolsList"></ul>
                             </div>
                         </div>
-
                         <div class="document-category" data-category="handbook">
                             <div class="document-category-header">
                                 <h3>Handbook</h3>
-                                <button class="admin-btn admin-only" onclick="uploadDocument()">Upload Document</button>
+                                <button class="admin-btn admin-only">Upload Document</button>
                             </div>
                             <div class="document-category-body">
-                                <ul class="doc-list" id="handbookList">
-                                
-                                </ul>
+                                <ul class="doc-list" id="handbookList"></ul>
                             </div>
                         </div>
                     </div>
                 </section>
-
                 <!-- Photos Section -->
                 <section id="photosSection" class="section">
                     <div class="page-title">
                         Photos
-                        <button class="admin-btn" onclick="uploadPhotos()">Upload Photos</button>
+                        <button class="admin-btn">Upload Photos</button>
                     </div>
-                    
                     <div class="photo-categories">
                         <div class="photo-category" data-category="team-events">
                             <div class="photo-category-header">
                                 <h3>Team Events</h3>
-                                <button class="btn btn-small admin-only" onclick="uploadPhotosToCategory('team-events')">Add</button>
+                                <button class="btn btn-small admin-only">Add</button>
                             </div>
                             <div class="photo-category-body">
-                                <div class="photos" id="teamEventsList">
-                                </div>
+                                <div class="photos" id="teamEventsList"></div>
                             </div>
                         </div>
-
                         <div class="photo-category" data-category="south-main">
                             <div class="photo-category-header">
                                 <h3>South Main</h3>
-                                <button class="btn btn-small admin-only" onclick="uploadPhotosToCategory('south-main')">Add</button>
+                                <button class="btn btn-small admin-only">Add</button>
                             </div>
                             <div class="photo-category-body">
-                                <div class="photos" id="southMainList">
-                                </div>
+                                <div class="photos" id="southMainList"></div>
                             </div>
                         </div>
-
                         <div class="photo-category" data-category="union-cross">
                             <div class="photo-category-header">
                                 <h3>Union Cross</h3>
-                                <button class="btn btn-small admin-only" onclick="uploadPhotosToCategory('union-cross')">Add</button>
+                                <button class="btn btn-small admin-only">Add</button>
                             </div>
                             <div class="photo-category-body">
-                                <div class="photos" id="unionCrossList">
-                                </div>
+                                <div class="photos" id="unionCrossList"></div>
                             </div>
                         </div>
                     </div>
                 </section>
-
                 <!-- Calendar Section -->
                 <section id="calendarSection" class="section">
                     <div class="page-title">
                         Calendar
-                        <button class="admin-btn" onclick="addEvent()">Add Event</button>
+                        <button class="admin-btn">Add Event</button>
                     </div>
                     <div class="calendar-tabs">
-                        <div class="calendar-tab active" onclick="switchCalendar('marketing')">Marketing Calendar</div>
-                        <div class="calendar-tab" onclick="switchCalendar('south-main')">South Main</div>
-                        <div class="calendar-tab" onclick="switchCalendar('union-cross')">Union Cross</div>
+                        <div class="calendar-tab active">Marketing Calendar</div>
+                        <div class="calendar-tab">South Main</div>
+                        <div class="calendar-tab">Union Cross</div>
                     </div>
-                   
                     <!-- Marketing Calendar -->
                     <div id="marketing-calendar" class="calendar-content active">
                         <div class="calendar-container">
                             <div class="calendar">
                                 <div class="calendar-header">
-                                    <button class="calendar-nav" onclick="previousMonth('marketing')">◀</button>
+                                    <button class="calendar-nav">◀</button>
                                     <h3 id="marketingCalendarTitle">July 2025</h3>
-                                    <button class="calendar-nav" onclick="nextMonth('marketing')">▶</button>
+                                    <button class="calendar-nav">▶</button>
                                 </div>
-                                <div class="calendar-grid" id="marketingCalendarGrid">
-                                </div>
+                                <div class="calendar-grid" id="marketingCalendarGrid"></div>
                             </div>
                             <div class="events-sidebar">
                                 <h3>Marketing Events</h3>
-                                <div id="marketingEventsList">
-                                </div>
+                                <div id="marketingEventsList"></div>
                             </div>
                         </div>
                     </div>
@@ -559,18 +498,15 @@
                         <div class="calendar-container">
                             <div class="calendar">
                                 <div class="calendar-header">
-                                    <button class="calendar-nav" onclick="previousMonth('south-main')">◀</button>
+                                    <button class="calendar-nav">◀</button>
                                     <h3 id="southMainCalendarTitle">July 2025</h3>
-                                    <button class="calendar-nav" onclick="nextMonth('south-main')">▶</button>
+                                    <button class="calendar-nav">▶</button>
                                 </div>
-                                <div class="calendar-grid" id="southMainCalendarGrid">
-                                    <!-- Calendar days will be generated by JavaScript -->
-                                </div>
+                                <div class="calendar-grid" id="southMainCalendarGrid"></div>
                             </div>
                             <div class="events-sidebar">
                                 <h3>South Main Events</h3>
-                                <div id="southMainEventsList">
-                                </div>
+                                <div id="southMainEventsList"></div>
                             </div>
                         </div>
                     </div>
@@ -579,35 +515,29 @@
                         <div class="calendar-container">
                             <div class="calendar">
                                 <div class="calendar-header">
-                                    <button class="calendar-nav" onclick="previousMonth('union-cross')">◀</button>
+                                    <button class="calendar-nav">◀</button>
                                     <h3 id="unionCrossCalendarTitle">July 2025</h3>
-                                    <button class="calendar-nav" onclick="nextMonth('union-cross')">▶</button>
+                                    <button class="calendar-nav">▶</button>
                                 </div>
-                                <div class="calendar-grid" id="unionCrossCalendarGrid">
-                                    <!-- Calendar days will be generated by JavaScript -->
-                                </div>
+                                <div class="calendar-grid" id="unionCrossCalendarGrid"></div>
                             </div>
                             <div class="events-sidebar">
                                 <h3>Union Cross Events</h3>
-                                <div id="unionCrossEventsList">
-                                </div>
+                                <div id="unionCrossEventsList"></div>
                             </div>
                         </div>
                     </div>
                 </section>
-                <!-- End Calendar Section -->
             </div>
         </main>
     </div>
-
     <!-- Modal Overlays -->
-    
     <!-- Edit Content Modal -->
     <div id="editModal" class="modal-overlay">
         <div class="modal">
             <div class="modal-header">
                 <h3>Edit Content</h3>
-                <button class="modal-close" onclick="closeModal('editModal')">×</button>
+                <button class="modal-close">×</button>
             </div>
             <form id="editForm">
                 <div class="form-group">
@@ -619,19 +549,18 @@
                     <textarea id="editDescription" class="form-textarea" required></textarea>
                 </div>
                 <div class="modal-buttons">
-                    <button type="button" class="btn btn-cancel" onclick="closeModal('editModal')">Cancel</button>
+                    <button type="button" class="btn btn-cancel">Cancel</button>
                     <button type="submit" class="btn">Save Changes</button>
                 </div>
             </form>
         </div>
     </div>
-
     <!-- Development Content Modal -->
     <div id="developmentModal" class="modal-overlay">
         <div class="modal">
             <div class="modal-header">
                 <h3>Development Content</h3>
-                <button class="modal-close" onclick="closeModal('developmentModal')">×</button>
+                <button class="modal-close">×</button>
             </div>
             <form id="developmentForm">
                 <div class="form-group">
@@ -644,22 +573,23 @@
                 </div>
                 <div class="form-group">
                     <label class="form-label" for="devLinks">Web Links (one per line)</label>
-                    <textarea id="devLinks" class="form-textarea" placeholder="Enter web links, one per line:&#10;https://example.com - Link Title&#10;https://training.site.com - Training Portal"></textarea>
+                    <textarea id="devLinks" class="form-textarea" placeholder="Enter web links, one per line:
+https://example.com - Link Title
+https://training.site.com - Training Portal"></textarea>
                 </div>
                 <div class="modal-buttons">
-                    <button type="button" class="btn btn-cancel" onclick="closeModal('developmentModal')">Cancel</button>
+                    <button type="button" class="btn btn-cancel">Cancel</button>
                     <button type="submit" class="btn">Save Changes</button>
                 </div>
             </form>
         </div>
     </div>
-
     <!-- Benefits Item Modal -->
     <div id="benefitsModal" class="modal-overlay">
         <div class="modal">
             <div class="modal-header">
                 <h3>Benefits Item</h3>
-                <button class="modal-close" onclick="closeModal('benefitsModal')">×</button>
+                <button class="modal-close">×</button>
             </div>
             <form id="benefitsForm">
                 <div class="form-group">
@@ -679,34 +609,32 @@
                     </select>
                 </div>
                 <div class="modal-buttons">
-                    <button type="button" class="btn btn-cancel" onclick="closeModal('benefitsModal')">Cancel</button>
+                    <button type="button" class="btn btn-cancel">Cancel</button>
                     <button type="submit" class="btn">Save Benefits Item</button>
                 </div>
             </form>
         </div>
     </div>
-
     <!-- Delete Confirmation Modal -->
     <div id="deleteModal" class="modal-overlay">
         <div class="modal">
             <div class="modal-header">
                 <h3>Confirm Delete</h3>
-                <button class="modal-close" onclick="closeModal('deleteModal')">×</button>
+                <button class="modal-close">×</button>
             </div>
             <p>Are you sure you want to delete this item? This action cannot be undone.</p>
             <div class="modal-buttons">
-                <button type="button" class="btn btn-cancel" onclick="closeModal('deleteModal')">Cancel</button>
+                <button type="button" class="btn btn-cancel">Cancel</button>
                 <button type="button" class="btn" id="confirmDelete">Delete</button>
             </div>
         </div>
     </div>
-
     <!-- Add Team Member Modal -->
     <div id="teamModal" class="modal-overlay">
         <div class="modal">
             <div class="modal-header">
                 <h3>Add Team Member</h3>
-                <button class="modal-close" onclick="closeModal('teamModal')">×</button>
+                <button class="modal-close">×</button>
             </div>
             <form id="teamForm">
                 <div class="form-group">
@@ -736,25 +664,24 @@
                 <div class="form-group">
                     <label class="form-label" for="teamPhoto">Headshot Photo</label>
                     <div class="form-file">
-                        <input type="file" id="teamPhoto" accept="image/*" onchange="showFilePreview(this, 'teamPhotoPreview', 'teamPhotoText')">
+                        <input type="file" id="teamPhoto" accept="image/*">
                         <p id="teamPhotoText">Click to select a photo or drag and drop</p>
-                        <div id="teamPhotoPreview" class="file-preview" style="display: none;"></div>
+                        <div id="teamPhotoPreview" class="file-preview"></div>
                     </div>
                 </div>
                 <div class="modal-buttons">
-                    <button type="button" class="btn btn-cancel" onclick="closeModal('teamModal')">Cancel</button>
+                    <button type="button" class="btn btn-cancel">Cancel</button>
                     <button type="submit" class="btn">Add Team Member</button>
                 </div>
             </form>
         </div>
     </div>
-
     <!-- Upload Document Modal -->
     <div id="documentModal" class="modal-overlay">
         <div class="modal">
             <div class="modal-header">
                 <h3>Upload Document</h3>
-                <button class="modal-close" onclick="closeModal('documentModal')">×</button>
+                <button class="modal-close">×</button>
             </div>
             <form id="documentForm">
                 <div class="form-group">
@@ -773,25 +700,24 @@
                 <div class="form-group">
                     <label class="form-label" for="docFile">Select File</label>
                     <div class="form-file">
-                        <input type="file" id="docFile" accept=".pdf,.doc,.docx,.txt" onchange="showFilePreview(this, 'docFilePreview', 'docFileText')">
+                        <input type="file" id="docFile" accept=".pdf,.doc,.docx,.txt">
                         <p id="docFileText">Click to select a file or drag and drop</p>
-                        <div id="docFilePreview" class="file-preview" style="display: none;"></div>
+                        <div id="docFilePreview" class="file-preview"></div>
                     </div>
                 </div>
                 <div class="modal-buttons">
-                    <button type="button" class="btn btn-cancel" onclick="closeModal('documentModal')">Cancel</button>
+                    <button type="button" class="btn btn-cancel">Cancel</button>
                     <button type="submit" class="btn">Upload Document</button>
                 </div>
             </form>
         </div>
     </div>
-
     <!-- Upload Photos Modal -->
     <div id="photoModal" class="modal-overlay">
         <div class="modal">
             <div class="modal-header">
                 <h3>Upload Photos</h3>
-                <button class="modal-close" onclick="closeModal('photoModal')">×</button>
+                <button class="modal-close">×</button>
             </div>
             <form id="photoForm">
                 <div class="form-group">
@@ -813,25 +739,24 @@
                 <div class="form-group">
                     <label class="form-label" for="photoFiles">Select Photos</label>
                     <div class="form-file">
-                        <input type="file" id="photoFiles" accept="image/*" multiple onchange="showFilePreview(this, 'photoFilesPreview', 'photoFilesText')">
+                        <input type="file" id="photoFiles" accept="image/*" multiple>
                         <p id="photoFilesText">Click to select photos or drag and drop</p>
-                        <div id="photoFilesPreview" class="file-preview" style="display: none;"></div>
+                        <div id="photoFilesPreview" class="file-preview"></div>
                     </div>
                 </div>
                 <div class="modal-buttons">
-                    <button type="button" class="btn btn-cancel" onclick="closeModal('photoModal')">Cancel</button>
+                    <button type="button" class="btn btn-cancel">Cancel</button>
                     <button type="submit" class="btn">Upload Photos</button>
                 </div>
             </form>
         </div>
     </div>
-
     <!-- Add Event Modal -->
     <div id="eventModal" class="modal-overlay">
         <div class="modal">
             <div class="modal-header">
                 <h3>Add Event</h3>
-                <button class="modal-close" onclick="closeModal('eventModal')">×</button>
+                <button class="modal-close">×</button>
             </div>
             <form id="eventForm">
                 <div class="form-group">
@@ -865,19 +790,18 @@
                     <textarea id="eventDescription" class="form-textarea" required></textarea>
                 </div>
                 <div class="modal-buttons">
-                    <button type="button" class="btn btn-cancel" onclick="closeModal('eventModal')">Cancel</button>
+                    <button type="button" class="btn btn-cancel">Cancel</button>
                     <button type="submit" class="btn">Add Event</button>
                 </div>
             </form>
         </div>
     </div>
-
     <!-- Quick Access Item Modal -->
     <div id="quickModal" class="modal-overlay">
         <div class="modal">
             <div class="modal-header">
                 <h3>Quick Access Link</h3>
-                <button class="modal-close" onclick="closeModal('quickModal')">×</button>
+                <button class="modal-close">×</button>
             </div>
             <form id="quickForm">
                 <div class="form-group">
@@ -903,19 +827,18 @@
                     </select>
                 </div>
                 <div class="modal-buttons">
-                    <button type="button" class="btn btn-cancel" onclick="closeModal('quickModal')">Cancel</button>
+                    <button type="button" class="btn btn-cancel">Cancel</button>
                     <button type="submit" class="btn">Save Link</button>
                 </div>
             </form>
         </div>
     </div>
-
     <!-- Announcement Modal -->
     <div id="announcementModal" class="modal-overlay">
         <div class="modal">
             <div class="modal-header">
                 <h3>Announcement</h3>
-                <button class="modal-close" onclick="closeModal('announcementModal')">×</button>
+                <button class="modal-close">×</button>
             </div>
             <form id="announcementForm">
                 <div class="form-group">
@@ -931,1072 +854,17 @@
                     <textarea id="announcementDescription" class="form-textarea" required></textarea>
                 </div>
                 <div class="modal-buttons">
-                    <button type="button" class="btn btn-cancel" onclick="closeModal('announcementModal')">Cancel</button>
+                    <button type="button" class="btn btn-cancel">Cancel</button>
                     <button type="submit" class="btn">Save Announcement</button>
                 </div>
             </form>
         </div>
     </div>
-
-    <script>
-// Global variables
-let userRole = null;
-let eventData = {
-    marketing: [],
-    development: [],
-    benefits: [],
-    team: [],
-    documents: [],
-    photos: [],
-    calendar: []
-};
-let calendarDates = {
-    marketing: new Date(),
-    development: new Date(),
-    benefits: new Date(),
-    team: new Date(),
-    documents: new Date(),
-    photos: new Date(),
-    calendar: new Date()
-};
-let currentEditElement = null;
-
-// Handle login form submission (onclick fallback)
-function handleLoginSubmit(event) {
-    console.log('handleLoginSubmit called!');
-    
-    if (event) {
-        event.preventDefault();
-        event.stopPropagation();
-        event.stopImmediatePropagation();
-    }
-    
-    const username = document.getElementById('loginUsername').value.trim();
-    const password = document.getElementById('loginPassword').value.trim();
-    
-    console.log('Form submission values:', { username, password });
-    
-    if (!username || !password) {
-        alert('Please enter both username and password');
-        return false;
-    }
-    
-    // Use the same login logic as the event listener
-    let valid = false;
-    
-    if (username.toLowerCase() === 'kvillecfa' && (password === '1248' || password === '4772')) {
-        userRole = 'team';
-        valid = true;
-    } else if (username.toLowerCase() === 'admin' && password === 'Asdf2025!') {
-        userRole = 'admin';
-        valid = true;
-    }
-    
-    if (valid) {
-        console.log('Login valid, showing portal for role:', userRole);
-        document.getElementById('loginScreen').style.display = 'none';
-        document.getElementById('mainPortal').style.display = '';
-        
-        const userInfo = document.querySelector('.user-info');
-        if (userRole === 'admin') {
-            userInfo.innerHTML = `<span class="admin-badge">Admin</span><span>Welcome, Admin!</span>`;
-        } else {
-            userInfo.innerHTML = `<span>Welcome, Team Member!</span>`;
-        }
-        setReadonlyMode(userRole === 'team');
-    } else {
-        const errorDiv = document.getElementById('loginError');
-        errorDiv.textContent = 'Invalid username or password.';
-        errorDiv.style.display = 'block';
-    }
-    
-    return false; // Prevent form submission
-}
-
-// Logout function
-function logout() {
-    console.log('Logout function called - Call stack:', new Error().stack);
-    
-    // Add a more specific confirmation to help debug
-    const confirmed = confirm('LOGOUT DETECTED: Are you sure you want to log out?\n\nIf you clicked Save Changes and got this message, there is a bug we need to fix.');
-    
-    if (!confirmed) {
-        console.log('Logout cancelled by user');
-        return false;
-    }
-    
-    console.log('Processing logout...');
-    // Reset portal state
-    document.getElementById('mainPortal').style.display = 'none';
-    document.getElementById('loginScreen').style.display = 'flex';
-    userRole = null;
-
-    // Clear welcome message
-    const userInfo = document.querySelector('.user-info');
-    userInfo.innerHTML = '';
-
-    // Stop autosave if active
-    try {
-        stopAutosave();
-    } catch (error) {
-        console.log('Autosave stop failed:', error);
-    }
-}
-
-// SetReadonly mode function
-function setReadonlyMode(isReadonly) {
-    // Hide admin controls if readonly
-    document.querySelectorAll('.admin-controls').forEach(el => {
-        el.style.display = isReadonly ? 'none' : '';
-    });
-    // Hide admin badge if readonly
-    const adminBadge = document.querySelector('.admin-badge');
-    if (adminBadge) adminBadge.style.display = isReadonly ? 'none' : '';
-    // Hide admin buttons
-    document.querySelectorAll('.admin-btn').forEach(btn => {
-        btn.style.display = isReadonly ? 'none' : '';
-    });
-    // Hide all admin-only add/upload buttons
-    document.querySelectorAll('.admin-only').forEach(btn => {
-        btn.style.display = isReadonly ? 'none' : '';
-    });
-}
-
-// Generic API request handler for CRUD operations
-async function apiRequest(table, method, data = null, id = null) {
-  try {
-    const url = id ? `/api/${table}/${id}` : `/api/${table}`;
-    const options = {
-      method,
-      headers: { 'Content-Type': 'application/json' },
-    };
-    if (data && method !== 'GET' && method !== 'DELETE') {
-      options.body = JSON.stringify(data);
-    }
-    console.log(`Sending ${method} request to ${url}`, data || '');
-    const response = await fetch(url, options);
-    if (!response.ok) {
-      const errorText = await response.text();
-      throw new Error(`HTTP error! Status: ${response.status}, Message: ${errorText}`);
-    }
-    const result = await response.json();
-    console.log(`Response from ${url}:`, result);
-    return result;
-  } catch (error) {
-    console.error(`Error in ${method} ${table}:`, error);
-    alert(`Error: ${error.message}`);
-    throw error;
-  }
-}
-
-// File upload handler for photos and documents
-async function uploadFile(type, file, metadata) {
-  try {
-    const formData = new FormData();
-    formData.append('type', type);
-    formData.append('file', file);
-    Object.entries(metadata).forEach(([key, value]) => formData.append(key, value));
-    console.log(`Uploading ${type} file`, metadata);
-    const response = await fetch('/api/upload', {
-      method: 'POST',
-      body: formData,
-    });
-    if (!response.ok) {
-      const errorText = await response.text();
-      throw new Error(`HTTP error! Status: ${response.status}, Message: ${errorText}`);
-    }
-    const result = await response.json();
-    console.log(`Upload ${type} response:`, result);
-    return result;
-  } catch (error) {
-    console.error(`Error uploading ${type}:`, error);
-    alert(`Error uploading ${type}: ${error.message}`);
-    throw error;
-  }
-}
-
-// Fetch and display data for a table
-async function displayList(table, listElementId) {
-  const list = document.getElementById(listElementId);
-  
-  // Check if list element exists
-  if (!list) {
-    console.log(`List element with id '${listElementId}' not found, skipping display`);
-    return;
-  }
-  
-  list.innerHTML = '';
-  const data = await apiRequest(table, 'GET');
-  data.forEach(item => {
-    const li = document.createElement('li');
-    li.className = 'flex justify-between items-center mb-2';
-    li.innerHTML = `
-      <span>${JSON.stringify(item, null, 2)}</span>
-      <div>
-        <button class="edit bg-yellow-500 text-white px-2 py-1 rounded mr-2" data-id="${item.id}" data-table="${table}">Edit</button>
-        <button class="delete bg-red-500 text-white px-2 py-1 rounded" data-id="${item.id}" data-table="${table}">Delete</button>
-      </div>
-    `;
-    list.appendChild(li);
-  });
-}
-
-// Form submission handler
-function handleFormSubmit(table, formId, listId, fields, fileField = null) {
-  const form = document.getElementById(formId);
-  const submitButton = document.getElementById(`${table}-submit`);
-  
-  // Check if form exists before adding event listener
-  if (!form) {
-    console.log(`Form with id '${formId}' not found, skipping event listener setup`);
-    return;
-  }
-  
-  form.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const id = document.getElementById(`${table}-id`).value;
-    if (fileField) {
-      const file = document.getElementById(fileField).files[0];
-      const metadata = {};
-      fields.forEach(field => {
-        const value = document.getElementById(`${table}-${field}`).value;
-        if (value) metadata[field] = value;
-      });
-      await uploadFile(table, file, metadata);
-    } else {
-      const data = {};
-      fields.forEach(field => {
-        const value = document.getElementById(`${table}-${field}`).value;
-        if (value) data[field] = value;
-      });
-      if (id) {
-        await apiRequest(table, 'PUT', data, id);
-      } else {
-        await apiRequest(table, 'POST', data);
-      }
-    }
-    form.reset();
-    document.getElementById(`${table}-id`).value = '';
-    submitButton.textContent = `Add ${table.charAt(0).toUpperCase() + table.slice(1)}`;
-    await displayList(table, listId);
-  });
-}
-
-// Edit button handler
-function handleEdit(table, formId, fields) {
-  return async (e) => {
-    const id = e.target.dataset.id;
-    const data = await apiRequest(table, 'GET', null, id);
-    fields.forEach(field => {
-      const input = document.getElementById(`${table}-${field}`);
-      if (input && data[field]) input.value = data[field];
-    });
-    document.getElementById(`${table}-id`).value = id;
-    document.getElementById(`${table}-submit`).textContent = `Update ${table.charAt(0).toUpperCase() + table.slice(1)}`;
-  };
-}
-
-// Delete button handler
-function handleDelete(table, listId) {
-  return async (e) => {
-    const id = e.target.dataset.id;
-    await apiRequest(table, 'DELETE', null, id);
-    await displayList(table, listId);
-  };
-}
-
-// Generate calendar function
-function generateCalendar(calendarType, currentDate) {
-  // Simple calendar generation placeholder
-  console.log(`Generating calendar for ${calendarType} with date:`, currentDate);
-  
-  // Find the calendar container for this type
-  const calendarContainer = document.querySelector(`[data-calendar="${calendarType}"] .calendar-container`);
-  if (!calendarContainer) {
-    console.log(`Calendar container not found for ${calendarType}`);
-    return;
-  }
-  
-  // Clear existing calendar
-  calendarContainer.innerHTML = '';
-  
-  // Create a simple calendar grid
-  const calendarGrid = document.createElement('div');
-  calendarGrid.className = 'calendar-grid';
-  calendarGrid.innerHTML = `
-    <div class="calendar-header">
-      <h4>${calendarType.charAt(0).toUpperCase() + calendarType.slice(1)} Calendar</h4>
-      <p>Current Date: ${currentDate.toDateString()}</p>
-    </div>
-    <div class="calendar-body">
-      <p>Calendar functionality coming soon...</p>
-    </div>
-  `;
-  
-  calendarContainer.appendChild(calendarGrid);
-}
-
-// Initialize event listeners
-document.addEventListener('DOMContentLoaded', () => {
-  // Initialize calendar and event data
-  try {
-    // Initialize event data from existing events
-    Object.keys(eventData).forEach(calendarType => {
-      eventData[calendarType] = [];
-      document.querySelectorAll(`.event[data-calendar="${calendarType}"]`).forEach(event => {
-        const date = event.getAttribute('data-date');
-        if (date) {
-          eventData[calendarType].push({ date: date, element: event });
-        }
-      });
-    });
-    
-    // Generate the initial calendar
-    generateCalendar('marketing', calendarDates.marketing);
-  } catch (error) {
-    console.log('Calendar initialization error:', error);
-  }
-
-  // Add form submit handlers for all modal forms
-  const editForm = document.getElementById('editForm');
-  if (editForm) {
-    editForm.addEventListener('submit', function(e) {
-      console.log('=== EDIT FORM SUBMIT EVENT TRIGGERED ===');
-      e.preventDefault();
-      e.stopPropagation();
-      e.stopImmediatePropagation();
-      
-      try {
-        const title = document.getElementById('editTitle').value;
-        const description = document.getElementById('editDescription').value;
-        
-        if (!title.trim() || !description.trim()) {
-          alert('Please fill in all fields');
-          return false;
-        }
-        
-        if (isEditMode && currentEditElement) {
-          console.log('Editing existing element:', currentEditElement);
-          const h3 = currentEditElement.querySelector('h3');
-          const p = currentEditElement.querySelector('.card-header p, .card-body p');
-          if (h3) h3.textContent = title;
-          if (p) p.textContent = description;
-        } else {
-          console.log('Adding new content');
-          const activeSection = document.querySelector('.section.active');
-          const cardsContainer = activeSection.querySelector('.cards');
-          if (cardsContainer) {
-            const newCard = document.createElement('div');
-            newCard.className = 'card';
-            newCard.setAttribute('data-id', 'new-' + Date.now());
-            newCard.innerHTML = `
-              <div class="admin-controls">
-                <button onclick="editContent(this, 'content')">Edit</button>
-                <button onclick="deleteContent(this, 'content')">Delete</button>
-              </div>
-              <div class="card-body">
-                <h3>${title}</h3>
-                <p>${description}</p>
-              </div>
-            `;
-            cardsContainer.appendChild(newCard);
-          }
-        }
-        
-        closeModal('editModal');
-        console.log('Edit form completed successfully');
-      } catch (error) {
-        console.error('Error saving content:', error);
-        alert('Error saving content. Please try again.');
-      }
-      
-      return false;
-    });
-  }
-
-  // Add event form submit handler
-  const eventForm = document.getElementById('eventForm');
-  if (eventForm) {
-    eventForm.addEventListener('submit', function(e) {
-      console.log('=== EVENT FORM SUBMIT EVENT TRIGGERED ===');
-      e.preventDefault();
-      e.stopPropagation();
-      e.stopImmediatePropagation();
-      
-      try {
-        const title = document.getElementById('eventTitle').value;
-        const calendarType = document.getElementById('eventCalendar').value;
-        const date = document.getElementById('eventDate').value;
-        const startTime = document.getElementById('eventStartTime').value;
-        const endTime = document.getElementById('eventEndTime').value;
-        const description = document.getElementById('eventDescription').value;
-        
-        if (!title.trim() || !date || !description.trim()) {
-          alert('Please fill in all required fields');
-          return false;
-        }
-        
-        if (isEditMode && currentEditElement) {
-          // Edit existing event
-          const eventTitle = currentEditElement.querySelector('.event-title');
-          const eventDate = currentEditElement.querySelector('.event-date');
-          const eventDesc = currentEditElement.querySelector('p');
-          if (eventTitle) eventTitle.textContent = title;
-          if (eventDate) eventDate.textContent = new Date(date).toLocaleDateString();
-          if (eventDesc) eventDesc.textContent = description;
-          
-          currentEditElement.setAttribute('data-date', date);
-          currentEditElement.setAttribute('data-calendar', calendarType);
-        } else {
-          // Add new event
-          let targetListId = '';
-          switch(calendarType) {
-            case 'marketing': targetListId = 'marketingEventsList'; break;
-            case 'south-main': targetListId = 'southMainEventsList'; break;
-            case 'union-cross': targetListId = 'unionCrossEventsList'; break;
-          }
-          
-          const eventsList = document.getElementById(targetListId);
-          if (eventsList) {
-            const newEvent = document.createElement('div');
-            newEvent.className = 'event';
-            newEvent.setAttribute('data-id', 'event-' + Date.now());
-            newEvent.setAttribute('data-date', date);
-            newEvent.setAttribute('data-calendar', calendarType);
-            newEvent.innerHTML = `
-              <div class="admin-controls">
-                <button onclick="editEvent(this, 'event')">Edit</button>
-                <button onclick="deleteEvent(this, 'event')">Delete</button>
-              </div>
-              <div class="event-date">${new Date(date).toLocaleDateString()}</div>
-              <div class="event-title">${title}</div>
-              <p>${description}</p>
-            `;
-            eventsList.appendChild(newEvent);
-            
-            // Add to event data
-            if (!eventData[calendarType]) eventData[calendarType] = [];
-            eventData[calendarType].push({ date: date, element: newEvent });
-          }
-        }
-        
-        // Regenerate calendar to show event highlighting
-        generateCalendar(calendarType, calendarDates[calendarType]);
-        closeModal('eventModal');
-        console.log('Event form completed successfully');
-      } catch (error) {
-        console.error('Error saving event:', error);
-        alert('Error saving event. Please try again.');
-      }
-      
-      return false;
-    });
-  }
-
-  // Add announcement form submit handler
-  const announcementForm = document.getElementById('announcementForm');
-  if (announcementForm) {
-    announcementForm.addEventListener('submit', function(e) {
-      console.log('=== ANNOUNCEMENT FORM SUBMIT EVENT TRIGGERED ===');
-      e.preventDefault();
-      e.stopPropagation();
-      e.stopImmediatePropagation();
-      
-      try {
-        const date = document.getElementById('announcementDate').value;
-        const title = document.getElementById('announcementTitle').value;
-        const description = document.getElementById('announcementDescription').value;
-        
-        if (!date || !title.trim() || !description.trim()) {
-          alert('Please fill in all fields');
-          return false;
-        }
-        
-        if (isEditMode && currentEditElement) {
-          const titleEl = currentEditElement.querySelector('.event-title');
-          const dateEl = currentEditElement.querySelector('.event-date');
-          const descEl = currentEditElement.querySelector('p');
-          if (titleEl) titleEl.textContent = title;
-          if (dateEl) dateEl.textContent = new Date(date).toLocaleDateString();
-          if (descEl) descEl.textContent = description;
-        } else {
-          const announcementsList = document.getElementById('announcementsList');
-          if (announcementsList) {
-            const newAnnouncement = document.createElement('div');
-            newAnnouncement.className = 'announcement-item';
-            newAnnouncement.setAttribute('data-id', 'ann-' + Date.now());
-            newAnnouncement.innerHTML = `
-              <div class="admin-controls">
-                <button onclick="editAnnouncement(this, 'announcement')">Edit</button>
-                <button onclick="deleteAnnouncement(this)">Delete</button>
-              </div>
-              <div class="event-date">${new Date(date).toLocaleDateString()}</div>
-              <div class="event-title">${title}</div>
-              <p>${description}</p>
-            `;
-            announcementsList.appendChild(newAnnouncement);
-          }
-        }
-        
-        closeModal('announcementModal');
-        console.log('Announcement form completed successfully');
-      } catch (error) {
-        console.error('Error saving announcement:', error);
-        alert('Error saving announcement. Please try again.');
-      }
-      
-      return false;
-    });
-  }
-
-  // Add development form submit handler
-  const developmentForm = document.getElementById('developmentForm');
-  if (developmentForm) {
-    developmentForm.addEventListener('submit', function(e) {
-      console.log('=== DEVELOPMENT FORM SUBMIT EVENT TRIGGERED ===');
-      e.preventDefault();
-      e.stopPropagation();
-      e.stopImmediatePropagation();
-      
-      try {
-        const title = document.getElementById('devTitle').value;
-        const description = document.getElementById('devDescription').value;
-        const links = document.getElementById('devLinks').value;
-        
-        if (!title.trim() || !description.trim()) {
-          alert('Please fill in title and description');
-          return false;
-        }
-        
-        // Create new development content
-        const devSection = document.getElementById('developmentSection');
-        const cardsContainer = devSection.querySelector('.cards');
-        if (cardsContainer) {
-          const newCard = document.createElement('div');
-          newCard.className = 'card';
-          newCard.setAttribute('data-id', 'dev-' + Date.now());
-          
-          let linksHtml = '';
-          if (links.trim()) {
-            const linkLines = links.split('\n').filter(line => line.trim());
-            linkLines.forEach(line => {
-              const [url, ...titleParts] = line.split(' - ');
-              const linkTitle = titleParts.join(' - ') || url;
-              linksHtml += `<a href="${url.trim()}" target="_blank">${linkTitle}</a><br>`;
-            });
-          }
-          
-          newCard.innerHTML = `
-            <div class="admin-controls">
-              <button onclick="editDevelopment(this, 'development')">Edit</button>
-              <button onclick="deleteDevelopment(this, 'development')">Delete</button>
-            </div>
-            <div class="card-body">
-              <h3>${title}</h3>
-              <p>${description}</p>
-              ${linksHtml ? `<div class="dev-links">${linksHtml}</div>` : ''}
-            </div>
-          `;
-          cardsContainer.appendChild(newCard);
-        }
-        
-        closeModal('developmentModal');
-        console.log('Development form completed successfully');
-      } catch (error) {
-        console.error('Error saving development content:', error);
-        alert('Error saving development content. Please try again.');
-      }
-      
-      return false;
-    });
-  }
-
-  // Add benefits form submit handler
-  const benefitsForm = document.getElementById('benefitsForm');
-  if (benefitsForm) {
-    benefitsForm.addEventListener('submit', function(e) {
-      console.log('=== BENEFITS FORM SUBMIT EVENT TRIGGERED ===');
-      e.preventDefault();
-      e.stopPropagation();
-      e.stopImmediatePropagation();
-      
-      try {
-        console.log('Getting form values...');
-        
-        const titleEl = document.getElementById('benefitsTitle');
-        const descriptionEl = document.getElementById('benefitsDescription');
-        const categoryEl = document.getElementById('benefitsCategory');
-        
-        if (!titleEl) {
-          throw new Error('benefitsTitle element not found');
-        }
-        if (!descriptionEl) {
-          throw new Error('benefitsDescription element not found');
-        }
-        if (!categoryEl) {
-          throw new Error('benefitsCategory element not found');
-        }
-        
-        const title = titleEl.value;
-        const description = descriptionEl.value;
-        const category = categoryEl.value;
-        
-        console.log('Form values:', { title, description, category, isEditMode, currentEditElement });
-        
-        if (!title.trim() || !description.trim() || !category) {
-          alert('Please fill in all fields');
-          return false;
-        }
-        
-        if (isEditMode && currentEditElement) {
-          // Edit existing benefits item
-          console.log('Editing existing benefits item:', currentEditElement);
-          const h4 = currentEditElement.querySelector('h4');
-          const p = currentEditElement.querySelector('p');
-          if (h4) h4.textContent = title;
-          if (p) p.textContent = description;
-          
-          // Move to different category if needed
-          const currentCategory = currentEditElement.closest('.benefits-category').dataset.category;
-          if (currentCategory !== category) {
-            // Remove from current category
-            currentEditElement.remove();
-            
-            // Add to new category
-            let targetContainerId = '';
-            switch(category) {
-              case 'fulltime': targetContainerId = 'fulltimeBenefits'; break;
-              case 'parttime': targetContainerId = 'parttimeBenefits'; break;
-              case 'manager': targetContainerId = 'managerBenefits'; break;
-            }
-            
-            const benefitsContainer = document.getElementById(targetContainerId);
-            if (benefitsContainer) {
-              const addButton = benefitsContainer.querySelector('button.btn-small');
-              if (addButton) {
-                benefitsContainer.insertBefore(currentEditElement, addButton);
-              } else {
-                benefitsContainer.appendChild(currentEditElement);
-              }
-            }
-          }
-        } else {
-          // Create new benefits item
-          let targetContainerId = '';
-          switch(category) {
-            case 'fulltime': targetContainerId = 'fulltimeBenefits'; break;
-            case 'parttime': targetContainerId = 'parttimeBenefits'; break;
-            case 'manager': targetContainerId = 'managerBenefits'; break;
-          }
-          
-          const benefitsContainer = document.getElementById(targetContainerId);
-          if (benefitsContainer) {
-            const newBenefit = document.createElement('div');
-            newBenefit.className = 'benefits-item';
-            newBenefit.setAttribute('data-id', 'benefit-' + Date.now());
-            newBenefit.innerHTML = `
-              <div class="admin-controls">
-                <button onclick="editBenefitsItem(this, 'benefit')">Edit</button>
-                <button onclick="deleteBenefitsItem(this)">Delete</button>
-              </div>
-              <h4>${title}</h4>
-              <p>${description}</p>
-            `;
-            
-            // Insert before the "Add Benefit" button if it exists
-            const addButton = benefitsContainer.querySelector('button.btn-small');
-            if (addButton) {
-              benefitsContainer.insertBefore(newBenefit, addButton);
-            } else {
-              benefitsContainer.appendChild(newBenefit);
-            }
-          } else {
-            console.error('Benefits container not found:', targetContainerId);
-            alert('Error: Could not find benefits container for category: ' + category);
-          }
-        }
-        
-        // Reset the form and close modal
-        document.getElementById('benefitsForm').reset();
-        isEditMode = false;
-        currentEditElement = null;
-        closeModal('benefitsModal');
-        console.log('Benefits form completed successfully');
-      } catch (error) {
-        console.error('Error saving benefits item:', error);
-        alert('Error saving benefits item: ' + error.message);
-      }
-      
-      return false;
-    });
-  }
-
-  // Add quick form submit handler
-  const quickForm = document.getElementById('quickForm');
-  if (quickForm) {
-    quickForm.addEventListener('submit', function(e) {
-      console.log('=== QUICK FORM SUBMIT EVENT TRIGGERED ===');
-      e.preventDefault();
-      e.stopPropagation();
-      e.stopImmediatePropagation();
-      
-      try {
-        const icon = document.getElementById('quickIcon').value;
-        const label = document.getElementById('quickLabel').value;
-        const section = document.getElementById('quickSection').value;
-        
-        if (!icon.trim() || !label.trim() || !section) {
-          alert('Please fill in all fields');
-          return false;
-        }
-        
-        // Create new quick access item
-        const quickGrid = document.getElementById('quickGrid');
-        if (quickGrid) {
-          const newQuickItem = document.createElement('div');
-          newQuickItem.className = 'quick-item';
-          newQuickItem.setAttribute('data-id', section);
-          newQuickItem.setAttribute('onclick', `showSection('${section}')`);
-          newQuickItem.innerHTML = `
-            <div class="admin-controls">
-              <button onclick="editQuickItem(this, 'quick'); event.stopPropagation();">Edit</button>
-              <button onclick="deleteQuickItem(this); event.stopPropagation();">Delete</button>
-            </div>
-            <div class="quick-icon">${icon}</div>
-            <div class="quick-label">${label}</div>
-          `;
-          quickGrid.appendChild(newQuickItem);
-        }
-        
-        closeModal('quickModal');
-        console.log('Quick form completed successfully');
-      } catch (error) {
-        console.error('Error saving quick access item:', error);
-        alert('Error saving quick access item. Please try again.');
-      }
-      
-      return false;
-    });
-  }
-
-  // Add team form submit handler
-  const teamForm = document.getElementById('teamForm');
-  if (teamForm) {
-    teamForm.addEventListener('submit', function(e) {
-      console.log('=== TEAM FORM SUBMIT EVENT TRIGGERED ===');
-      e.preventDefault();
-      e.stopPropagation();
-      e.stopImmediatePropagation();
-      
-      try {
-        const name = document.getElementById('teamName').value;
-        const position = document.getElementById('teamPosition').value;
-        const description = document.getElementById('teamDescription').value;
-        const level = document.getElementById('teamLevel').value;
-        
-        if (!name.trim() || !position.trim() || !level) {
-          alert('Please fill in all required fields');
-          return false;
-        }
-        
-        // Create new team member element
-        const teamSection = document.getElementById('teamSection');
-        const orgChart = document.getElementById('orgChart');
-        if (orgChart) {
-          // Find the correct org-level based on the selected level
-          const targetLevel = orgChart.querySelector(`.org-level[data-level="${level}"]`);
-          if (targetLevel) {
-            const teamGrid = targetLevel.querySelector('.team-grid');
-            if (teamGrid) {
-              const newMember = document.createElement('div');
-              newMember.className = 'card team-member';
-              newMember.setAttribute('data-id', 'team-' + Date.now());
-              newMember.setAttribute('draggable', 'true');
-              newMember.setAttribute('ondragstart', 'drag(event)');
-              
-              // Create initials for avatar
-              const initials = name.split(' ').map(word => word.charAt(0)).join('').toUpperCase();
-              
-              newMember.innerHTML = `
-                <div class="admin-controls">
-                  <button class="edit-btn" onclick="editTeamMember(this, 'team')">Edit</button>
-                  <button class="delete-btn" onclick="deleteTeamMember(this, 'team')">Delete</button>
-                </div>
-                <div class="card-body" style="text-align: center;">
-                  <div class="team-avatar">${initials}</div>
-                  <h3>${name}</h3>
-                  <p>${position}</p>
-                  ${description ? `<p class="team-description">${description}</p>` : ''}
-                </div>
-              `;
-              teamGrid.appendChild(newMember);
-            }
-          }
-        }
-        
-        closeModal('teamModal');
-        console.log('Team form completed successfully');
-      } catch (error) {
-        console.error('Error saving team member:', error);
-        alert('Error saving team member. Please try again.');
-      }
-      
-      return false;
-    });
-  }
-
-  // Add document form submit handler
-  const documentForm = document.getElementById('documentForm');
-  if (documentForm) {
-    documentForm.addEventListener('submit', function(e) {
-      console.log('=== DOCUMENT FORM SUBMIT EVENT TRIGGERED ===');
-      e.preventDefault();
-      e.stopPropagation();
-      e.stopImmediatePropagation();
-      
-      try {
-        const title = document.getElementById('docTitle').value;
-        const category = document.getElementById('docCategory').value;
-        const fileInput = document.getElementById('docFile');
-        
-        if (!title.trim() || !category || !fileInput.files.length) {
-          alert('Please fill in all fields and select a file');
-          return false;
-        }
-        
-        // Create new document element
-        let targetListId = '';
-        switch(category) {
-          case 'forms': targetListId = 'formsList'; break;
-          case 'policy': targetListId = 'policyList'; break;
-          case 'tools': targetListId = 'toolsList'; break;
-          case 'handbook': targetListId = 'handbookList'; break;
-        }
-        
-        const docList = document.getElementById(targetListId);
-        if (docList) {
-          const newDoc = document.createElement('li');
-          newDoc.className = 'doc-item';
-          newDoc.setAttribute('data-id', 'doc-' + Date.now());
-          newDoc.innerHTML = `
-            <div class="admin-controls">
-              <button onclick="editDocument(this, 'document')">Edit</button>
-              <button onclick="deleteDocument(this, 'document')">Delete</button>
-            </div>
-            <div class="doc-info">
-              <h4>${title}</h4>
-              <p>File: ${fileInput.files[0].name}</p>
-            </div>
-            <div class="doc-actions">
-              <button onclick="viewDocument('${newDoc.getAttribute('data-id')}')">View</button>
-              <button onclick="downloadDocument('${newDoc.getAttribute('data-id')}')">Download</button>
-            </div>
-          `;
-          docList.appendChild(newDoc);
-        }
-        
-        closeModal('documentModal');
-        console.log('Document form completed successfully');
-      } catch (error) {
-        console.error('Error saving document:', error);
-        alert('Error saving document. Please try again.');
-      }
-      
-      return false;
-    });
-  }
-
-  // Add photo form submit handler
-  const photoForm = document.getElementById('photoForm');
-  if (photoForm) {
-    photoForm.addEventListener('submit', function(e) {
-      console.log('=== PHOTO FORM SUBMIT EVENT TRIGGERED ===');
-      e.preventDefault();
-      e.stopPropagation();
-      e.stopImmediatePropagation();
-      
-      try {
-        const title = document.getElementById('photoTitle').value;
-        const description = document.getElementById('photoDescription').value;
-        const category = document.getElementById('photoCategory').value;
-        const fileInput = document.getElementById('photoFiles');
-        
-        if (!title.trim() || !category || !fileInput.files.length) {
-          alert('Please fill in title, category and select photos');
-          return false;
-        }
-        
-        // Create new photo elements
-        let targetListId = '';
-        switch(category) {
-          case 'team-events': targetListId = 'teamEventsList'; break;
-          case 'south-main': targetListId = 'southMainList'; break;
-          case 'union-cross': targetListId = 'unionCrossList'; break;
-        }
-        
-        const photosList = document.getElementById(targetListId);
-        if (photosList) {
-          Array.from(fileInput.files).forEach((file, index) => {
-            const newPhoto = document.createElement('div');
-            newPhoto.className = 'photo-item';
-            newPhoto.setAttribute('data-id', 'photo-' + Date.now() + '-' + index);
-            
-            // Create a temporary URL for the uploaded file
-            const imageUrl = URL.createObjectURL(file);
-            
-            newPhoto.innerHTML = `
-              <div class="admin-controls">
-                <button onclick="editPhoto(this, 'photo')">Edit</button>
-                <button onclick="deletePhoto(this, 'photo')">Delete</button>
-              </div>
-              <div class="photo-container" style="width: 200px; height: 150px; overflow: hidden; border-radius: 8px; cursor: pointer; display: flex; align-items: center; justify-content: center; margin: 0 auto;">
-                <img src="${imageUrl}" alt="${title}" onclick="openPhotoViewer('${imageUrl}')" style="width: 100%; height: 100%; object-fit: cover;">
-              </div>
-              <div class="photo-info" style="text-align: center; margin-top: 8px;">
-                <h4>${title}</h4>
-                <p>${description}</p>
-              </div>
-            `;
-            photosList.appendChild(newPhoto);
-          });
-        }
-        
-        closeModal('photoModal');
-        console.log('Photo form completed successfully');
-      } catch (error) {
-        console.error('Error saving photos:', error);
-        alert('Error saving photos. Please try again.');
-      }
-      
-      return false;
-    });
-  }
-
-  // Add comprehensive event handling for modal buttons
-  document.querySelectorAll('.modal button[type="submit"]').forEach(btn => {
-    btn.addEventListener('click', function(e) {
-      console.log('=== Modal submit button clicked ===');
-      console.log('Button:', this);
-      console.log('Form:', this.closest('form'));
-      
-      // Stop all event propagation
-      e.stopPropagation();
-      e.stopImmediatePropagation();
-      
-      // Let the form handle the submission
-      const form = this.closest('form');
-      if (form) {
-        console.log('Triggering form submit event...');
-        // Don't call form.submit() as that bypasses our event listeners
-        // The form will submit naturally and our event listeners will handle it
-      }
-    });
-  });
-
-  // Add click handlers to all modal overlays to prevent event bubbling
-  document.querySelectorAll('.modal-overlay').forEach(overlay => {
-    overlay.addEventListener('click', function(e) {
-      console.log('=== Modal overlay clicked ===');
-      // Stop propagation to prevent any background clicks
-      e.stopPropagation();
-      e.stopImmediatePropagation();
-      
-      // Only close if clicking the overlay background (not the modal content)
-      if (e.target === this) {
-        console.log('Closing modal due to overlay click');
-        this.classList.remove('active');
-        isEditMode = false;
-        currentEditElement = null;
-      }
-    });
-    
-    // Also prevent all events from bubbling out of the modal content
-    const modalContent = overlay.querySelector('.modal');
-    if (modalContent) {
-      modalContent.addEventListener('click', function(e) {
-        console.log('=== Modal content clicked ===');
-        e.stopPropagation();
-        e.stopImmediatePropagation();
-      });
-    }
-  });
-
-  // Add confirmDelete button handler
-  const confirmDeleteBtn = document.getElementById('confirmDelete');
-  if (confirmDeleteBtn) {
-    confirmDeleteBtn.addEventListener('click', function(e) {
-      console.log('=== CONFIRM DELETE BUTTON CLICKED ===');
-      e.preventDefault();
-      e.stopPropagation();
-      e.stopImmediatePropagation();
-      
-      try {
-        if (currentDeleteElement) {
-          console.log('Deleting element:', currentDeleteElement);
-          
-          // Remove the element from the DOM
-          currentDeleteElement.remove();
-          
-          // Clear the current delete element
-          currentDeleteElement = null;
-          
-          // Close the delete modal
-          closeModal('deleteModal');
-          
-          console.log('Element deleted successfully');
-        } else {
-          console.warn('No element selected for deletion');
-          alert('No item selected for deletion');
-        }
-      } catch (error) {
-        console.error('Error deleting element:', error);
-        alert('Error deleting item. Please try again.');
-      }
-    });
-  }
-
-  // Define sections and their fields - only include actual forms that exist in HTML
-  const sections = [
-    // These forms don't exist in the HTML, so we'll skip them to avoid errors
-    // { table: 'employees', formId: 'employee-form', listId: 'employee-list', fields: ['name', 'role'] },
-    // { table: 'announcements', formId: 'announcement-form', listId: 'announcement-list', fields: ['title', 'content'] },
-    // { table: 'events', formId: 'event-form', listId: 'event-list', fields: ['title', 'date', 'description'] },
-    // { table: 'photos', formId: 'photo-form', listId: 'photo-list', fields: ['caption'], fileField: 'photo-file' },
-    // { table: 'documents', formId: 'document-form', listId: 'document-list', fields: ['title'], fileField: 'document-file' },
-    // { table: 'links', formId: 'link-form', listId: 'link-list', fields: ['title', 'url'] },
-    // { table: 'cards', formId: 'card-form', listId: 'card-list', fields: ['title', 'content'] },
-    // { table: 'users', formId: 'user-form', listId: 'user-list', fields: ['username', 'password', 'role'] },
-  ];
-
-  // Set up each section
-  sections.forEach(({ table, formId, listId, fields, fileField }) => {
-    handleFormSubmit(table, formId, listId, fields, fileField);
-    displayList(table, listId);
-    
-    // Check if list element exists before adding event listener
-    const listElement = document.getElementById(listId);
-    if (listElement) {
-      listElement.addEventListener('click', (e) => {
-        if (e.target.classList.contains('edit')) {
-          handleEdit(table, formId, fields)(e);
-        } else if (e.target.classList.contains('delete')) {
-          handleDelete(table, listId)(e);
-        }
-      });
-    } else {
-      console.log(`List element with id '${listId}' not found, skipping click event setup`);
-    }
-  });
-});
-</script>
-        <!-- Add this just before the closing </body> tag -->
-            <div id="photoViewerModal" class="modal-overlay" style="background: rgba(0,0,0,0.9); z-index: 2000;">
-        <div class="modal" style="background: transparent; border: none; box-shadow: none; padding: 0; max-width: 95vw; max-height: 95vh; display: flex; align-items: center; justify-content: center; position: relative;"
-             onclick="event.stopPropagation()">
-            <img id="photoViewerImg" src="" alt="Full Size Photo" style="max-width: 90vw; max-height: 80vh; border-radius: 12px; box-shadow: 0 8px 40px rgba(0,0,0,0.7); background: white;">
-            <button class="modal-close" style="position: absolute; top: 20px; right: 30px; font-size: 40px; color: white; background: rgba(0,0,0,0.5);" onclick="closePhotoViewer(); event.stopPropagation();">×</button>
+    <div id="photoViewerModal" class="modal-overlay">
+        <div class="modal">
+            <img id="photoViewerImg" src="" alt="Full Size Photo">
+            <button class="modal-close">×</button>
         </div>
     </div>
-
 </body>
 </html>

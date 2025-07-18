@@ -1,9 +1,10 @@
 
 import React, { useState, useEffect } from 'react';
-import apiRequest from '../../utils/apiRequest';
+import useStore from '../../store';
 import '../../styles/Modal.css';
 
 const EventModal = ({ isOpen, CloseModal, item }) => {
+  const { addCalendarContent, updateCalendarContent } = useStore();
   const [title, setTitle] = useState('');
   const [calendar, setCalendar] = useState('');
   const [date, setDate] = useState('');
@@ -24,8 +25,36 @@ const EventModal = ({ isOpen, CloseModal, item }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
+    // Format date to MM/DD/YYYY
+    const formattedDate = date ? new Date(date).toLocaleDateString('en-US') : '';
+    
+    // Format time string
+    let timeString = '';
+    if (startTime && endTime) {
+      timeString = `${startTime} - ${endTime}`;
+    } else if (startTime) {
+      timeString = startTime;
+    } else if (endTime) {
+      timeString = endTime;
+    }
+    
+    const eventData = {
+      title,
+      date: formattedDate,
+      time: timeString,
+      description
+    };
+
     try {
-      await apiRequest('calendar', item?.id ? 'PUT' : 'POST', { title, calendar, date, startTime, endTime, description }, item?.id);
+      if (item?.id) {
+        // Update existing event
+        updateCalendarContent(calendar, item.id, eventData);
+      } else {
+        // Add new event
+        addCalendarContent(calendar, eventData);
+      }
+      
       CloseModal('EventModal');
       setTitle('');
       setCalendar('');
@@ -44,7 +73,7 @@ const EventModal = ({ isOpen, CloseModal, item }) => {
     <div className="modal-overlay">
       <div className="modal">
         <h2>Add Event</h2>
-        <button className="modal-close" onClick={() => closeModal('EventModal')}>
+        <button className="modal-close" onClick={() => CloseModal('EventModal')}>
           ×
         </button>
         <form onSubmit={handleSubmit}>
@@ -85,21 +114,24 @@ const EventModal = ({ isOpen, CloseModal, item }) => {
             />
           </div>
           <div className="form-group">
-            <label>Time</label>
-            <input
-              type="time"
-              id="startTime"
-              value={startTime}
-              onChange={(e) => setStartTime(e.target.value)}
-              required
-            />
-            <input
-              type="time"
-              id="endTime"
-              value={endTime}
-              onChange={(e) => setEndTime(e.target.value)}
-              required
-            />
+            <label>Time (Optional)</label>
+            <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
+              <input
+                type="time"
+                id="startTime"
+                value={startTime}
+                onChange={(e) => setStartTime(e.target.value)}
+                placeholder="Start time"
+              />
+              <span>to</span>
+              <input
+                type="time"
+                id="endTime"
+                value={endTime}
+                onChange={(e) => setEndTime(e.target.value)}
+                placeholder="End time"
+              />
+            </div>
           </div>
           <div className="form-group">
             <label htmlFor="description">Description</label>

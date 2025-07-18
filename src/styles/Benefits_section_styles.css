@@ -1,40 +1,389 @@
 
+/* Benefits Section - Chick-fil-A Design System */
+
 .benefits-section {
-  padding: 20px;
-}
-
-.benefits-category {
-  margin-bottom: 30px;
-}
-
-.btn.add-benefit {
-  background: #d32f2f;
-  color: white;
-  padding: 10px;
+  padding: 2rem;
+  background: #f8f9fa;
   border: none;
-  border-radius: 4px;
+  border-radius: 0;
+  margin: 2rem 0;
+  min-height: 80vh;
+  position: relative;
+  overflow: hidden;
+  font-family: 'Apercu-Medium', sans-serif;
+  color: #333;
+}
+
+.benefits-section h2, 
+.benefits-section h3, 
+.benefits-section h4 {
+  font-family: 'RooneyPro-Medium', serif;
+  font-weight: bold;
+  color: #004F71;
+}
+
+.benefits-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  z-index: 0;
+}
+
+.benefits-section > * {
+  position: relative;
+  z-index: 1;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 3rem;
+  background: white;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+}
+
+.section-header h2 {
+  font-family: 'RooneyPro-Medium', serif;
+  font-size: 3rem;
+  margin-bottom: 0.5rem;
+  color: #004F71;
+}
+
+.section-subtitle {
+  font-family: 'Apercu-Medium', sans-serif;
+  font-size: 1.7em;
+  font-weight: 400;
+  opacity: 0.9;
+  max-width: 600px;
+  margin: 0 auto;
+  color: #666;
+  line-height: 1.6;
+}
+
+/* Benefits Dropdown */
+.benefits-dropdown-container {
+  margin-bottom: var(--cfa-spacing-lg);
+  border-bottom: 2px solid var(--cfa-white);
+  padding-bottom: var(--cfa-spacing-md);
+}
+
+.dropdown-label {
+  display: block;
+  color: var(--cfa-white);
+  font-weight: var(--cfa-font-weight-bold);
+  font-size: 1.7em;
+  margin-bottom: var(--cfa-spacing-xs);
+  font-family: 'RooneyPro-Medium', var(--cfa-font-family);
+}
+
+.benefits-dropdown {
+  padding: var(--cfa-spacing-sm) var(--cfa-spacing-md);
+  background: var(--cfa-white);
+  border: 2px solid var(--cfa-navy);
+  border-radius: var(--cfa-border-radius);
   cursor: pointer;
-  margin-bottom: 20px;
+  color: var(--cfa-text-primary);
+  font-weight: var(--cfa-font-weight-bold);
+  font-size: var(--cfa-font-size-lg);
+  font-family: 'RooneyPro-Medium', var(--cfa-font-family);
+  transition: all 0.3s ease;
+  min-width: 300px;
 }
 
-.btn:hover {
-  background: #b71c1c;
+.benefits-dropdown:hover {
+  border-color: var(--cfa-red);
+  background: var(--cfa-background-secondary);
 }
 
-.benefits-list {
+.benefits-dropdown:focus {
+  outline: none;
+  border-color: var(--cfa-red);
+  box-shadow: 0 0 0 3px rgba(221, 0, 51, 0.2);
+}
+
+.benefits-dropdown option {
+  padding: var(--cfa-spacing-sm);
+  font-weight: var(--cfa-font-weight-bold);
+  font-size: var(--cfa-font-size-md-lg);
+  color: var(--cfa-text-primary);
+  background: var(--cfa-white);
+}
+
+/* Tabs Styling */
+.tabs-container {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: var(--cfa-box-shadow-lg);
+  backdrop-filter: blur(20px);
+}
+
+.tabs-nav {
   display: flex;
-  flex-direction: column;
-  gap: 15px;
+  background: rgba(255, 255, 255, 0.1);
+  padding: var(--cfa-spacing-sm);
+  gap: var(--cfa-spacing-sm);
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 
-.benefit-item {
-  background: #f9f9f9;
-  padding: 15px;
-  border-radius: 4px;
+.tabs-nav::-webkit-scrollbar {
+  display: none;
 }
 
-.benefit-actions {
+.tab {
   display: flex;
-  gap: 10px;
-  margin-bottom: 10px;
+  align-items: center;
+  gap: var(--cfa-spacing-sm);
+  padding: var(--cfa-spacing-md) var(--cfa-spacing-lg);
+  border: none;
+  background: transparent;
+  border-radius: var(--cfa-border-radius);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: 'Apercu-Medium', sans-serif;
+  color: rgba(255, 255, 255, 0.7);
+  white-space: nowrap;
+  min-width: fit-content;
+}
+
+.tab:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  transform: translateY(-2px);
+}
+
+.tab.active {
+  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+  color: white;
+  box-shadow: 0 4px 15px rgba(79, 172, 254, 0.4);
+}
+
+.tab-icon {
+  font-size: var(--cfa-font-size-lg);
+}
+
+.tab-label {
+  font-weight: var(--cfa-font-weight-medium);
+}
+
+/* Tab Content */
+.tab-content {
+  padding: var(--cfa-spacing-xl);
+  background: var(--cfa-white);
+  color: var(--cfa-text-primary);
+}
+
+.tab-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--cfa-spacing-xl);
+  padding: var(--cfa-spacing-md);
+  background: var(--cfa-navy);
+  color: var(--cfa-white);
+  border-radius: 15px 15px 0 0;
+  margin: calc(-1 * var(--cfa-spacing-lg)) calc(-1 * var(--cfa-spacing-lg)) var(--cfa-spacing-xl) calc(-1 * var(--cfa-spacing-lg));
+}
+
+.tab-header h3 {
+  font-family: 'RooneyPro-Medium', var(--cfa-font-family);
+  font-size: var(--cfa-font-size-xxlg);
+  color: var(--cfa-white);
+  margin: 0;
+}
+
+.btn-primary,
+.add-content-btn {
+  display: flex;
+  align-items: center;
+  gap: var(--cfa-spacing-sm);
+  padding: var(--cfa-spacing-sm) var(--cfa-spacing-lg);
+  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+  color: var(--cfa-white);
+  border: none;
+  border-radius: 25px;
+  font-family: var(--cfa-font-family);
+  font-weight: var(--cfa-font-weight-medium);
+  font-size: var(--cfa-font-size-md-lg);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: var(--cfa-box-shadow-md);
+}
+
+.btn-primary:hover,
+.add-content-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--cfa-box-shadow-lg);
+}
+
+.btn-primary span,
+.add-content-btn span {
+  font-size: var(--cfa-font-size-lg);
+}
+
+/* Content Grid */
+.content-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: var(--cfa-spacing-lg);
+}
+
+.content-card {
+  background: var(--cfa-white);
+  border: 1mm solid var(--cfa-navy);
+  border-radius: 15px;
+  padding: var(--cfa-spacing-lg);
+  position: relative;
+  box-shadow: var(--cfa-box-shadow-sm);
+  transition: all 0.3s ease;
+}
+
+.content-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+}
+
+.benefit-card {
+  background: white;
+  border: 1mm solid #004F71;
+}
+
+.card-actions {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  display: flex;
+  gap: 0.5rem;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.content-card:hover .card-actions {
+  opacity: 1;
+}
+
+.action-btn {
+  width: 35px;
+  height: 35px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.9);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.action-btn:hover {
+  transform: scale(1.1);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.edit-btn:hover {
+  background: #3498db;
+  color: white;
+}
+
+.delete-btn:hover {
+  background: #e74c3c;
+  color: white;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  .benefits-section {
+    padding: 1rem;
+  }
+
+  .section-header h2 {
+    font-size: 2rem;
+  }
+
+  .dropdown-container {
+    width: 100%;
+  }
+
+  .dropdown-btn {
+    font-size: 1rem;
+    padding: 0.8rem 1rem;
+  }
+
+  .dropdown-content {
+    left: 0;
+    right: 0;
+    width: 100%;
+  }
+
+  .dropdown-content a {
+    padding: 0.8rem 1rem;
+    font-size: 0.95rem;
+  }
+
+  .tab {
+    padding: 1rem;
+  }
+
+  .btn-primary,
+  .add-content-btn {
+    padding: 0.7rem 1.2rem;
+    font-size: 0.95rem;
+  }
+
+  .content-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .card-actions {
+    position: static;
+    opacity: 1;
+    justify-content: center;
+    margin-bottom: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .benefits-section {
+    padding: 0.8rem;
+  }
+
+  .section-header h2 {
+    font-size: 1.8rem;
+  }
+
+  .tab-label {
+    display: none;
+  }
+
+  .tab {
+    padding: 0.8rem;
+    justify-content: center;
+  }
+
+  .btn-primary,
+  .add-content-btn {
+    padding: 0.6rem 1rem;
+    font-size: 0.9rem;
+  }
+
+  .dropdown-btn {
+    font-size: 0.95rem;
+    padding: 0.7rem 0.8rem;
+  }
+
+  .dropdown-content a {
+    padding: 0.7rem 0.8rem;
+    font-size: 0.9rem;
+  }
 }

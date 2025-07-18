@@ -1,9 +1,10 @@
 
 import React, { useState, useEffect } from 'react';
-import apiRequest from '../../utils/apiRequest';
+import useStore from '../../store';
 import '../../styles/Modal.css';
 
 const DocumentModal = ({ isOpen, CloseModal, item }) => {
+  const { addDocumentsContent, updateDocumentsContent } = useStore();
   const [title, setTitle] = useState('');
   const [category, setCategory] = useState('');
   const [file, setFile] = useState(null);
@@ -12,18 +13,34 @@ const DocumentModal = ({ isOpen, CloseModal, item }) => {
     if (item) {
       setTitle(item.title || '');
       setCategory(item.type || '');
+    } else {
+      // Reset form for new document
+      setTitle('');
+      setCategory('');
+      setFile(null);
     }
   }, [item]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const formData = new FormData();
-    formData.append('title', title);
-    formData.append('category', category);
-    if (file) formData.append('file', file);
+    
+    const documentData = {
+      title,
+      type: 'PDF', // Default type
+      size: file ? `${(file.size / 1024 / 1024).toFixed(1)} MB` : '0 MB',
+      uploadDate: new Date().toISOString().split('T')[0],
+      url: file ? URL.createObjectURL(file) : '#' // Temporary URL for demo
+    };
 
     try {
-      await apiRequest('documents', item?.id ? 'PUT' : 'POST', formData, item?.id);
+      if (item?.id) {
+        // Update existing document
+        updateDocumentsContent(category, item.id, documentData);
+      } else {
+        // Add new document
+        addDocumentsContent(category, documentData);
+      }
+      
       CloseModal('DocumentModal');
       setTitle('');
       setCategory('');
@@ -62,8 +79,15 @@ const DocumentModal = ({ isOpen, CloseModal, item }) => {
               required
             >
               <option value="">Select Category</option>
-              {['forms', 'policy', 'tools', 'handbook'].map((cat) => (
-                <option key={cat} value={cat}>{cat.charAt(0).toUpperCase() + cat.slice(1)}</option>
+              {['forms', 'policy', 'tools', 'handbook', 'training'].map((cat) => (
+                <option key={cat} value={cat}>
+                  {cat === 'forms' ? 'Forms' :
+                   cat === 'policy' ? 'Policies & Procedures' :
+                   cat === 'tools' ? 'Tools & Resources' :
+                   cat === 'handbook' ? 'Employee Handbook' :
+                   cat === 'training' ? 'Training Materials' : 
+                   cat.charAt(0).toUpperCase() + cat.slice(1)}
+                </option>
               ))}
             </select>
           </div>

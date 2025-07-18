@@ -1,11 +1,83 @@
 // src/components/LoginScreen.js
-import React from 'react';
+import React, { useState } from 'react';
+import '../styles/LoginScreen.css';
 
 function LoginScreen({ handleLogin }) {
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [role, setRole] = useState('user');
+  const [error, setError] = useState('');
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    
+    // Basic validation
+    if (!username || !password) {
+      setError('Please enter both username and password');
+      return;
+    }
+    
+    // Clear error and call login handler
+    setError('');
+    handleLogin(role, username, password);
+  };
+
   return (
-    <div>
-      <h1>Login Screen</h1>
-      <button onClick={() => handleLogin('user')}>Login as User</button>
+    <div className="login-screen">
+      <div className="login-container">
+        <div className="login-header">
+          <div className="login-logo">
+            <img src="/IMG_3606.JPG" alt="Chick-fil-A Logo" />
+          </div>
+          <h1>Chick-fil-A Kernersville</h1>
+          <h2>Employee Portal</h2>
+        </div>
+        
+        <form className="login-form" onSubmit={handleSubmit}>
+          <div className="form-group">
+            <label htmlFor="username">Username</label>
+            <input
+              type="text"
+              id="username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              className="form-input"
+              required
+            />
+          </div>
+          
+          <div className="form-group">
+            <label htmlFor="password">Password</label>
+            <input
+              type="password"
+              id="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="form-input"
+              required
+            />
+          </div>
+          
+          <div className="form-group">
+            <label htmlFor="role">Role</label>
+            <select
+              id="role"
+              value={role}
+              onChange={(e) => setRole(e.target.value)}
+              className="form-select"
+            >
+              <option value="user">Team Member</option>
+              <option value="admin">Administrator</option>
+            </select>
+          </div>
+          
+          {error && <div className="error-message">{error}</div>}
+          
+          <button type="submit" className="btn login-btn">
+            Login
+          </button>
+        </form>
+      </div>
     </div>
   );
 }

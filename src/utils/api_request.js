@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const apiRequest = async (table, method, data = null, id = null) => {
   try {
-    const url = id ? `http://localhost:3001/api/${table}/${id}` : `http://localhost:3001/api/${table}`;
+    const url = id ? `http://localhost:3000/api/${table}/${id}` : `http://localhost:3000/api/${table}`;
     const response = await axios({
       method,
       url,
@@ -16,11 +16,12 @@ const apiRequest = async (table, method, data = null, id = null) => {
   } catch (error) {
     if (error.response?.status === 401 && error.response.data.error === 'Invalid token') {
       try {
-        const refreshResponse = await axios.post('http://localhost:3001/auth/refresh-token', {}, { withCredentials: true });
+        const refreshResponse = await axios.post('http://localhost:3000/auth/refresh-token', {}, { withCredentials: true });
         if (refreshResponse.data.success) {
+          const retryUrl = id ? `http://localhost:3000/api/${table}/${id}` : `http://localhost:3000/api/${table}`;
           const retryResponse = await axios({
             method,
-            url,
+            url: retryUrl,
             headers: {
               'Content-Type': data instanceof FormData ? 'multipart/form-data' : 'application/json',
             },

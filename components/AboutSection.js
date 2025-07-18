@@ -1,16 +1,18 @@
 
 import React, { useState, useEffect } from 'react';
+import { useModal } from '../../contexts/ModalContext'; // Import useModal hook
 import apiRequest from '../utils/apiRequest';
 import '../styles/AboutSection.css';
 
-const AboutSection = ({ userRole, openModal }) => {
+const AboutSection = ({ userRole }) => {
   const [content, setContent] = useState([]);
+  const { openModal } = useModal(); // Use ModalContext hook instead of prop
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const data = await apiRequest('about', 'GET');
-        setContent(data || []);
+        setContent(data || []); // Ensure content is an array
       } catch (err) {
         console.error('Error fetching about data:', err);
       }
@@ -22,7 +24,10 @@ const AboutSection = ({ userRole, openModal }) => {
     <div className="about-section">
       <h2>About Chick-fil-A</h2>
       {userRole === 'admin' && (
-        <button className="btn add-content" onClick={() => OpenModal('EditModal', { section: 'about', type: 'content' })}>
+        <button
+          className="btn add-content"
+          onClick={() => openModal('EditModal', { section: 'about', type: 'content' })}
+        >
           Add Content
         </button>
       )}
@@ -31,8 +36,16 @@ const AboutSection = ({ userRole, openModal }) => {
           <div key={item.id} className="content-item">
             {userRole === 'admin' && (
               <div className="content-actions">
-                <button onClick={() => OpenModal('EditModal', { ...item, section: 'about', type: 'content' })}>Edit</button>
-                <button onClick={() => OpenModal('DeleteModal', { id: item.id, section: 'about', type: 'content' })}>Delete</button>
+                <button
+                  onClick={() => openModal('EditModal', { ...item, section: 'about', type: 'content' })}
+                >
+                  Edit
+                </button>
+                <button
+                  onClick={() => openModal('DeleteModal', { id: item.id, section: 'about', type: 'content' })}
+                >
+                  Delete
+                </button>
               </div>
             )}
             <h3>{item.title}</h3>

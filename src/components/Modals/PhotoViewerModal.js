@@ -7,8 +7,8 @@ const PhotoViewerModal = ({ isOpen, CloseModal, item }) => {
 
   return (
     <div className="modal-overlay">
-      <div className="modal">
-        <button className="modal-close" onClick={() => closeModal('PhotoViewerModal')}>
+      <div className="modal photo-viewer-modal">
+        <button className="modal-close" onClick={() => CloseModal('PhotoViewerModal')}>
           ×
         </button>
         <img src={item.url} alt={item.title} className="photo-viewer" />

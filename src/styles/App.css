@@ -1,16 +1,112 @@
+/* App - Chick-fil-A Design System */
 .app {
   text-align: center;
+  min-height: 100vh;
+  background-color: var(--cfa-background-secondary);
+  padding: var(--cfa-spacing-lg);
+  font-family: var(--cfa-font-family);
+  font-size: var(--cfa-font-size-base);
+  line-height: 1.6;
 }
 
 .main {
   max-width: 1200px;
-  margin: 20px auto;
-  padding: 20px;
+  margin: var(--cfa-spacing-lg) auto;
+  padding: var(--cfa-spacing-lg);
 }
 
 .container {
-  background: white;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  padding: 20px;
+  background: var(--cfa-white);
+  border-radius: var(--cfa-border-radius);
+  box-shadow: var(--cfa-box-shadow-md);
+  padding: var(--cfa-spacing-lg);
+  border: var(--cfa-border-width) solid var(--cfa-border-color);
+}
+
+/* Mobile Responsive Adjustments */
+@media (max-width: 768px) {
+  .app {
+    padding: var(--cfa-spacing-sm);
+    font-size: var(--cfa-font-size-lg);
+  }
+  
+  .main {
+    margin: var(--cfa-spacing-sm) auto;
+    padding: var(--cfa-spacing-sm);
+  }
+  
+  .container {
+    padding: var(--cfa-spacing-lg);
+    border-radius: var(--cfa-border-radius);
+    margin: 0 var(--cfa-spacing-xs);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  }
+  
+  /* Improve touch targets */
+  button, a, input, select, textarea {
+    min-height: 44px;
+    font-size: var(--cfa-font-size-md);
+  }
+  
+  /* Better text readability */
+  h1, h2, h3, h4, h5, h6 {
+    line-height: 1.3;
+    margin-bottom: 1rem;
+  }
+  
+  h1 { font-size: 2.2rem; }
+  h2 { font-size: 1.8rem; }
+  h3 { font-size: 1.5rem; }
+  
+  p, li {
+    font-size: var(--cfa-font-size-md);
+    line-height: 1.6;
+    margin-bottom: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .app {
+    padding: var(--cfa-spacing-xs);
+    font-size: var(--cfa-font-size-md);
+  }
+  
+  .main {
+    margin: var(--cfa-spacing-xs) auto;
+    padding: var(--cfa-spacing-xs);
+  }
+  
+  .container {
+    padding: var(--cfa-spacing-md);
+    margin: 0;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  }
+  
+  /* Even better touch targets for small screens */
+  button, a, input, select, textarea {
+    min-height: 48px;
+    font-size: var(--cfa-font-size-md-lg);
+    padding: 12px 16px;
+  }
+  
+  /* Larger text for better readability */
+  h1 { font-size: 2rem; }
+  h2 { font-size: 1.6rem; }
+  h3 { font-size: 1.4rem; }
+  
+  p, li {
+    font-size: var(--cfa-font-size-md-lg);
+    line-height: 1.7;
+  }
+  
+  /* Better spacing for small screens */
+  .section {
+    margin-bottom: 2rem;
+  }
+  
+  .card, .modal-content {
+    margin: 0.5rem;
+    padding: 1rem;
+  }
 }

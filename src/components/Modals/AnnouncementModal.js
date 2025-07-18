@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
-import apiRequest from '../../utils/apiRequest';
+import apiRequest from '../../utils/api_request';
 import '../../styles/Modal.css';
 
 const AnnouncementModal = ({ isOpen, CloseModal, item }) => {
