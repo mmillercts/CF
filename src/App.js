@@ -71,21 +71,6 @@ function App() {
 function AppContent() {
 
   const navigate = useNavigate();
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const { userRole, setUserRole, modals, modalData, openModal, closeModal } = useStore();
-  const { setAllData } = useStore.getState();
-
-
-  const handleLogin = async (role, username, password) => {
-    setIsLoggedIn(true);
-    setUserRole(role);
-    // Fetch all Neon DB data after login
-    try {
-      const response = await api.get('/all-data');
-      if (response.data && response.data.success) {
-        setAllData(response.data.data);
-      }
-    } catch (err) {
   const [isLoggedIn, setIsLoggedIn] = useState(() => {
     const stored = localStorage.getItem('isLoggedIn');
     return stored === 'true';
