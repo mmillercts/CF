@@ -6,16 +6,7 @@ import useStore from '../../store';
 import '../../styles/Modal.css';
 
 const DeleteModal = ({ isOpen, CloseModal, item }) => {
-  const { 
-    deleteAboutContent,
-    deleteHomeQuickLink, deleteHomeAnnouncement,
-    deleteBenefitsContent,
-    deleteDevelopmentContent,
-    deleteDocumentsContent,
-    deletePhotosContent,
-    deleteVideosContent,
-    deleteCalendarContent
-  } = useStore();
+  // Removed unused delete*Content variables to fix ESLint errors
   
   const handleDelete = async () => {
     try {
